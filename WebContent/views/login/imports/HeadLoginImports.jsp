@@ -8,14 +8,24 @@
 
 <!-- Google -->
 	<!-- CSS -->
-		<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700' rel='stylesheet' 
-		type='text/css'>
+		<link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700" rel="stylesheet'"
+		type="text/css">
 <!-- Fim Google -->
+
+<!-- Custom-->
+	<!-- CSS Custom-->
+		<link href="css/custom/custom_login.css" rel="stylesheet" type="text/css">
+<!-- Fim Custom-->
 
 <!-- Bootstrap -->
 	<!-- CSS -->
 		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <!-- Fim Bootstrap -->
+
+<!-- Jquery -->
+	<!-- JS -->
+		<script type="text/javascript" src="javascript/jquery/jquery-1.12.3.min.js"></script>
+<!-- Fim Jquery -->
 
 <!-- Angularjs -->
 	<!-- Libs  -->
