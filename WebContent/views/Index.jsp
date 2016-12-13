@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
-	<head ng-app="vmApp">
+<html ng-app="vmApp">
+	<head>
 		<meta charset="utf-8">
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
@@ -13,7 +13,7 @@
 		<%@include  file="login/imports/HeadLoginImports.jsp" %>
 		
 	</head>
-	<body class="lalal" ng-controller="login as lg">
+	<body ng-controller="login as lg">
 		<!-- Loading -->
 			<div id="loading" class="popup_loading" style="display: none;"> 
 				<img src="imagens/gifs/loading.gif" class="img_loader"/>
@@ -35,19 +35,19 @@
 					 		<span aria-hidden='true'>&times;</span>
 				 		</button>
 						<h4 class='modal-title' id='myModalLabel'>
-							@{{lg.modalHeader}}
+							{{lg.modalHeader}}
 						</h4>
 					 </div>
 					 <div class="modal-body">
-						<div class='alert @{{lg.alertModal}}'>
+						<div class='alert {{lg.alertModal}}'>
 							<ul>
-								@{{lg.modalBody}}
+								{{lg.modalBody}}
 							</ul>
 						</div>
 					 </div>
 					 <div class="modal-footer">
-					 	<button type='button' class='btn @{{lg.btnModal}}' ng-click="lg.voltarLogin()" data-dismiss='modal'>
-					 		@{{lg.modalFooter}}
+					 	<button type='button' class='btn {{lg.btnModal}}' ng-click="lg.voltarLogin()" data-dismiss='modal'>
+					 		{{lg.modalFooter}}
 					 	</button>
 					 </div>
 				   </div>
@@ -64,7 +64,7 @@
 						//sessionStorage.removeItem('rc_step_3');
 						sessionStorage.clear();
 					</script>
-					<div style="text-align: center;" class="box_login">
+					<div class="box_login">
 						
 						<img class="header-elemento-img" 
 						src="imagens/icones/menu/logo_ico_32dp.png"/>
@@ -73,49 +73,30 @@
 						
 						<hr width="98%"/>
 						
-						<div class="espacamento">
+						<div class="titulo_box_login">
 							Entre com os seus dados corretamente para acessar o sistema			
 						</div>
 						
-						<form ng-submit="lg.submit()" name="form">		
-							<input type="text" style="margin: 15px 0 15px 0; width: 60%;" 
+						<form ng-submit="lg.LogarUsuario()" name="form">		
+							<input type="text" style="margin: 15px 20% 15px 20%; width: 60%;" 
 							placeholder="Digite seu login..." class="form-control" ng-model="lg.login" required maxlength="50">		
-						</form>
-						<!-- ><div class="content-login">	  
 							
-								<div class="box-login-elementos">
-									<div class="spacing">
-										Entre com os seus dados corretamente para acessar o sistema			
-									</div>
-									<form ng-submit="lg.submit()" name="form">		
-										
-										<input type="hidden" id="token" ng-model="lg.token" value="{{ csrf_token() }}">				
-										<div>
-											<input  type="text" style="margin: 15px 0 15px 0; width: 60%;" 
-												 placeholder="Digite seu login..." class="form-control" ng-model="lg.login" required maxlength="50">
-										</div>
-										<div>
-											<input  type="password" style="margin: 15px 0 15px 0; width: 60%;" 
-												placeholder="Digite sua senha..." class="form-control" ng-model="lg.pass" required maxlength="50">
-										</div>
-			
-										<div>							
-											<button  type="submit" class="btn btn-primary">Entrar</button>							
-										</div>
-			
-										<div class="spacing-a">
-											<a href="usuario/recuperar/senha/step/one" ng-click="lg.loading()"> 
-										 		Recuperar Senha	
-										 	</a>		
-										</div>	
-			
-									</form>	
-								</div>
-							</article>
-					
-						</div>
-					</div> -->
-					
+							<input  type="password" style="margin: 15px 20% 15px 20%; width: 60%;" 
+							placeholder="Digite sua senha..." class="form-control" ng-model="lg.pass" required maxlength="50">
+							
+							<div>
+								<button type="submit" style="width: 30%; margin: 0 0 15px 0;" 
+								class="btn btn-primary">Entrar</button>
+							</div>
+							
+							<div>
+								<a href="usuario/recuperar/senha/step/one" ng-click="lg.loading()"> 
+						 			Recuperar Senha	
+							 	</a>
+						 	</div>
+						 				
+						</form>		
+					</div>
 				<!-- Fim Corpo -->		
 			
 			</div>
@@ -127,7 +108,6 @@
 
 	<!-- Animação letras -->
 		<script type="text/javascript">
-		$("#loading").hide();
 			$(function () {
 				$('.animaTituloMenuFlash').textillate({      
 					// enable looping
@@ -162,12 +142,50 @@
 		</script>
 	<!-- Fim Animação letras -->
 		
-		<!-- ANGULAR JS -->
+	<!-- ANGULAR JS -->
 		<script type="text/javascript">
 			var app = angular.module('vmApp',[] )
-				app.controller('login', ['$http',function($http){
+			app.controller('login', ['$http',function($http){
+				
+				var acess = this;
+				
+				acess.LogarUsuario = function(){
+					$("#loading").show();
 					
-				}]);
+					//var variaveis = '{"login_usuario":"'+acess.login+'","senha_usuario":"'+acess.pass+'"}'
+					var variaveis = "?metodo=VerificaLoginDoUsuario&login="+acess.login+"&senha="+acess.pass;
+					
+					$http.post('LoginUsuario'+variaveis)
+			            .success(function (data, status, headers, config) {				  
+			            	console.log(data);
+			            	if(data == "N"){
+			            		console.log("msn erro");
+			            		acess.alertModal = 'alert-danger';
+			            		acess.btnModal = 'btn-danger';
+			            		acess.modalHeader = 'Atenção:'; 
+			            		acess.modalBody = 'Usuário ou senha está incorreto!';
+			            		acess.modalFooter = 'Fechar';
+			            		$("#modal").modal('show');
+			            		$("#loading").hide();
+			            	}else{	
+			            		console.log("logar");
+			            		$("#loading").hide();
+			            		//sessionStorage.setItem("id", data.usuario[0].id_usuario);
+			            		//sessionStorage.setItem("user", data.usuario[0].nome_usuario);
+			            		//sessionStorage.setItem("user_log", "Y");
+			            		//window.location.assign("principal");
+			            	}	    	
+		            	}).error(function (data, status, header, config) {		            	
+		            		acess.alertModal = 'alert-danger';
+		            		acess.btnModal = 'btn-danger';
+			            	acess.modalHeader = 'Atenção:'; 
+		            		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
+		            		acess.modalFooter = 'Fechar';
+		            		$("#modal").modal('show');
+		            		$("#loading").hide();
+		            	});
+				};
+			}]);	
 		</script>
 	<!-- ANGULAR JS -->
 	</body>

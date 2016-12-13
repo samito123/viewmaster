@@ -33,49 +33,47 @@ hr{
 		width: 100%;
 	}
 	   
-	.box_login{  
-		width: 33em;
-		height: 22em;
-		position: absolute;
-		top:50%;
-		left:50%;
-		margin-top: -11em;
-		margin-left: -16.5em;
+		.box_login{  
+			width: 33em;
+			height: 22em;
+			position: absolute;
+			top:50%;
+			left:50%;
+			margin-top: -11em;
+			margin-left: -16.5em;
+			
+			background-color: #203142;
+			color: white;
+			border-color:#cfcbcb;
+			border-radius:  2.3608%; /*14px*/
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+	      
+		.box_login img{
+			margin: 1% 0 1% 1%;
+			float: left;
+		}
 		
-		background-color: #203142;
-		color: white;
-		border-color:#cfcbcb;
-		border-radius:  2.3608%; /*14px*/
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
-      
-	.box_login img{
-		margin: 1% 0 1% 1%;
-		float: left;
-	}
-	
-	.box_login p{
-        margin: 3.1% 0 0 2%;
-        float: left;
-        font-size: 1.4em;
-    }
-    
-    .box_login .espacamento{
-    	padding: 2% 1% 1% 1%;
-    }
-    
-    .box_login form{
-    	width: 100%;
-    	margin: 0 20% 0 20%;
-    }
-    
-      .box_login button{
-        width: 30.2521%;
-        margin: 3.3613% 0 0 0; 
-      }
-      .box_login a{
-        color: white;
-      }
+		.box_login p{
+	        margin: 3.1% 0 0 2%;
+	        float: left;
+	        font-size: 1.4em;
+	    }
+	    
+	    .box_login .titulo_box_login{
+	    	text-align: center;
+	    	padding: 2% 1% 1% 1%;
+	    }
+	    
+	    .box_login form{
+	    	width: 100%;
+	    	text-align: center;
+	    }
+
+		.box_login a{
+			color: white;
+		}
+		
       .spacing-a{
         padding: 3.0420% 0.6722% 1.6806% 0.6722%;
       }
