@@ -12,7 +12,7 @@ public class FabricaDeConexao {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection(
-					 "jdbc:mysql://localhost/crud", "sam", "123"); 
+					 "jdbc:mysql://localhost/viewmaster", "sam", "123"); 
 		}catch(SQLException e){
 			throw new ServletException(e);
 		}

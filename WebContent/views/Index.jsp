@@ -152,9 +152,7 @@
 				acess.LogarUsuario = function(){
 					$("#loading").show();
 					
-					//var variaveis = '{"login_usuario":"'+acess.login+'","senha_usuario":"'+acess.pass+'"}'
 					var variaveis = "?metodo=VerificaLoginDoUsuario&login="+acess.login+"&senha="+acess.pass;
-					
 					$http.post('LoginUsuario'+variaveis)
 			            .success(function (data, status, headers, config) {				  
 			            	console.log(data);
@@ -168,7 +166,7 @@
 			            		$("#modal").modal('show');
 			            		$("#loading").hide();
 			            	}else{	
-			            		console.log("logar");
+			            		console.log(data[0].nome_usuario);
 			            		$("#loading").hide();
 			            		//sessionStorage.setItem("id", data.usuario[0].id_usuario);
 			            		//sessionStorage.setItem("user", data.usuario[0].nome_usuario);
