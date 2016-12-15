@@ -1,0 +1,231 @@
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+html{
+	background-color: #2b4158;
+}
+
+html,body{
+	font-family: Arial, 
+	Helvetica, sans-serif;
+}
+
+@media all and (max-width: 320px) { 
+	body{
+		background-color: #203142;
+	}
+}
+
+img, iframe, object, embed, video { 
+	height: auto; 
+	max-width: 100%; 
+}
+
+.container { 
+	margin: 0 auto;
+	width: 100%;
+}
+  
+	.content{
+		width: 100%;
+	}
+	   
+      .content_recuperar_senha_explicacao{
+		width: 65em;
+		height: 28em;
+		position: absolute;	
+		top:50%;
+		left:50%;
+		margin-top:-14em;
+		margin-left:-32.5em;
+		
+		background-color: #203142;
+		border-color:#cfcbcb;
+		border-radius:  2.3608%; /*14px*/
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	 }
+	 
+	 @media all and (max-width: 1024px) { 
+		.content_recuperar_senha_explicacao{
+			width: 100%;
+			height: 50%;
+			top:0;
+			left:0;
+			margin-top:0;
+			margin-left:0;   
+		}
+	 }
+	 
+	.caixa_play{
+		min-width: 23%;
+		height: 60px;
+		background-color: #337ab7;
+		margin: 1% 1% 0 1%;
+		float: left;
+		
+		font-size: 1.3em;
+		color: white;
+		border-color:#ea8511;
+		border-radius: 14px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.caixa_ok{
+        min-width: 23%;
+        height: 60px;
+        background-color: #228B22;
+        margin: 1% 1% 0 1%;
+        float: left;
+
+        font-size: 1.3em;
+        color: white;
+        border-color:#228B22;
+        border-radius: 14px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .caixa_erro{
+        min-width: 23%;
+        height: 60px;
+        background-color: #ea8511;
+        margin: 1% 1% 0 1%;
+        float: left;
+
+        font-size: 1.3em;
+        color: white;
+        border-color:#ea8511;
+        border-radius: 14px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .caixa_off{
+        min-width: 23%;
+        height: 60px;
+        background-color: #f8f8f8;
+        margin: 1% 1% 0 1%;
+        float: left;
+
+        font-size: 1.3em;
+        color: gray;
+        border-color:#f8f8f8;
+        border-radius: 14px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+	
+	@media all and (max-width: 1024px) { 
+	    .caixa_play, .caixa_ok, .caixa_erro, .caixa_off   {
+			min-width: 46%;
+			height: 3em;
+			float: left;	
+			margin: 2% 2% 2% 2%;
+		}
+	}
+ 
+	.caixa_de_descricao{
+		min-width: 90%;
+		background-color: #f5f4e9;
+		margin: 2% 5% 1% 5%;
+		padding: 0 0 2% 0;
+		float: left;
+		
+		font-size: 1.3em;
+		color: gray;
+		border-color: #f5f4e9;
+		border-radius: 14px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	@media all and (max-width: 640px) { 
+	    .caixa_de_descricao{
+			min-width: 100%;
+		    height: auto;
+		    margin: 2% 0 2% 0; 
+		    border-radius: 0;
+		}
+	}
+	
+ 	.caixa_de_descricao h3{
+		text-align: center;
+		background-color:#e0e0e0; 
+        color: #5a5655;
+	}
+	
+ 	.caixa_de_descricao p{
+    	font-size:0.7532em; 
+    	margin: 0 1% 0.5em 1%
+    }
+    
+    .caixa_de_descricao ul{
+      	font-size:0.7532em;
+      	margin: 0 3.7% 0 3.7%
+    }
+    
+    .caixa_de_descricao li{
+      	margin: 0 0 1% 0
+    }
+    
+    @media all and (max-width: 640px) { 
+		.caixa_de_descricao h3{
+			font-size: 0.9em;
+		}
+	  
+	  .caixa_de_descricao ul{
+	    font-size:0.7532em;
+	    margin: 0 5% 0 5%
+	  }
+	
+	  .caixa_de_descricao li{
+	    margin: 0 0.5% 5% 6%
+	  }
+	
+	  .caixa_de_descricao ul{
+	    font-size:0.7532em;
+	    margin: 0 5% 0 5%
+	  }
+	
+	  .btn-step-p1{
+	    width: 50%;
+	    float: none; 
+	    margin: 1% 25% 1% 25%;
+	  }
+
+	  .btn-step-p2{
+	    width: 50%;
+	    float: none; 
+	    margin: 1% 25% 1% 25%;
+	  }
+	}
+    
+    .botao_de_controle_de_fluxo_1{
+      float: right; 
+      margin: 1% 5% 1% 1%;
+    }
+
+    .botao_de_controle_de_fluxo_2{
+      float: right; 
+      margin: 1% 1% 1% 1%;
+    }
+    
+.popup_loading{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 9999;
+  width: 100%;
+  height:auto; 
+  min-height:100%;
+  background: #000000;
+  opacity: 0.95;
+  /*display: none;*/
+}
+  
+.img_loader{
+  width:80px;
+  height:80px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-40px;
+  margin-left:-40px;
+}

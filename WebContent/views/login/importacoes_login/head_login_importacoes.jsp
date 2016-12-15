@@ -20,9 +20,6 @@
 <!-- Angularjs -->
 	<!-- Libs  -->
 		<script type="text/javascript" src="javascript/angular/angular.min.js"></script>
-		<script type="text/javascript" src="javascript/angular/angular-sanitize.min.js"></script>
-		<script type="text/javascript" src="javascript/angular/ngMask.min.js"></script>
-		<script type="text/javascript" src="javascript/angular/dirPagination.js"></script>
 <!-- Fim Angularjs -->
 
 <!-- Google -->

@@ -18,7 +18,7 @@ public class UsuarioDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
-	public Usuario VerificaLoginDeAcesso(Usuario usuario) throws ServletException, SQLException{
+	public Usuario VerificaLoginDeAcessoRetornaUsuario(Usuario usuario) throws ServletException, SQLException{
 		try {	
 			conn = new FabricaDeConexao().getConnection();
 			String sql = "select * from tb_usuarios where login_usuario = ? "
