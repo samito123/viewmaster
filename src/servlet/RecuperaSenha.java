@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +14,7 @@ import com.google.gson.Gson;
 import dao.UsuarioDAO;
 import model.Usuario;
 
-
-public class LoginUsuario extends HttpServlet{
+public class RecuperaSenha extends HttpServlet{
 	
 	static private HttpServletRequest request;
 	static private HttpServletResponse response;
@@ -29,10 +27,11 @@ public class LoginUsuario extends HttpServlet{
 		response = resp;
 		
 		String metodo = request.getParameter("metodo");
+	
 		switch (metodo) {
-			case "VerificaLoginDoUsuario":	
+			case "VerificacaoEmailDataDeNascimento":	
 				try {
-					VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
+					VerificaEmailDataNascimentoRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -53,27 +52,28 @@ public class LoginUsuario extends HttpServlet{
 		return usuarioRequest;
 	}
 	
-	private void VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(Usuario usuario) throws 
-	ServletException, SQLException, IOException{
+	private void VerificaEmailDataNascimentoRecuperaUsuarioOuEnviaMensagemDeErro(Usuario usuario) 
+			throws IOException, ServletException, SQLException{
+		
 		UsuarioDAO dao = new UsuarioDAO();
-		usuario = dao.VerificaLoginDeAcessoRetornaUsuario(usuario);
-		VerificaRetornoDeUsuarioParaLogin(usuario);
+		usuario = dao.VerificaEmailDataNascimentoRecuperaSenhaRetornaUsuario(usuario);
+		VerificaRetornoDeUsuarioParaRecuperacaoDeSenha(usuario);
 	}
-	
-	private void VerificaRetornoDeUsuarioParaLogin(Usuario usuario) throws IOException{
+
+	private void VerificaRetornoDeUsuarioParaRecuperacaoDeSenha(Usuario usuario) throws IOException{
 		if(usuario.getNome_usuario() == null){
-			RetornaErroUsuarioOuSenhaIncorreta();
+			RetornaErroEmailOuDataDeNascimentoIncorreto();
 		}else{
-			RetornaUsuarioJsonRecuperadoViaLogin(usuario);
+			RetornaUsuarioJsonRecuperadoViaEmailDataDeNascimento(usuario);
 		}
 	}
 	
-	private void RetornaErroUsuarioOuSenhaIncorreta() throws IOException{
+	private void RetornaErroEmailOuDataDeNascimentoIncorreto() throws IOException{
 		PrintWriter out = response.getWriter();
 		out.write("erro"); 
 	}
 	
-	private void RetornaUsuarioJsonRecuperadoViaLogin(Usuario usuario) throws IOException{
+	private void RetornaUsuarioJsonRecuperadoViaEmailDataDeNascimento(Usuario usuario) throws IOException{
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		out.write(gson.toJson(usuario)); 

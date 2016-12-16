@@ -12,7 +12,7 @@
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
-	<body ng-controller="login as lg">
+	<body ng-controller="ViewMaster as vm">
 		
 		<%@include  file="../importacoes/loading.jsp" %>
 		<%@include  file="../importacoes/modal_mensagens.jsp" %>
@@ -20,56 +20,50 @@
 		<div class="container"> 
 			<div class="content"> 
 				
-				<div class="content_recuperar_senha_explicacao"> 
+				<div class="caixa_recuperar_senha"> 
 					
-						<button class="btn btn-primary box_step_play" ng-click="lg.step1()" disabled>
+						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoDeExplicacao()">
 							1° Passo
 						</button>
 				
-						<button class="btn btn-primary box-steps-off" disabled>
+						<button class="btn caixa_play" disabled>
 							2° Passo
 						</button>
 	
-						<button class="btn btn-primary box-steps-off" disabled>
+						<button class="btn caixa_off" disabled>
 							3° Passo
 						</button>
 	
-						<button class="btn btn-primary box-steps-off" disabled>
+						<button class="btn caixa_off" disabled>
 							4° Passo
 						</button>
+					
+					<form ng-submit="vm.VerificacaoEmailDataDeNascimento()" name="form">		
+						<div class="caixa_de_descricao">
+							<h3>
+								Informe seus dados
+							</h3>
 							
-					<div class="box_descricao_step_one">
-						
-						<h3>
-							Informativo
-						</h3>
-						
-						<p>
-							Esqueceu sua senha! Sem problemas, você pode gerar uma nova senha em alguns passos:
-						</p>
-						<ul>
-							<li>
-								Passo 1: Você já está nele, é apenas um informativo!
-							</li>
-							<li>
-								Passo 2: Você vai precisar informar o seu email e sua data de nascimento!
-							</li>
-							<li>
-								Passo 3: Escolha o método de recuperação de senha!
-							</li>
-							<li>
-								Passo 4.1: (Pergunta secreta) Responda a pergunta secreta e finalize o procedimento, você recebera uma nova senha!
-							</li>
-							<li>
-								Passo 4.2: (Email) Uma nova senha será enviada para o seu email!
-							</li>
-						</ul>
-					</div>
-		
-					<button class="btn btn-primary botao_de_controle_de_fluxo_1" ng-click="lg.proximo()">
-						Próximo
+							<div>
+								<input class="input_para_passos"  type="email" placeholder="Email..." title="Email" 
+								class="form-control" ng-model="vm.email" required/>
+							</div>
+							<div>
+								<input class="input_para_passos" type="date" placeholder="Data de nascimento..." 
+								title="Data de nascimento" class="form-control" ng-model="vm.dataNascimento" required>
+							</div>
+							
+						</div>
+			
+						<button class="btn btn-primary botao_de_controle_de_fluxo_1" type="submit">
+							Próximo
+						</button>
+					</form>
+					
+					<button class="btn btn-primary botao_de_controle_de_fluxo_2" ng-click="vm.VoltarParaPassoDeExplicacao()">
+						Anterior
 					</button>
-					<button class="btn btn-danger botao_de_controle_de_fluxo_2" ng-click="lg.cancel()">
+					<button class="btn btn-danger botao_de_controle_de_fluxo_2" ng-click="vm.CancelarRecuperacaoDeSenha()">
 						Cancelar
 					</button>
 					
@@ -84,20 +78,68 @@
 <!-- ANGULAR JS -->
 	<script type="text/javascript">
 		var app = angular.module('vmApp',[] )
-		app.controller('login', ['$http',function($http){
+		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;
 			
-			acess.cancel = function() {
+			acess.VoltarParaPassoDeExplicacao = function() {
 				$("#loading").show();
-				window.location.href="/viewmaster/public";
-			};
-
-			acess.proximo = function() {
-				$("#loading").show();
-				window.location.href="two";
+				window.location.href="RecuperarSenhaExplicacao";
 			};
 			
+			acess.CancelarRecuperacaoDeSenha = function() {
+				$("#loading").show();
+				window.location.href="Login";
+			};
+
+			acess.VerificacaoEmailDataDeNascimento = function(){
+				$("#loading").show();
+				
+				var DataFormatada = acess.dataNascimento.toLocaleDateString();
+				DataFormatada = DataFormatada.replace('/', '-').replace('/', '-');
+
+        		var variaveis = "?metodo=VerificacaoEmailDataDeNascimento&email="+acess.email
+        				+"&data_nascimento="+DataFormatada;
+        		
+	            $http.post('RecuperaSenha'+variaveis)
+		            .success(function (data, status, headers, config) {	
+		            	console.log('Data:', data);
+		            	if(data == "erro"){
+		            		MenssagemDeErroModal('Email informado não corresponde com data de nascimento informada!');
+		            	}else{
+		            		CriaSessaoDeRecuperacaoDeSenha();		    
+		     			}        
+	            })
+		            .error(function (data, status, header, config) {	
+		            	MenssagemDeErroModal('Ocorreu um erro no servidor, tente novamente mais tarde!');
+	            });
+	        };
+	        
+	        function CriaSessaoDeRecuperacaoDeSenha() {
+	        	sessionStorage.setItem("id_usuario", data.id_usuario);
+        		sessionStorage.setItem("login_usuario", data.login_usuario);
+        		sessionStorage.setItem("email_usuario", data.email_usuario);
+        		sessionStorage.setItem("data_nascimento_usuario", data.data_nascimento_usuario);	
+        		sessionStorage.setItem("pergunta_secreta_usuario", data.pergunta_secreta_usuario);
+				sessionStorage.setItem("resposta_pergunta_secreta_usuario", data.resposta_pergunta_secreta_usuario);
+        		sessionStorage.setItem("rc_step_3", "Y");	
+        		DirecionaFluxoParaPassoTres();
+			}	
+	        
+	        function DirecionaFluxoParaPassoTres() {
+	        	window.location.href="three";
+			}	
+			
+	        function MenssagemDeErroModal(Mensagem) {
+	        	acess.alertModal = 'alert-danger';
+				acess.btnModal = 'btn-danger';
+            	acess.modalHeader = 'Atenção:'; 
+        		acess.modalBody = Mensagem;
+        		acess.modalFooter = 'Fechar';
+        		$("#modal").modal('show');
+        		$("#loading").hide();
+			}	
+	        
 			$("#loading").hide();
 		}]);	
 	</script>

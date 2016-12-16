@@ -8,19 +8,19 @@
 			 		<span aria-hidden='true'>&times;</span>
 		 		</button>
 				<h4 class='modal-title' id='myModalLabel'>
-					{{lg.modalHeader}}
+					{{vm.modalHeader}}
 				</h4>
 			 </div>
 			 <div class="modal-body">
-				<div class='alert {{lg.alertModal}}'>
+				<div class='alert {{vm.alertModal}}'>
 					<ul>
-						{{lg.modalBody}}
+						{{vm.modalBody}}
 					</ul>
 				</div>
 			 </div>
 			 <div class="modal-footer">
-			 	<button type='button' class='btn {{lg.btnModal}}' ng-click="lg.voltarLogin()" data-dismiss='modal'>
-			 		{{lg.modalFooter}}
+			 	<button type='button' class='btn {{vm.btnModal}}' ng-click="vm.voltarLogin()" data-dismiss='modal'>
+			 		{{vm.modalFooter}}
 			 	</button>
 			 </div>
 		   </div>

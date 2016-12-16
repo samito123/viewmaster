@@ -12,7 +12,7 @@
 		<%@include  file="importacoes_login/head_login_importacoes.jsp" %>
 		
 	</head>
-	<body ng-controller="login as lg">
+	<body ng-controller="ViewMaster as vm">
 		
 		<%@include  file="../importacoes/loading.jsp" %>
 		<%@include  file="../importacoes/modal_mensagens.jsp" %>
@@ -36,12 +36,12 @@
 							Entre com os seus dados corretamente para acessar o sistema			
 						</div>
 						
-						<form ng-submit="lg.LogarUsuario()" name="form">		
+						<form ng-submit="vm.LogarUsuario()" name="form">		
 							<input type="text" style="margin: 15px 20% 15px 20%; width: 60%;" 
-							placeholder="Digite seu login..." class="form-control" ng-model="lg.login" required maxlength="50">		
+							placeholder="Digite seu login..." class="form-control" ng-model="vm.login" required maxlength="50">		
 							
 							<input  type="password" style="margin: 15px 20% 15px 20%; width: 60%;" 
-							placeholder="Digite sua senha..." class="form-control" ng-model="lg.pass" required maxlength="50">
+							placeholder="Digite sua senha..." class="form-control" ng-model="vm.pass" required maxlength="50">
 							
 							<div>
 								<button type="submit" style="width: 30%; margin: 0 0 15px 0;" 
@@ -49,7 +49,7 @@
 							</div>
 							
 							<div>
-								<a href="RecuperarSenhaExplicacao" ng-click="lg.loading()"> 
+								<a href="RecuperarSenhaExplicacao" ng-click="vm.loading()"> 
 						 			Recuperar Senha	
 							 	</a>
 						 	</div>
@@ -101,7 +101,7 @@
 <!-- ANGULAR JS -->
 	<script type="text/javascript">
 		var app = angular.module('vmApp',[] )
-		app.controller('login', ['$http',function($http){
+		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;
 			
@@ -109,9 +109,10 @@
 				$("#loading").show();
 				
 				var variaveis = "?metodo=VerificaLoginDoUsuario&login="+acess.login+"&senha="+acess.pass;
+				
 				$http.post('LogarUsuario'+variaveis)
 		            .success(function (data, status, headers, config) {				  
-		            	if(data == "N"){
+		            	if(data == "erro"){
 		            		acess.alertModal = 'alert-danger';
 		            		acess.btnModal = 'btn-danger';
 		            		acess.modalHeader = 'Atenção:'; 

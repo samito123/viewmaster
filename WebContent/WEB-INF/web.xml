@@ -26,22 +26,31 @@
 	</servlet-mapping>
 	
 	<servlet>
-        <servlet-name>TelaRecuperarSenhaExplicacao</servlet-name>
+        <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
         <jsp-file>/views/login/recuperar_senha_explicacao.jsp</jsp-file>
         </servlet>
     <servlet-mapping>
-        <servlet-name>TelaRecuperarSenhaExplicacao</servlet-name>
-        <url-pattern>/RecuperarSenhaExplicacao</url-pattern>
+        <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
+        <url-pattern>/TelaRecuperarSenhaPassoUm</url-pattern>
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
+        <servlet-name>TelaRecuperarSenhaPassoDois</servlet-name>
         <jsp-file>/views/login/recuperar_senha_passo_um.jsp</jsp-file>
         </servlet>
     <servlet-mapping>
-        <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
-        <url-pattern>/RecuperarSenhaPassoUm</url-pattern>
+        <servlet-name>TelaRecuperarSenhaPassoDois</servlet-name>
+        <url-pattern>/RecuperarSenhaPassoDois</url-pattern>
     </servlet-mapping>
+    
+    <servlet> 
+		<servlet-name>RecuperaSenha</servlet-name> 
+		<servlet-class>servlet.RecuperaSenha</servlet-class> 
+	</servlet>
+	<servlet-mapping> 
+		<servlet-name>RecuperaSenha</servlet-name> 
+		<url-pattern>/RecuperaSenha</url-pattern> 
+	</servlet-mapping>
 	
 	<error-page> 
 		<exception-type>java.lang.Exception</exception-type> 

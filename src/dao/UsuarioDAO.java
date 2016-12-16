@@ -47,8 +47,36 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
+	public Usuario VerificaEmailDataNascimentoRecuperaSenhaRetornaUsuario(Usuario usuario) 
+			throws ServletException, SQLException{
+		try {	
+			conn = new FabricaDeConexao().getConnection();
+			String sql = "select * from tb_usuarios where email_usuario = ? "
+					+ "and data_nascimento_usuario = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, usuario.getEmail_usuario()); 
+			ps.setString(2, usuario.getData_nascimento_usuario()); 
+			rs = ps.executeQuery(); 
+			while (rs.next()) { 
+				usuario.setId_usuario(rs.getLong("id_usuario"));
+				usuario.setNome_usuario(rs.getString("nome_usuario"));
+				usuario.setLogin_usuario(rs.getString("login_usuario"));
+				usuario.setEmail_usuario(rs.getString("email_usuario"));
+				usuario.setData_nascimento_usuario(rs.getString("data_nascimento_usuario"));
+				usuario.setPergunta_secreta_usuario(rs.getString("pergunta_secreta_usuario"));
+				usuario.setResposta_pergunta_secreta(rs.getString("resposta_pergunta_secreta_usuario"));
+			}	
+		}catch (Exception e) {
+			System.out.print(e);
+		}finally{
+			rs.close();
+			ps.close();
+			conn.close();
+		}
+		return usuario;
+	}
 	
-	public ArrayList<Usuario> RetornaTudo(Usuario usuario) throws ServletException, SQLException{
+	/*public ArrayList<Usuario> RetornaTudo(Usuario usuario) throws ServletException, SQLException{
 		ArrayList<Usuario> usuarios = new ArrayList<>();
 		try {	
 			conn = new FabricaDeConexao().getConnection();
@@ -76,5 +104,5 @@ public class UsuarioDAO {
 			conn.close();
 		}
 		return usuarios;
-	}
+	}*/
 }

@@ -12,7 +12,7 @@
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
-	<body ng-controller="login as lg">
+	<body ng-controller="ViewMaster as vm">
 		
 		<%@include  file="../importacoes/loading.jsp" %>
 		<%@include  file="../importacoes/modal_mensagens.jsp" %>
@@ -20,9 +20,9 @@
 		<div class="container"> 
 			<div class="content"> 
 				
-				<div class="content_recuperar_senha_explicacao"> 
+				<div class="caixa_recuperar_senha"> 
 					
-						<button class="btn caixa_play" ng-click="lg.step1()" disabled>
+						<button class="btn caixa_play" disabled>
 							1° Passo
 						</button>
 				
@@ -66,13 +66,13 @@
 						</ul>
 					</div>
 		
-					<!-- <button class="btn btn-primary botao_de_controle_de_fluxo_1" ng-click="lg.proximo()">
+					<button class="btn btn-primary botao_de_controle_de_fluxo_1" ng-click="vm.AvancarParaProximoPasso()">
 						Próximo
 					</button>
-					<button class="btn btn-danger botao_de_controle_de_fluxo_2" ng-click="lg.cancel()">
+					<button class="btn btn-danger botao_de_controle_de_fluxo_2" ng-click="vm.CancelarRecuperacaoDeSenha()">
 						Cancelar
-					</button> -->
-					
+					</button>
+				
 				</div>
 				
 			</div>	
@@ -84,18 +84,18 @@
 <!-- ANGULAR JS -->
 	<script type="text/javascript">
 		var app = angular.module('vmApp',[] )
-		app.controller('login', ['$http',function($http){
+		app.controller('ViewMaster', [function($http){
 			
 			var acess = this;
 			
-			acess.cancel = function() {
+			acess.CancelarRecuperacaoDeSenha = function() {
 				$("#loading").show();
-				window.location.href="/viewmaster/public";
+				window.location.href="Login";
 			};
 
-			acess.proximo = function() {
+			acess.AvancarParaProximoPasso = function() {
 				$("#loading").show();
-				window.location.href="two";
+				window.location.href="RecuperarSenhaPassoUm";
 			};
 			
 			$("#loading").hide();
