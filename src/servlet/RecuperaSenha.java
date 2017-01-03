@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.mail.EmailException;
+
 import com.google.gson.Gson;
 
 import dao.UsuarioDAO;
+import model.Email;
 import model.Usuario;
 
 public class RecuperaSenha extends HttpServlet{
@@ -27,7 +30,6 @@ public class RecuperaSenha extends HttpServlet{
 		response = resp;
 		
 		String metodo = request.getParameter("metodo");
-	
 		switch (metodo) {
 			case "VerificacaoEmailDataDeNascimento":	
 				try {
@@ -36,20 +38,27 @@ public class RecuperaSenha extends HttpServlet{
 					e.printStackTrace();
 				}
 			break;
+			
+			case "EnviarNovaSenhaPorEmail":	
+				EnviarNovaSenhaPorEmail(CriaObjetoUsuarioRequest());
+			break;
 		}
 	}
 	
 	private Usuario CriaObjetoUsuarioRequest(){
-		Usuario usuarioRequest = new Usuario();
-		usuarioRequest.setNome_usuario(request.getParameter("nome"));
-		usuarioRequest.setLogin_usuario(request.getParameter("login"));
-		usuarioRequest.setSenha_usuario(request.getParameter("senha"));
-		usuarioRequest.setEmail_usuario(request.getParameter("email"));
-		usuarioRequest.setData_nascimento_usuario(request.getParameter("data_nascimento").replaceAll("-", "/"));
-		usuarioRequest.setPergunta_secreta_usuario(request.getParameter("pergunta_secreta"));
-		usuarioRequest.setResposta_pergunta_secreta(request.getParameter("resposta_pergunta_secreta"));
+		Usuario usuario = new Usuario();
+		if(request.getParameter("id") != null)
+		usuario.setId_usuario(Long.parseLong(request.getParameter("id")));
+		usuario.setNome_usuario(request.getParameter("nome"));	
+		usuario.setLogin_usuario(request.getParameter("login"));		
+		usuario.setSenha_usuario(request.getParameter("senha"));
+		usuario.setEmail_usuario(request.getParameter("email"));
+		if(request.getParameter("data_nascimento") != null)
+		usuario.setData_nascimento_usuario(request.getParameter("data_nascimento").replaceAll("-", "/"));
+		usuario.setPergunta_secreta_usuario(request.getParameter("pergunta_secreta"));
+		usuario.setResposta_pergunta_secreta(request.getParameter("resposta_pergunta_secreta"));
 		
-		return usuarioRequest;
+		return usuario;
 	}
 	
 	private void VerificaEmailDataNascimentoRecuperaUsuarioOuEnviaMensagemDeErro(Usuario usuario) 
@@ -78,4 +87,19 @@ public class RecuperaSenha extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		out.write(gson.toJson(usuario)); 
 	}
+	
+	private void EnviarNovaSenhaPorEmail(Usuario usuario) throws IOException{
+		Email email = new Email();
+		try {
+			email.EnviarEmail(usuario);
+			PrintWriter out = response.getWriter();
+			out.write("S"+usuario.getId_usuario()); 
+		} catch (EmailException e) {
+			e.printStackTrace();
+			PrintWriter out = response.getWriter();
+			out.write("erro"); 
+		}
+	}
+	
+	
 }

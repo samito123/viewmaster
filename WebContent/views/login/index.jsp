@@ -49,7 +49,7 @@
 							</div>
 							
 							<div>
-								<a href="RecuperarSenhaExplicacao" ng-click="vm.loading()"> 
+								<a href="RecuperarSenhaPassoUm" ng-click="vm.loading()"> 
 						 			Recuperar Senha	
 							 	</a>
 						 	</div>

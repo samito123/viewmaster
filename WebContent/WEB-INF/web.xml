@@ -27,20 +27,38 @@
 	
 	<servlet>
         <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
-        <jsp-file>/views/login/recuperar_senha_explicacao.jsp</jsp-file>
+        <jsp-file>/views/login/recuperar_senha_passo_um.jsp</jsp-file>
         </servlet>
     <servlet-mapping>
         <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
-        <url-pattern>/TelaRecuperarSenhaPassoUm</url-pattern>
+        <url-pattern>/RecuperarSenhaPassoUm</url-pattern>
     </servlet-mapping>
     
     <servlet>
         <servlet-name>TelaRecuperarSenhaPassoDois</servlet-name>
-        <jsp-file>/views/login/recuperar_senha_passo_um.jsp</jsp-file>
+        <jsp-file>/views/login/recuperar_senha_passo_dois.jsp</jsp-file>
         </servlet>
     <servlet-mapping>
         <servlet-name>TelaRecuperarSenhaPassoDois</servlet-name>
         <url-pattern>/RecuperarSenhaPassoDois</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TelaRecuperarSenhaPassoTres</servlet-name>
+        <jsp-file>/views/login/recuperar_senha_passo_tres.jsp</jsp-file>
+        </servlet>
+    <servlet-mapping>
+        <servlet-name>TelaRecuperarSenhaPassoTres</servlet-name>
+        <url-pattern>/RecuperarSenhaPassoTres</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TelaRecuperarSenhaPassoQuatroPorEmail</servlet-name>
+        <jsp-file>/views/login/recuperar_senha_passo_quatro_email.jsp</jsp-file>
+        </servlet>
+    <servlet-mapping>
+        <servlet-name>TelaRecuperarSenhaPassoQuatroPorEmail</servlet-name>
+        <url-pattern>/TelaRecuperarSenhaPassoQuatroPorEmail</url-pattern>
     </servlet-mapping>
     
     <servlet> 
