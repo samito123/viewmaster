@@ -19,7 +19,7 @@
 				</div>
 			 </div>
 			 <div class="modal-footer">
-			 	<button type='button' class='btn {{vm.btnModal}}' ng-click="vm.voltarLogin()" data-dismiss='modal'>
+			 	<button type='button' class='btn {{vm.btnModal}}' ng-click="vm.fechar()" data-dismiss='modal'>
 			 		{{vm.modalFooter}}
 			 	</button>
 			 </div>

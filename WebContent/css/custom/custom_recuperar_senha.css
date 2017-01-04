@@ -152,8 +152,9 @@ img, iframe, object, embed, video {
 	}
 	
  	.caixa_de_descricao p{
+ 		text-align: center;
     	font-size:0.7532em; 
-    	margin: 0 1% 0.5em 1%
+    	margin: 0 1% 0.5em 1%;
     }
     
     .caixa_de_descricao ul{

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="vmApp">
 	<head>
@@ -8,7 +8,7 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta name="viewport" content="width=device-width">
 		
-		<title>Sistema de gestão para o ramo óptico</title>
+		<title>Sistema de gestÃ£o para o ramo Ã³ptico</title>
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
@@ -23,19 +23,19 @@
 				<div class="caixa_recuperar_senha"> 
 					
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoUm()">
-							1° Passo
+							1Â° Passo
 						</button>
 				
 						<button class="btn caixa_play" disabled>
-							2° Passo
+							2Â° Passo
 						</button>
 	
 						<button class="btn caixa_off" disabled>
-							3° Passo
+							3Â° Passo
 						</button>
 	
 						<button class="btn caixa_off" disabled>
-							4° Passo
+							4Â° Passo
 						</button>
 					
 					<form ng-submit="vm.VerificacaoEmailDataDeNascimento()" name="form">		
@@ -56,7 +56,7 @@
 						</div>
 			
 						<button class="btn btn-primary botao_de_controle_de_fluxo_1" type="submit">
-							Próximo
+							PrÃ³ximo
 						</button>
 					</form>
 					
@@ -76,7 +76,7 @@
 </html>
 
 <!-- ANGULAR JS -->
-	<script type="text/javascript">
+	<script type="text/javascript" charset="UTF-8">
 		var app = angular.module('vmApp',[] )
 		app.controller('ViewMaster', ['$http',function($http){
 			
@@ -103,9 +103,9 @@
         		
 	            $http.post('RecuperaSenha'+variaveis)
 		            .success(function (data, status, headers, config) {	
-		            	//console.log('Data:', data);
+		            	console.log('Data:', data);
 		            	if(data == "erro"){
-		            		MensagemDeErroModal('Email informado não corresponde com data de nascimento informada!');
+		            		MensagemDeErroModal('Email informado nÃ£o corresponde com data de nascimento informada!');
 		            	}else{
 		            		CriaSessaoDeRecuperacaoDeSenha(data);		    
 		     			}        
@@ -114,7 +114,7 @@
 		            	MensagemDeErroModal('Ocorreu um erro no servidor, tente novamente mais tarde!');
 	            });
 	        };
-	        
+	       
 	        function CriaSessaoDeRecuperacaoDeSenha(data) {
 	        	sessionStorage.setItem("id_usuario", data.id_usuario);
         		sessionStorage.setItem("login_usuario", data.login_usuario);
@@ -133,7 +133,7 @@
 	        function MensagemDeErroModal(Mensagem) {
 	        	acess.alertModal = 'alert-danger';
 				acess.btnModal = 'btn-danger';
-            	acess.modalHeader = 'Atenção:'; 
+            	acess.modalHeader = 'AtenÃ§Ã£o:'; 
         		acess.modalBody = Mensagem;
         		acess.modalFooter = 'Fechar';
         		$("#modal").modal('show');

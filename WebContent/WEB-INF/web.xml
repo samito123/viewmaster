@@ -61,6 +61,15 @@
         <url-pattern>/TelaRecuperarSenhaPassoQuatroPorEmail</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>TelaRecuperarSenhaPassoQuatroPorPergunta</servlet-name>
+        <jsp-file>/views/login/recuperar_senha_passo_quatro_pergunta.jsp</jsp-file>
+        </servlet>
+    <servlet-mapping>
+        <servlet-name>TelaRecuperarSenhaPassoQuatroPorPergunta</servlet-name>
+        <url-pattern>/TelaRecuperarSenhaPassoQuatroPorPergunta</url-pattern>
+    </servlet-mapping>
+    
     <servlet> 
 		<servlet-name>RecuperaSenha</servlet-name> 
 		<servlet-class>servlet.RecuperaSenha</servlet-class> 

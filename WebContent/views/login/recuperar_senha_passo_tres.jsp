@@ -24,7 +24,7 @@
 					if(sessionStorage.getItem("rc_step_3") != "Y"){
 						window.location.assign("Login");
 		    		}
-					//sessionStorage.setItem("rc_step_3", "N");
+					sessionStorage.setItem("rc_step_3", "N");
 				</script>
 				
 				<div class="caixa_recuperar_senha"> 
@@ -64,7 +64,7 @@
 						</button>
 					</form>
 					
-					<button class="btn btn-primary botao_de_controle_de_fluxo_2" ng-click="vm.VoltarParaPassoUm()">
+					<button class="btn btn-primary botao_de_controle_de_fluxo_2" ng-click="vm.VoltarParaPassoDois()">
 						Anterior
 					</button>
 					<button class="btn btn-danger botao_de_controle_de_fluxo_2" ng-click="vm.CancelarRecuperacaoDeSenha()">
@@ -107,16 +107,25 @@
 				$("#loading").show();
 
 				if(acess.metodoSelecionado == 0){
-					sessionStorage.setItem("rc_step_4", "Y");			    
-		            		window.location.href="TelaRecuperarSenhaPassoQuatroPorEmail";
+					RecuperaMensagemPorEmail();
 				}else if(acess.metodoSelecionado == 1){
-					sessionStorage.setItem("rc_step_4", "Y");			    
-		            		//window.location.href="four/"+acess.metodoSelecionado;
+					RecuperaMensagemPorPerguntaSecreta();
 				}else{
 					MensagemDeErroModal('Nenhuma opção foi selecionada!');
-					
 				}		
-	        };		
+	        };	
+	        
+	        function RecuperaMensagemPorEmail() {
+	        	sessionStorage.setItem("rc_step_4", "Y");
+				sessionStorage.setItem("rc_step_3", "Y");
+         		window.location.href="TelaRecuperarSenhaPassoQuatroPorEmail";
+			}	
+	        
+	        function RecuperaMensagemPorPerguntaSecreta() {
+	        	sessionStorage.setItem("rc_step_4", "Y");	
+				sessionStorage.setItem("rc_step_3", "Y");
+				window.location.href="TelaRecuperarSenhaPassoQuatroPorPergunta";
+			}	
 
 	        function MensagemDeErroModal(Mensagem) {
 	        	acess.alertModal = 'alert-danger';

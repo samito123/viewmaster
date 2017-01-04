@@ -24,7 +24,7 @@
 					if(sessionStorage.getItem("rc_step_4") != "Y"){
 						window.location.assign("Login");
 		    		}
-					sessionStorage.setItem("rc_step_4", "N");
+					//sessionStorage.setItem("rc_step_4", "N");
 				</script>
 				
 				<div class="caixa_recuperar_senha"> 
@@ -49,14 +49,24 @@
 						<div class="caixa_de_descricao">
 						
 							<h3>
-								Confirmar envio
+								{{vm.perguntaSecreta}}
 							</h3>
+						
+							<p>
+								Para que seja gerada uma nova senha é nescessario 
+								responser corretamente a pergunta acima.
+							</p>
 							
-							<p style="margin: 50px 10px 50px 10px">Atenção usuário 
-								{{vm.usuario}}, para confirmar o envio da nova senha para o email 
-								{{vm.email}} clique em finalizar e aguarde!
+							<div>
+								<input class="input_para_passos"  type="email" 
+								placeholder="Resposta..." title="Digite a resposta correta" 
+								class="form-control" ng-model="vm.respostaPerguntaSecreta" required/>
+							</div>
+							
+							<p style="margin: 5px 10px 50px 10px">
+								Atenção usuário {{vm.usuario}}, 
+								após digitar a resposta, click em finalizar.
 							</p>	
-							
 						</div>
 			
 						<button class="btn btn-success botao_de_controle_de_fluxo_1" ng-click="vm.Finalizar()">
@@ -85,9 +95,10 @@
 		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;
-			
+			console.log(sessionStorage.getItem("pergunta_secreta_usuario"));
 			acess.usuario = sessionStorage.getItem("login_usuario");
-			acess.email = sessionStorage.getItem("email_usuario");
+			acess.perguntaSecreta = sessionStorage.getItem("pergunta_secreta_usuario");
+			var respostaSecretaDb = sessionStorage.getItem("resposta_pergunta_secreta_usuario");
 			
 			acess.VoltarParaPassoUm = function() {
 				$("#loading").show();

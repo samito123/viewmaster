@@ -7,42 +7,42 @@
 
 <!-- Jquery -->
 	<!-- JS -->
-		<script type="text/javascript" src="javascript/jquery/jquery-1.12.3.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery/jquery-1.12.3.min.js" charset="UTF-8"></script>
 <!-- Fim Jquery -->
 
 <!-- Bootstrap -->
 	<!-- CSS -->
-		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" charset="UTF-8">
 	<!-- JS -->
-		<script type="text/javascript" src="javascript/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap/bootstrap.min.js" charset="UTF-8"></script>
 <!-- Fim Bootstrap -->
 
 <!-- Angularjs -->
 	<!-- Libs  -->
-		<script type="text/javascript" src="javascript/angular/angular.min.js"></script>
+		<script type="text/javascript" src="javascript/angular/angular.min.js" charset="UTF-8"></script>
 <!-- Fim Angularjs -->
 
 <!-- Google -->
 	<!-- CSS -->
 		<link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700" rel="stylesheet'"
-		type="text/css">
+		type="text/css" charset="UTF-8">
 <!-- Fim Google -->
 
 <!-- Custom-->
 	<!-- CSS Custom-->
-		<link href="css/custom/custom_login.css" rel="stylesheet" type="text/css">
+		<link href="css/custom/custom_login.css" rel="stylesheet" type="text/css" charset="UTF-8">
 <!-- Fim Custom-->
 
 <!-- Bootstrap -->
 	<!-- CSS -->
-		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" charset="UTF-8">
 <!-- Fim Bootstrap -->
 
 <!-- Animacoes de texto - textillate-->
 	<!-- CSS-->
-		<link href="css/textillate/vm_animate.css" rel="stylesheet" type="text/css">
+		<link href="css/textillate/vm_animate.css" rel="stylesheet" type="text/css" charset="UTF-8">
 	<!-- JS -->	
-		<script type="text/javascript" src="javascript/textillate/vm_jquery.fittext.js"></script>
-		<script type="text/javascript" src="javascript/textillate/vm_jquery.lettering.js"></script>
-		<script type="text/javascript" src="javascript/textillate/vm_jquery.textillate.js"></script>
+		<script type="text/javascript" src="javascript/textillate/vm_jquery.fittext.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="javascript/textillate/vm_jquery.lettering.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="javascript/textillate/vm_jquery.textillate.js" charset="UTF-8"></script>
 <!-- Fim Animacoes de texto - textillate-->
