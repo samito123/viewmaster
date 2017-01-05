@@ -31,7 +31,7 @@ public class UsuarioDAO {
 				usuario.setEmail_usuario(rs.getString("email_usuario"));
 				usuario.setData_nascimento_usuario(rs.getString("data_nascimento_usuario"));
 				usuario.setPergunta_secreta_usuario(rs.getString("pergunta_secreta_usuario"));
-				usuario.setResposta_pergunta_secreta(rs.getString("resposta_pergunta_secreta_usuario"));
+				usuario.setResposta_pergunta_secreta_usuario(rs.getString("resposta_pergunta_secreta_usuario"));
 			}	
 		}catch (Exception e) {
 			System.out.print(e);
@@ -59,7 +59,7 @@ public class UsuarioDAO {
 				usuario.setEmail_usuario(rs.getString("email_usuario"));
 				usuario.setData_nascimento_usuario(rs.getString("data_nascimento_usuario"));
 				usuario.setPergunta_secreta_usuario(rs.getString("pergunta_secreta_usuario"));
-				usuario.setResposta_pergunta_secreta(rs.getString("resposta_pergunta_secreta_usuario"));
+				usuario.setResposta_pergunta_secreta_usuario(rs.getString("resposta_pergunta_secreta_usuario"));
 			}	
 		}catch (Exception e) {
 			System.out.print(e);

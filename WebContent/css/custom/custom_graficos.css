@@ -1,0 +1,116 @@
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+
+html,body{
+	font-family: Arial, 
+	Helvetica, sans-serif;
+	background-color: #f5f4e9;
+}
+
+img, iframe, object, embed, video { 
+	height: auto; 
+	max-width: 100%; 
+}
+
+.container { 
+	margin: 0 auto;
+	width: 100%;
+}
+
+	header {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    min-width: 35em;
+	    height: 4em;
+	
+	    z-index: 3;
+	    -webkit-transform: translateZ(0);
+	    -webkit-backface-visibility: hidden;
+	    -webkit-transition-property: -webkit-transform;
+	    -moz-transition-property: -moz-transform;
+	    transition-property: transform;
+	    -webkit-transition-duration: 0.4s;
+	    -moz-transition-duration: 0.4s;
+	    transition-duration: 0.4s;
+	   
+	    background: -webkit-gradient(linear, left top, right top, from(#1f3041), to(#36536f)) no-repeat; 
+	    background: -moz-linear-gradient(left, #1f3041, #36536f); 
+	    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#1f3041', EndColorStr='#36536f');  
+	}
+		
+		.titulo_de_menu{
+			float: left;
+			font-size: 1.575em;
+			color: white; 
+			margin: 0.375em 0 0 0.125em;
+			padding-left: 0.1em;
+	    }
+	    
+	    .botao_de_smenu{
+			float: left; 
+			width: auto;
+			margin: 5px 0 0 0;
+	    }
+	           
+	    header a{
+			float:right; 
+			color:white;
+			font-size: 20px;
+			margin: 6px 8px 0 0;
+	    }
+	    
+	.conteiner_secundario{
+		width: 100%;
+		margin: 5.5em 0 1em 0;
+    }
+    
+    	.caixa_com_borda_redonda{
+    		width: 100%;
+			border: 1px solid;
+			border-color:#cfcbcb;
+			border-radius: 14px;
+		 }
+		 
+		.caixa_com_borda_redonda .borda_branca{
+			border: 8px solid;
+			border-color:#ffffff;
+			border-radius: 14px;
+		}
+		
+		.caixa_com_borda_redonda h4{
+			font-weight: bold;
+			text-align: center;
+		}
+		
+		.caixa_com_borda_redonda .conteudo_de_corpo_da_caixa{
+  			/*height: 12em;*/
+  			padding: 10px 5px 10px 5px;
+		}
+	    
+.popup_loading{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 9999;
+  width: 100%;
+  height:auto; 
+  min-height:100%;
+  background: #000000;
+  opacity: 0.95;
+  /*display: none;*/
+}
+  
+.img_loader{
+  width:80px;
+  height:80px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-40px;
+  margin-left:-40px;
+}
+

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="vmApp">
 	<head>
@@ -8,7 +8,7 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta name="viewport" content="width=device-width">
 		
-		<title>Sistema de gestão para o ramo óptico</title>
+		<title>Sistema de gestÃ£o para o ramo Ã³ptico</title>
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
@@ -23,19 +23,19 @@
 				<div class="caixa_recuperar_senha"> 
 					
 						<button class="btn caixa_play" disabled>
-							1° Passo
+							1Â° Passo
 						</button>
 				
 						<button class="btn caixa_off" disabled>
-							2° Passo
+							2Â° Passo
 						</button>
 	
 						<button class="btn caixa_off" disabled>
-							3° Passo
+							3Â° Passo
 						</button>
 	
 						<button class="btn caixa_off" disabled>
-							4° Passo
+							4Â° Passo
 						</button>
 							
 					<div class="caixa_de_descricao">
@@ -45,29 +45,29 @@
 						</h3>
 						
 						<p>
-							Esqueceu sua senha! Sem problemas, você pode gerar uma nova senha em alguns passos:
+							Esqueceu sua senha! Sem problemas, vocÃª pode gerar uma nova senha em alguns passos:
 						</p>
 						<ul>
 							<li>
-								Passo 1: Você já está nele, é apenas um informativo!
+								Passo 1: VocÃª jÃ¡ estÃ¡ nele, Ã© apenas um informativo!
 							</li>
 							<li>
-								Passo 2: Você vai precisar informar o seu email e sua data de nascimento!
+								Passo 2: VocÃª vai precisar informar o seu email e sua data de nascimento!
 							</li>
 							<li>
-								Passo 3: Escolha o método de recuperação de senha!
+								Passo 3: Escolha o mÃ©todo de recuperaÃ§Ã£o de senha!
 							</li>
 							<li>
-								Passo 4.1: (Pergunta secreta) Responda a pergunta secreta e finalize o procedimento, você recebera uma nova senha!
+								Passo 4.1: (Pergunta secreta) Responda a pergunta secreta e finalize o procedimento, vocÃª recebera uma nova senha!
 							</li>
 							<li>
-								Passo 4.2: (Email) Uma nova senha será enviada para o seu email!
+								Passo 4.2: (Email) Uma nova senha serÃ¡ enviada para o seu email!
 							</li>
 						</ul>
 					</div>
 		
 					<button class="btn btn-primary botao_de_controle_de_fluxo_1" ng-click="vm.AvancarParaProximoPasso()">
-						Próximo
+						PrÃ³ximo
 					</button>
 					<button class="btn btn-danger botao_de_controle_de_fluxo_2" ng-click="vm.CancelarRecuperacaoDeSenha()">
 						Cancelar

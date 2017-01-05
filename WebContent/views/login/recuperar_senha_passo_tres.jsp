@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="vmApp">
 	<head>
@@ -8,7 +8,7 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta name="viewport" content="width=device-width">
 		
-		<title>Sistema de gestão para o ramo óptico</title>
+		<title>Sistema de gestÃ£o para o ramo Ã³ptico</title>
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
@@ -30,26 +30,26 @@
 				<div class="caixa_recuperar_senha"> 
 					
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoUm()">
-							1° Passo
+							1Â° Passo
 						</button>
 				
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoDois()">
-							2° Passo
+							2Â° Passo
 						</button>
 	
 						<button class="btn caixa_play" disabled>
-							3° Passo
+							3Â° Passo
 						</button>
 	
 						<button class="btn caixa_off" disabled>
-							4° Passo
+							4Â° Passo
 						</button>
 					
-					<form ng-submit="vm.VerificacaoEmailDataDeNascimento()" name="form">		
+					<form name="form">		
 						<div class="caixa_de_descricao">
 						
 							<h3>
-								{{vm.usuario}}, selecione o método desejado
+								{{vm.usuario}}, selecione o mÃ©todo desejado
 							</h3>
 						
 							<fieldset style="font-size: 0.8em;">
@@ -60,7 +60,7 @@
 						</div>
 			
 						<button class="btn btn-primary botao_de_controle_de_fluxo_1" ng-click="vm.RecuperaSenhaPorMetodoSelecionado()">
-							Próximo
+							PrÃ³ximo
 						</button>
 					</form>
 					
@@ -111,7 +111,7 @@
 				}else if(acess.metodoSelecionado == 1){
 					RecuperaMensagemPorPerguntaSecreta();
 				}else{
-					MensagemDeErroModal('Nenhuma opção foi selecionada!');
+					MensagemDeErroModal('Nenhuma opÃ§Ã£o foi selecionada!');
 				}		
 	        };	
 	        
@@ -130,7 +130,7 @@
 	        function MensagemDeErroModal(Mensagem) {
 	        	acess.alertModal = 'alert-danger';
 				acess.btnModal = 'btn-danger';
-            	acess.modalHeader = 'Atenção:'; 
+            	acess.modalHeader = 'AtenÃ§Ã£o:'; 
         		acess.modalBody = Mensagem;
         		acess.modalFooter = 'Fechar';
         		$("#modal").modal('show');

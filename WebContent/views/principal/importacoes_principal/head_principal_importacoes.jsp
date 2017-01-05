@@ -30,7 +30,7 @@
 
 <!-- Custom-->
 	<!-- CSS Custom-->
-		<link href="css/custom/custom_login.css" rel="stylesheet" type="text/css" charset="UTF-8">
+		<link href="css/custom/custom_graficos.css" rel="stylesheet" type="text/css" charset="UTF-8">
 <!-- Fim Custom-->
 
 <!-- Animacoes de texto - textillate-->
@@ -41,3 +41,10 @@
 		<script type="text/javascript" src="javascript/textillate/vm_jquery.lettering.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="javascript/textillate/vm_jquery.textillate.js" charset="UTF-8"></script>
 <!-- Fim Animacoes de texto - textillate-->
+
+<!-- Menu-->
+	<!-- CSS -->
+		<link href="css/menu/pushy.css" rel="stylesheet" type="text/css" charset="UTF-8">
+	<!-- JS 	
+		<script type="text/javascript" src="../../javascript/menu/pushy.min.js" charset="UTF-8"></script>-->
+<!-- Fim Menu-->

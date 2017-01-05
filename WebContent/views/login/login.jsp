@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="vmApp">
 	<head>
@@ -8,7 +8,7 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta name="viewport" content="width=device-width">
 		
-		<title>Sistema de gest„o para o ramo Ûptico</title>
+		<title>Sistema de gest√£o para o ramo √≥ptico</title>
 		<%@include  file="importacoes_login/head_login_importacoes.jsp" %>
 		
 	</head>
@@ -18,52 +18,50 @@
 		<%@include  file="../importacoes/modal_mensagens.jsp" %>
 		
 		<div class="container"> 
-			<div class="content"> 
-		
-					<script type="text/javascript">
-						sessionStorage.clear();
-					</script>
+			
+			<script type="text/javascript">
+				sessionStorage.clear();
+			</script>
+			
+			<div class="box_login">			
+				<img class="logo_imagem_box_login" 
+				src="imagens/icones/menu/logo_ico_32dp.png"/>
 					
-					<div class="box_login">			
-						<img class="logo_imagem_box_login" 
-						src="imagens/icones/menu/logo_ico_32dp.png"/>
-							
-						<p class=titulo_login_animacao>View Master</p>
-						
-						<hr width="98%"/>
-						
-						<div class="titulo_box_login">
-							Entre com os seus dados corretamente para acessar o sistema			
-						</div>
-						
-						<form ng-submit="vm.LogarUsuario()" name="form">		
-							<input type="text" style="margin: 15px 20% 15px 20%; width: 60%;" 
-							placeholder="Digite seu login..." class="form-control" ng-model="vm.login" required maxlength="50">		
-							
-							<input  type="password" style="margin: 15px 20% 15px 20%; width: 60%;" 
-							placeholder="Digite sua senha..." class="form-control" ng-model="vm.pass" required maxlength="50">
-							
-							<div>
-								<button type="submit" style="width: 30%; margin: 0 0 15px 0;" 
-								class="btn btn-primary">Entrar</button>
-							</div>
-							
-							<div>
-								<a href="RecuperarSenhaPassoUm" ng-click="vm.loading()"> 
-						 			Recuperar Senha	
-							 	</a>
-						 	</div>
-						 				
-						</form>		
-					</div>
+				<p class=titulo_login_animacao>View Master</p>
 				
-			</div>	
+				<hr width="98%"/>
+				
+				<div class="titulo_box_login">
+					Entre com os seus dados corretamente para acessar o sistema			
+				</div>
+				
+				<form ng-submit="vm.LogarUsuario()" name="form">		
+					<input type="text" style="margin: 15px 20% 15px 20%; width: 60%;" 
+					placeholder="Digite seu login..." class="form-control" ng-model="vm.login" required maxlength="50">		
+					
+					<input  type="password" style="margin: 15px 20% 15px 20%; width: 60%;" 
+					placeholder="Digite sua senha..." class="form-control" ng-model="vm.pass" required maxlength="50">
+					
+					<div>
+						<button type="submit" style="width: 30%; margin: 0 0 15px 0;" 
+						class="btn btn-primary">Entrar</button>
+					</div>
+					
+					<div>
+						<a href="RecuperarSenhaPassoUm" ng-click="vm.loading()"> 
+				 			Recuperar Senha	
+					 	</a>
+				 	</div>
+				 				
+				</form>		
+			</div>
+		
 		</div>
 			
 	</body>
 </html>
 
-<!-- AnimaÁ„o letras -->
+<!-- Anima√ß√£o letras -->
 	<script type="text/javascript">
 		$(function () {
 			$('.titulo_login_animacao').textillate({      
@@ -96,7 +94,7 @@
 			$("#loading").hide();
 		});
 	</script>
-<!-- Fim AnimaÁ„o letras -->
+<!-- Fim Anima√ß√£o letras -->
 	
 <!-- ANGULAR JS -->
 	<script type="text/javascript">
@@ -115,8 +113,8 @@
 		            	if(data == "erro"){
 		            		acess.alertModal = 'alert-danger';
 		            		acess.btnModal = 'btn-danger';
-		            		acess.modalHeader = 'AtenÁ„o:'; 
-		            		acess.modalBody = 'Usu·rio ou senha est· incorreto!';
+		            		acess.modalHeader = 'Aten√ß√£o:'; 
+		            		acess.modalBody = 'Usu√°rio ou senha est√° incorreto!';
 		            		acess.modalFooter = 'Fechar';
 		            		$("#modal").modal('show');
 		            		$("#loading").hide();
@@ -124,12 +122,12 @@
 		            		sessionStorage.setItem("id", data.id_usuario);
 		            		sessionStorage.setItem("user", data.nome_usuario);
 		            		sessionStorage.setItem("user_log", "Y");
-		            		window.location.assign("views/principal/graficos.jsp");
+		            		window.location.assign("Graficos");
 		            	}	    	
 	            	}).error(function (data, status, header, config) {		            	
 	            		acess.alertModal = 'alert-danger';
 	            		acess.btnModal = 'btn-danger';
-		            	acess.modalHeader = 'AtenÁ„o:'; 
+		            	acess.modalHeader = 'Aten√ß√£o:'; 
 	            		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
 	            		acess.modalFooter = 'Fechar';
 	            		$("#modal").modal('show');

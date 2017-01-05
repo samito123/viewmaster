@@ -33,11 +33,6 @@
 		<link href="css/custom/custom_recuperar_senha.css" rel="stylesheet" type="text/css">
 <!-- Fim Custom-->
 
-<!-- Bootstrap -->
-	<!-- CSS -->
-		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-<!-- Fim Bootstrap -->
-
 <!-- Animacoes de texto - textillate-->
 	<!-- CSS-->
 		<link href="css/textillate/vm_animate.css" rel="stylesheet" type="text/css">
@@ -46,3 +41,9 @@
 		<script type="text/javascript" src="javascript/textillate/vm_jquery.lettering.js"></script>
 		<script type="text/javascript" src="javascript/textillate/vm_jquery.textillate.js"></script>
 <!-- Fim Animacoes de texto - textillate-->
+
+<!-- Inputs Mascaras-->
+	<!-- JS -->	
+		<script type="text/javascript" src="javascript/mask/jquery.maskedinput.min.js"></script>
+		<script type="text/javascript" src="javascript/mask/jquery.validate.min.js"></script>
+<!-- Fim Inputs Mascaras-->

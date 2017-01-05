@@ -9,7 +9,7 @@ public class Usuario {
 	private String email_usuario;
 	private String data_nascimento_usuario;
 	private String pergunta_secreta_usuario;
-	private String resposta_pergunta_secreta;
+	private String resposta_pergunta_secreta_usuario;
 	
 	
 	public Long getId_usuario() {
@@ -54,12 +54,11 @@ public class Usuario {
 	public void setPergunta_secreta_usuario(String pergunta_secreta_usuario) {
 		this.pergunta_secreta_usuario = pergunta_secreta_usuario;
 	}
-	public String getResposta_pergunta_secreta() {
-		return resposta_pergunta_secreta;
+	public String getResposta_pergunta_secreta_usuario() {
+		return resposta_pergunta_secreta_usuario;
 	}
-	public void setResposta_pergunta_secreta(String resposta_pergunta_secreta) {
-		this.resposta_pergunta_secreta = resposta_pergunta_secreta;
+	public void setResposta_pergunta_secreta_usuario(
+			String resposta_pergunta_secreta_usuario) {
+		this.resposta_pergunta_secreta_usuario = resposta_pergunta_secreta_usuario;
 	}
-	
-
 }

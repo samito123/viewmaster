@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="vmApp">
 	<head>
@@ -8,7 +8,7 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta name="viewport" content="width=device-width">
 		
-		<title>Sistema de gestão para o ramo óptico</title>
+		<title>Sistema de gestÃ£o para o ramo Ã³ptico</title>
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
@@ -24,28 +24,28 @@
 					if(sessionStorage.getItem("rc_step_4") != "Y"){
 						window.location.assign("Login");
 		    		}
-					//sessionStorage.setItem("rc_step_4", "N");
+					sessionStorage.setItem("rc_step_4", "N");
 				</script>
 				
 				<div class="caixa_recuperar_senha"> 
 					
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoUm()">
-							1° Passo
+							1Â° Passo
 						</button>
 				
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoDois()">
-							2° Passo
+							2Â° Passo
 						</button>
 	
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoTres()">
-							3° Passo
+							3Â° Passo
 						</button>
 	
 						<button class="btn caixa_play" disabled>
-							4° Passo
+							4Â° Passo
 						</button>
 					
-					<form ng-submit="vm.VerificacaoEmailDataDeNascimento()" name="form">		
+					<form ng-submit="vm.EnviarSenhaPorPerguntaSecreta()" name="form">		
 						<div class="caixa_de_descricao">
 						
 							<h3>
@@ -53,23 +53,23 @@
 							</h3>
 						
 							<p>
-								Para que seja gerada uma nova senha é nescessario 
+								Para que seja gerada uma nova senha Ã© nescessario 
 								responser corretamente a pergunta acima.
 							</p>
 							
 							<div>
-								<input class="input_para_passos"  type="email" 
+								<input class="input_para_passos"  type="text" 
 								placeholder="Resposta..." title="Digite a resposta correta" 
 								class="form-control" ng-model="vm.respostaPerguntaSecreta" required/>
 							</div>
 							
 							<p style="margin: 5px 10px 50px 10px">
-								Atenção usuário {{vm.usuario}}, 
-								após digitar a resposta, click em finalizar.
+								AtenÃ§Ã£o usuÃ¡rio {{vm.usuario}}, 
+								apÃ³s digitar a resposta, click em finalizar.
 							</p>	
 						</div>
 			
-						<button class="btn btn-success botao_de_controle_de_fluxo_1" ng-click="vm.Finalizar()">
+						<button class="btn btn-success botao_de_controle_de_fluxo_1" type="submit">
 							Finalizar
 						</button>
 					</form>
@@ -95,7 +95,6 @@
 		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;
-			console.log(sessionStorage.getItem("pergunta_secreta_usuario"));
 			acess.usuario = sessionStorage.getItem("login_usuario");
 			acess.perguntaSecreta = sessionStorage.getItem("pergunta_secreta_usuario");
 			var respostaSecretaDb = sessionStorage.getItem("resposta_pergunta_secreta_usuario");
@@ -120,31 +119,28 @@
 				window.location.href="Login";
 			};
 			
-			acess.Finalizar = function(){
+			acess.EnviarSenhaPorPerguntaSecreta = function(){
 				$("#loading").show();
-				var senha = "";
-				for (i = 0; i < 8; i++) { 
-					senha += Math.floor(Math.random() * 10);
+				
+				if(acess.respostaPerguntaSecreta.toLowerCase().localeCompare(respostaSecretaDb.toLowerCase()) == 0){
+					var variaveis = "?metodo=EnviarNovaSenhaPorPerguntaSecreta&id="+sessionStorage.getItem("id_usuario");
+					$http.post('RecuperaSenha'+variaveis)
+		            .success(function (data, status, headers, config) {	
+		            	if(data == "erro"){
+	            			MensagemDeErroModal("Ocorreu um erro no servidor, tente novamente mais tarde!");
+		            	}else{
+		            		MensagemDeSucessoModal(data);
+		            	}      
+		            })
+			            .error(function (data, status, header, config) {	
+			            	MensagemDeErroModal();
+		            });
+				}else{
+					MensagemDeErroModal("A resposta de pergunta secreta estÃ¡ incorreta!");
 				}
-				
-				var variaveis = "?metodo=EnviarNovaSenhaPorEmail&id="+sessionStorage.getItem("id_usuario")
-				+"&email="+sessionStorage.getItem("email_usuario")
-				+"&login="+sessionStorage.getItem("login_usuario");
-				
-				$http.post('RecuperaSenha'+variaveis)
-	            .success(function (data, status, headers, config) {	
-	            	if(data == "sucesso"){
-	            		MensagemDeSucessoModal();
-	            	}else{
-	            		MensagemDeErroModal();
-	            	}      
-	            })
-		            .error(function (data, status, header, config) {	
-		            	MensagemDeErroModal();
-	            });	
 			};
 			
-			function MensagemDeSucessoModal() {
+			function MensagemDeSucessoModal(novaSenha) {
 				acess.btnCancelarStatus = 'btn-success';
 				acess.btnCancelarText = 'Voltar para tela de login';
 				acess.fechar = function() {
@@ -154,18 +150,18 @@
 
         		acess.alertModal = 'alert-success';
         		acess.btnModal = 'btn-success';
-        		acess.modalHeader = 'Atenção:'; 
-        		acess.modalBody = 'O email foi enviado com sucesso!';
+        		acess.modalHeader = 'AtenÃ§Ã£o:'; 
+        		acess.modalBody = 'Sua nova senha Ã©: '+novaSenha;
         		acess.modalFooter = 'Voltar para tela de login';
         		$("#modal").modal('show');
         		$("#loading").hide();
 			}	
 
-	        function MensagemDeErroModal() {
+	        function MensagemDeErroModal(mensagem) {
 	        	acess.alertModal = 'alert-danger';
         		acess.btnModal = 'btn-danger';
-        		acess.modalHeader = 'Atenção:'; 
-        		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
+        		acess.modalHeader = 'AtenÃ§Ã£o:'; 
+        		acess.modalBody = mensagem;
         		acess.modalFooter = 'Fechar';
         		$("#modal").modal('show');
         		$("#loading").hide();

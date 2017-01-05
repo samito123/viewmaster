@@ -45,12 +45,12 @@ pageEncoding="UTF-8"%>
 							</h3>
 							
 							<div>
-								<input class="input_para_passos"  type="email" placeholder="Email..." title="Email" 
-								class="form-control" ng-model="vm.email" required/>
+								<input class="input_para_passos" type="email" 
+								placeholder="Email..." title="Email" ng-model="vm.email" required/>
 							</div>
 							<div>
-								<input class="input_para_passos" type="date" placeholder="Data de nascimento..." 
-								title="Data de nascimento" class="form-control" ng-model="vm.dataNascimento" required>
+								<input id="data" class="input_para_passos" type="text" placeholder="Data de nascimento..." 
+								title="Data de nascimento" ng-model="vm.dataNascimento" required>
 							</div>
 							
 						</div>
@@ -95,15 +95,14 @@ pageEncoding="UTF-8"%>
 			acess.VerificacaoEmailDataDeNascimento = function(){
 				$("#loading").show();
 				
-				var DataFormatada = acess.dataNascimento.toLocaleDateString();
-				DataFormatada = DataFormatada.replace('/', '-').replace('/', '-');
+				//var DataFormatada = acess.dataNascimento.toLocaleDateString();
+				var DataFormatada = acess.dataNascimento.replace('/', '-').replace('/', '-');
 
         		var variaveis = "?metodo=VerificacaoEmailDataDeNascimento&email="+acess.email
         				+"&data_nascimento="+DataFormatada;
         		
 	            $http.post('RecuperaSenha'+variaveis)
 		            .success(function (data, status, headers, config) {	
-		            	console.log('Data:', data);
 		            	if(data == "erro"){
 		            		MensagemDeErroModal('Email informado não corresponde com data de nascimento informada!');
 		            	}else{

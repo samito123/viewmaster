@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="vmApp">
 	<head>
@@ -8,7 +8,7 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 		<meta name="viewport" content="width=device-width">
 		
-		<title>Sistema de gestão para o ramo óptico</title>
+		<title>Sistema de gestÃ£o para o ramo Ã³ptico</title>
 		<%@include  file="importacoes_login/head_recupera_senha_importacoes.jsp" %>
 		
 	</head>
@@ -30,36 +30,36 @@
 				<div class="caixa_recuperar_senha"> 
 					
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoUm()">
-							1° Passo
+							1Â° Passo
 						</button>
 				
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoDois()">
-							2° Passo
+							2Â° Passo
 						</button>
 	
 						<button class="btn caixa_ok" ng-click="vm.VoltarParaPassoTres()">
-							3° Passo
+							3Â° Passo
 						</button>
 	
 						<button class="btn caixa_play" disabled>
-							4° Passo
+							4Â° Passo
 						</button>
 					
-					<form ng-submit="vm.VerificacaoEmailDataDeNascimento()" name="form">		
+					<form name="form">		
 						<div class="caixa_de_descricao">
 						
 							<h3>
 								Confirmar envio
 							</h3>
 							
-							<p style="margin: 50px 10px 50px 10px">Atenção usuário 
+							<p style="margin: 50px 10px 50px 10px">AtenÃ§Ã£o usuÃ¡rio 
 								{{vm.usuario}}, para confirmar o envio da nova senha para o email 
 								{{vm.email}} clique em finalizar e aguarde!
 							</p>	
 							
 						</div>
 			
-						<button class="btn btn-success botao_de_controle_de_fluxo_1" ng-click="vm.Finalizar()">
+						<button class="btn btn-success botao_de_controle_de_fluxo_1" ng-click="vm.EnviarSenhaPorEmail()">
 							Finalizar
 						</button>
 					</form>
@@ -109,7 +109,7 @@
 				window.location.href="Login";
 			};
 			
-			acess.Finalizar = function(){
+			acess.EnviarSenhaPorEmail = function(){
 				$("#loading").show();
 				var senha = "";
 				for (i = 0; i < 8; i++) { 
@@ -122,6 +122,7 @@
 				
 				$http.post('RecuperaSenha'+variaveis)
 	            .success(function (data, status, headers, config) {	
+	            	console.log('Data:', data);
 	            	if(data == "sucesso"){
 	            		MensagemDeSucessoModal();
 	            	}else{
@@ -143,7 +144,7 @@
 
         		acess.alertModal = 'alert-success';
         		acess.btnModal = 'btn-success';
-        		acess.modalHeader = 'Atenção:'; 
+        		acess.modalHeader = 'AtenÃ§Ã£o:'; 
         		acess.modalBody = 'O email foi enviado com sucesso!';
         		acess.modalFooter = 'Voltar para tela de login';
         		$("#modal").modal('show');
@@ -153,7 +154,7 @@
 	        function MensagemDeErroModal() {
 	        	acess.alertModal = 'alert-danger';
         		acess.btnModal = 'btn-danger';
-        		acess.modalHeader = 'Atenção:'; 
+        		acess.modalHeader = 'AtenÃ§Ã£o:'; 
         		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
         		acess.modalFooter = 'Fechar';
         		$("#modal").modal('show');

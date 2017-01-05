@@ -41,16 +41,25 @@ public class LoginUsuario extends HttpServlet{
 	}
 	
 	private Usuario CriaObjetoUsuarioRequest(){
-		Usuario usuarioRequest = new Usuario();
-		usuarioRequest.setNome_usuario(request.getParameter("nome"));
-		usuarioRequest.setLogin_usuario(request.getParameter("login"));
-		usuarioRequest.setSenha_usuario(request.getParameter("senha"));
-		usuarioRequest.setEmail_usuario(request.getParameter("email"));
-		usuarioRequest.setData_nascimento_usuario(request.getParameter("data_nascimento").replaceAll("-", "/"));
-		usuarioRequest.setPergunta_secreta_usuario(request.getParameter("pergunta_secreta"));
-		usuarioRequest.setResposta_pergunta_secreta(request.getParameter("resposta_pergunta_secreta"));
+		Usuario usuario = new Usuario();
+		if(request.getParameter("id") != null)
+			usuario.setId_usuario(Long.parseLong(request.getParameter("id")));
+		if(request.getParameter("nome") != null)
+			usuario.setNome_usuario(request.getParameter("nome"));	
+		if(request.getParameter("login") != null)
+			usuario.setLogin_usuario(request.getParameter("login"));		
+		if(request.getParameter("senha") != null)
+			usuario.setSenha_usuario(request.getParameter("senha"));
+		if(request.getParameter("email") != null)
+			usuario.setEmail_usuario(request.getParameter("email"));
+		if(request.getParameter("data_nascimento") != null)
+			usuario.setData_nascimento_usuario(request.getParameter("data_nascimento").replaceAll("-", "/"));
+		if(request.getParameter("pergunta_secreta") != null)
+			usuario.setPergunta_secreta_usuario(request.getParameter("pergunta_secreta"));
+		if(request.getParameter("resposta_pergunta_secreta") != null)
+			usuario.setResposta_pergunta_secreta_usuario(request.getParameter("resposta_pergunta_secreta"));
 		
-		return usuarioRequest;
+		return usuario;
 	}
 	
 	private void VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(Usuario usuario) throws 

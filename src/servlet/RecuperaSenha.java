@@ -42,7 +42,15 @@ public class RecuperaSenha extends HttpServlet{
 			
 			case "EnviarNovaSenhaPorEmail":	
 				try {
-					GerarNovaSenha(CriaObjetoUsuarioRequest());
+					GerarNovaSenha(0, CriaObjetoUsuarioRequest());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			break;
+				
+			case "EnviarNovaSenhaPorPerguntaSecreta":	
+				try {
+					GerarNovaSenha(1, CriaObjetoUsuarioRequest());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -54,14 +62,20 @@ public class RecuperaSenha extends HttpServlet{
 		Usuario usuario = new Usuario();
 		if(request.getParameter("id") != null)
 			usuario.setId_usuario(Long.parseLong(request.getParameter("id")));
-		usuario.setNome_usuario(request.getParameter("nome"));	
-		usuario.setLogin_usuario(request.getParameter("login"));		
-		usuario.setSenha_usuario(request.getParameter("senha"));
-		usuario.setEmail_usuario(request.getParameter("email"));
+		if(request.getParameter("nome") != null)
+			usuario.setNome_usuario(request.getParameter("nome"));	
+		if(request.getParameter("login") != null)
+			usuario.setLogin_usuario(request.getParameter("login"));		
+		if(request.getParameter("senha") != null)
+			usuario.setSenha_usuario(request.getParameter("senha"));
+		if(request.getParameter("email") != null)
+			usuario.setEmail_usuario(request.getParameter("email"));
 		if(request.getParameter("data_nascimento") != null)
 			usuario.setData_nascimento_usuario(request.getParameter("data_nascimento").replaceAll("-", "/"));
-		usuario.setPergunta_secreta_usuario(request.getParameter("pergunta_secreta"));
-		usuario.setResposta_pergunta_secreta(request.getParameter("resposta_pergunta_secreta"));
+		if(request.getParameter("pergunta_secreta") != null)
+			usuario.setPergunta_secreta_usuario(request.getParameter("pergunta_secreta"));
+		if(request.getParameter("resposta_pergunta_secreta") != null)
+			usuario.setResposta_pergunta_secreta_usuario(request.getParameter("resposta_pergunta_secreta"));
 		
 		return usuario;
 	}
@@ -95,18 +109,24 @@ public class RecuperaSenha extends HttpServlet{
 	private void RetornaUsuarioJsonRecuperadoViaEmailDataDeNascimento(Usuario usuario) throws IOException{
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
-		out.write(gson.toJson(CodificaUsuarioJavaServidor(usuario)));
+		out.write(gson.toJson(CodificaUsuarioUTF8(usuario)));
 	}
 	
-	private Usuario CodificaUsuarioJavaServidor(Usuario usuario) throws UnsupportedEncodingException{
-		//usuario.setNome_usuario(CodificaStringUTF8(usuario.getNome_usuario()));	
-		//usuario.setLogin_usuario(CodificaStringUTF8(usuario.getLogin_usuario()));		
-		//usuario.setSenha_usuario(CodificaStringUTF8(usuario.getSenha_usuario()));
-		//usuario.setEmail_usuario(CodificaStringUTF8(usuario.getEmail_usuario()));
-		//usuario.setData_nascimento_usuario(CodificaStringUTF8(usuario.getData_nascimento_usuario()));
-		usuario.setPergunta_secreta_usuario(CodificaStringUTF8(usuario.getPergunta_secreta_usuario()));
-		//usuario.setResposta_pergunta_secreta(CodificaStringUTF8(usuario.getResposta_pergunta_secreta()));
-		
+	private Usuario CodificaUsuarioUTF8(Usuario usuario) throws UnsupportedEncodingException{
+		if(usuario.getNome_usuario() != null)
+			usuario.setNome_usuario(CodificaStringUTF8(usuario.getNome_usuario()));	
+		if(usuario.getLogin_usuario() != null)
+			usuario.setLogin_usuario(CodificaStringUTF8(usuario.getLogin_usuario()));		
+		if(usuario.getSenha_usuario() != null)
+			usuario.setSenha_usuario(CodificaStringUTF8(usuario.getSenha_usuario()));
+		if(usuario.getEmail_usuario() != null)
+			usuario.setEmail_usuario(CodificaStringUTF8(usuario.getEmail_usuario()));
+		if(usuario.getData_nascimento_usuario() != null)
+			usuario.setData_nascimento_usuario(CodificaStringUTF8(usuario.getData_nascimento_usuario()));
+		if(usuario.getPergunta_secreta_usuario() != null)
+			usuario.setPergunta_secreta_usuario(CodificaStringUTF8(usuario.getPergunta_secreta_usuario()));
+		if(usuario.getResposta_pergunta_secreta_usuario() != null)
+			usuario.setResposta_pergunta_secreta_usuario(CodificaStringUTF8(usuario.getResposta_pergunta_secreta_usuario()));
 		return usuario;
 	}
 	
@@ -114,7 +134,7 @@ public class RecuperaSenha extends HttpServlet{
 		return new String(string.getBytes("UTF-8"), "ISO-8859-1");
 	}
 	
-	private void GerarNovaSenha(Usuario usuario) throws IOException, ServletException, SQLException{
+	private void GerarNovaSenha(int emailOuPergunta, Usuario usuario) throws IOException, ServletException, SQLException{
 		int qtdeMaximaCaracteres = 8;
         String[] caracteres = { "a", "1", "b", "2", "4", "5", "6", "7", "8",
                 "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
@@ -130,7 +150,15 @@ public class RecuperaSenha extends HttpServlet{
             senha.append(caracteres[posicao]);
         }
         usuario.setSenha_usuario(senha.toString());
-        EnviarNovaSenhaPorEmail(usuario);
+        EnviarNovaSenha(emailOuPergunta, usuario);
+	}
+	
+	private void EnviarNovaSenha(int emailOuPergunta, Usuario usuario) throws IOException, ServletException, SQLException{
+		if(emailOuPergunta == 0){
+			EnviarNovaSenhaPorEmail(usuario);
+		}else{
+			EnviarNovaSenhaPorPerguntaSecreta(usuario);
+		}
 	}
 	
 	private void EnviarNovaSenhaPorEmail(Usuario usuario) throws IOException, ServletException, SQLException{
@@ -138,29 +166,60 @@ public class RecuperaSenha extends HttpServlet{
 		
 		try {
 			email.EnviarEmail(usuario);
-			AlterarSenhaUsuario(usuario);
+			AlterarSenhaUsuarioEmail(usuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 			RetornaErroRecuperacaoSenha();
 		}
 	}
 	
-	private void AlterarSenhaUsuario(Usuario usuario) throws ServletException, SQLException, IOException{
+	private void AlterarSenhaUsuarioEmail(Usuario usuario) throws ServletException, SQLException, IOException{
 		try {
 			UsuarioDAO dao = new UsuarioDAO();
 			boolean executouSQL = dao.AlteraSenhaUsuario(usuario);
-			TrataErroAlterarSenhaBancoDeDados(executouSQL);
+			TrataErroAlterarSenhaEmailBancoDeDados(executouSQL);
 		} catch (Exception e) {
 			RetornaErroRecuperacaoSenha();
 		}
 	}
 	
-	private void TrataErroAlterarSenhaBancoDeDados(boolean executouSQL) throws IOException{
+	private void TrataErroAlterarSenhaEmailBancoDeDados(boolean executouSQL) throws IOException{
 		if(executouSQL == true){
 			RetornaSucessoRecuperacaoSenha();
 		}else{
 			RetornaErroRecuperacaoSenha();
 		}
+	}
+	
+	private void EnviarNovaSenhaPorPerguntaSecreta(Usuario usuario) throws IOException{
+		try {
+			AlterarSenhaUsuarioPerguntaSecreta(usuario);
+		} catch (Exception e) {
+			RetornaErroRecuperacaoSenha();
+		}
+	}
+	
+	private void AlterarSenhaUsuarioPerguntaSecreta(Usuario usuario) throws ServletException, SQLException, IOException{
+		try {
+			UsuarioDAO dao = new UsuarioDAO();
+			boolean executouSQL = dao.AlteraSenhaUsuario(usuario);
+			TrataErroAlterarSenhaPerguntaSecretaBancoDeDados(executouSQL, usuario.getSenha_usuario());
+		} catch (Exception e) {
+			RetornaErroRecuperacaoSenha();
+		}
+	}
+	
+	private void TrataErroAlterarSenhaPerguntaSecretaBancoDeDados(boolean executouSQL, String novaSenha) throws IOException{
+		if(executouSQL == true){
+			RetornaNovaSenhaUsuario(novaSenha);
+		}else{
+			RetornaErroRecuperacaoSenha();
+		}
+	}
+	
+	private void RetornaNovaSenhaUsuario(String novaSenha) throws IOException{
+		PrintWriter out = response.getWriter();
+		out.write(CodificaStringUTF8(novaSenha));
 	}
 	
 }
