@@ -9,8 +9,8 @@ pageEncoding="UTF-8"%>
 		<meta name="viewport" content="width=device-width">
 		
 		<title>Sistema de gestão para o ramo óptico</title>
-		<%@include  file="importacoes_principal/head_principal_importacoes.jsp" %>
-		
+		<%@include  file="importacoes_graficos/head_graficos_importacoes.jsp" %>
+	
 	</head>
 	<body ng-controller="ViewMaster as vm">
 		
@@ -26,105 +26,104 @@ pageEncoding="UTF-8"%>
 		<div class="container"> 
 			<%@include  file="../importacoes/menu_de_opcoes_modulos.jsp" %>
 			
-			<div class="conteiner_secundario">
+			<div class="conteiner_grande">
 				
-				<div class="col-md-12">
-				    <div class="caixa_com_borda_redonda">
-				      	<div class="borda_branca">               
-							
-							<ul class="nav nav-tabs">
-							  	<li class="active">
-								  	<a data-toggle="tab" style="color:#536376" href="#sessaoTab1">
-								  		Sessões
-							  		</a>
-					  			</li>
-							  	<li>
-							  		<a data-toggle="tab" style="color:#536376" href="#sessaoTab2">
-							  			Legendas
-						  			</a>
-					  			</li>
-							</ul>
+			    <div class="caixa_com_borda_redonda">
+			      	<div class="borda_branca">               
+						
+						<ul class="nav nav-tabs">
+						  	<li class="active">
+							  	<a data-toggle="tab" style="color:#536376" href="#sessaoTab1">
+							  		Sessões
+						  		</a>
+				  			</li>
+						  	<li>
+						  		<a data-toggle="tab" style="color:#536376" href="#sessaoTab2">
+						  			Legendas
+					  			</a>
+				  			</li>
+						</ul>
+						
+						<div class="tab-content">
+						
+							<div id="sessaoTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
+                 				<div class="titulo_da_caixa">
+               						<h4>
+				              			Sessões do usuário vs recupera_ano_corrente 2222       		
+						            </h4>
+                 				</div>
+                 				<div class="conteudo_de_corpo_da_caixa">
+						            
+		                           <div id="GraficoSessoes" style="width:100%; 
+                             			height:200px;">
+	                              	
+	                              </div>
+	                           							
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                 				</div>	              			
+	                 		</div>
+	                 		
+	                 		<div id="sessaoTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
+								<div class="titulo_da_caixa">
+               						<h4>
+				              			Sessões do usuário vs recupera_ano_corrente 2222       		
+						            </h4>
+                 				</div>
+                 				<div>
+						            
+			                        <p>
+		                 				<span style="font-size:18px;">
+		                 					- Total de sessões: xxx	
+		                 				</span>
+		                 			</p>			
+		                          	<p>
+			                          	<span style="font-size:18px;">
+			                          		- Sessões no ano de 2222: total clientes
+			                          	</span>
+		                          	</p>				  						  
+							        <p>
+							        	<span style="font-size:18px;">
+						          			- Porcentagem correspondente(2222): totalclientes%
+							          	</span>
+						          	</p>				  
+								 
+								  	<div style="position: fixed; margin-top:5px; border-color: #1f77b4 #1f77b4 #f5f4e9 #1f77b4;" class="quadrado">
+								  	</div>
+								  	
+								  	<p style="margin-left:15px;">
+								  		 <span style="font-size:18px;">
+								  	 		Sessões no ano de xxxx
+							  	 		</span>
+								  	</p>	
 
-		                 	<div class="tab-content">
-		                 		<div id="sessaoTab1" class="tab-pane fade in active">
-		                 			<div>
-		                 				<div class="titulo_da_caixa">
-	                 						<h4>
-						              			Sessões do usuário vs recupera_ano_corrente 2222       		
-								            </h4>
-		                 				</div>
-		                 				<div class="conteudo_de_corpo_da_caixa">
-								            
-				                            <div id="GraficoSessoes">
-				                              
-				                            </div>
-			                           							
-			                          	</div>
-			                          	<div class="rodape_da_caixa">
-                     					</div>	
-		                 			</div>
-		                 		</div>
-
-		                 		<div id="sessaoTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-		                 			<div>
-		                 				<div>
-	                 						<h4 class="titulo_da_caixa">
-						              			Sessões do usuário vs recupera_ano_corrente 2222       		
-								            </h4>
-		                 				</div>
-		                 				<div>
-								            
-					                        <p>
-				                 				<span style="font-size:18px;">
-				                 					- Total de sessões: xxx	
-				                 				</span>
-				                 			</p>			
-				                          	<p>
-					                          	<span style="font-size:18px;">
-					                          		- Sessões no ano de 2222: total clientes
-					                          	</span>
-				                          	</p>				  						  
-									        <p>
-									        	<span style="font-size:18px;">
-								          			- Porcentagem correspondente(2222): totalclientes%
-									          	</span>
-								          	</p>				  
-										 
-										  	<div style="position: fixed; margin-top:5px; border-color: #1f77b4 #1f77b4 #f5f4e9 #1f77b4;" class="quadrado">
-										  	</div>
-										  	
-										  	<p style="margin-left:15px;">
-										  		 <span style="font-size:18px;">
-										  	 		Sessões no ano de xxxx
-									  	 		</span>
-										  	</p>	
-	
-										  	<div style="position: fixed; margin-top:5px; border-color: #ff7f0e #ff7f0e #f5f4e9 #ff7f0e;" class="quadrado">
-										  	</div>
-		 							 		<p style="margin-left:15px;">
-			 							 		<span style="font-size:18px;">
-			 							 			Porcentagem correspondente(2222)
-		 							 			</span>
-											</p> 
-			                           							
-			                          	</div>
-			                          	<div class="rodape_da_caixa">
-                     					</div>	
-		                 			</div>
-		                 			
-		                 		</div>
-		                 	</div>  				                 				
-                    	</div>	
-			      		
-	                </div>
-					
+								  	<div style="position: fixed; margin-top:5px; border-color: #ff7f0e #ff7f0e #f5f4e9 #ff7f0e;" class="quadrado">
+								  	</div>
+ 							 		<p style="margin-left:15px;">
+	 							 		<span style="font-size:18px;">
+	 							 			Porcentagem correspondente(2222)
+ 							 			</span>
+									</p> 
+	                           							
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                  				</div>	
+							</div>
+	                 		
+						</div>
+						       				
+                   	</div>			               	
 				</div>
+						
 			</div>
 							
 		</div>
 			
 	</body>
 </html>
+
+<script type="text/javascript" src="javascript/menu/pushy.min.js" charset="UTF-8"></script>
+
 
 <!-- Animação letras -->
 	<script type="text/javascript">
@@ -165,13 +164,62 @@ pageEncoding="UTF-8"%>
 	<script type="text/javascript">
 		var app = angular.module('vmApp',[] )
 		app.controller('ViewMaster', ['$http',function($http){
+			
 			var acess = this;		
 			acess.user = sessionStorage.getItem("user");
 			acess.tituloDoMenu = "Home";	
 
-			//$("#loading").hide(); 
+			
+			var randomnb = function(){ return Math.round(Math.random()*300)};
+			var ano = "2017";
+			
+			var GraficoSessoes = c3.generate({
+			    bindto: '#GraficoSessoes',
+			    data: {
+			        columns: [
+			            [ano, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+						['%', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			        ],
+			        types: {
+			            '2222': 'area-spline',
+			            '%': 'area-spline'			
+			            // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
+			        },
+			        groups: [['2222', '%']]
+			    },axis: {
+			        x: {
+			            type: 'category',
+			            categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 
+						'Out', 'Nov', 'Dez']
+			        }
+			    }
+			});  
+			setTimeout(function () {
+			    GraficoSessoes.load({
+			        columns: [
+			            [ano, randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), 
+						randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()],
+			        ]
+			    });
+			}, 1000);
+			setTimeout(function () {
+			    GraficoSessoes.load({
+			        columns: [      
+						['%', randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), 
+						randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()]
+			        ]
+			    });
+			}, 2000);
+	            
+			
 		}]);
 	</script>
 <!-- ANGULAR JS -->
 
-<script type="text/javascript" src="javascript/menu/pushy.min.js" charset="UTF-8"></script>
+<!-- Gráficos -->
+	<script type="text/javascript">
+		
+	</script>
+	
+	
+<!-- Gráficos -->

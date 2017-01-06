@@ -45,6 +45,12 @@
 <!-- Menu-->
 	<!-- CSS -->
 		<link href="css/menu/pushy.css" rel="stylesheet" type="text/css" charset="UTF-8">
-	<!-- JS 	
-		<script type="text/javascript" src="../../javascript/menu/pushy.min.js" charset="UTF-8"></script>-->
 <!-- Fim Menu-->
+
+<!-- C3 Grafic-->
+	<!-- CSS -->
+		<link href="css/grafic/vm_c3_grafic.css" rel="stylesheet" type="text/css">
+	<!-- JS -->	
+		<script type="text/javascript" src="javascript/grafic/vm_d3_grafic.min.js"></script>
+		<script type="text/javascript" src="javascript/grafic/vm_c3_grafic.min.js"></script>
+<!-- Fim Corpo-->

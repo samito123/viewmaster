@@ -80,7 +80,7 @@
 <header>
 	<div style="padding: 8px">	
 				
-		<button class="btn btn-primary menu-btn botao_de_smenu">
+		<button class="btn btn-primary menu-btn botao_de_menu">
 			&#9776;
 		</button>
 		
