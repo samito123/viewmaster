@@ -122,7 +122,7 @@ pageEncoding="UTF-8"%>
 		            		sessionStorage.setItem("id", data.id_usuario);
 		            		sessionStorage.setItem("user", data.nome_usuario);
 		            		sessionStorage.setItem("user_log", "Y");
-		            		window.location.assign("Graficos");
+		            		window.location.assign("TelaPrincipal");
 		            	}	    	
 	            	}).error(function (data, status, header, config) {		            	
 	            		acess.alertModal = 'alert-danger';

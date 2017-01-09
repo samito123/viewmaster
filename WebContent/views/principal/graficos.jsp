@@ -49,7 +49,7 @@ pageEncoding="UTF-8"%>
 							<div id="sessaoTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
                  				<div class="titulo_da_caixa">
                						<h4>
-				              			Sessões do usuário vs recupera_ano_corrente 2222       		
+				              			Sessões do usuário - {{vm.anoCorrente}}         		
 						            </h4>
                  				</div>
                  				<div class="conteudo_de_corpo_da_caixa">
@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
 	                 		<div id="sessaoTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
 								<div class="titulo_da_caixa">
                						<h4>
-				              			Sessões do usuário vs recupera_ano_corrente 2222       		
+				              			Sessões do usuário - {{vm.anoCorrente}}        		
 						            </h4>
                  				</div>
                  				<div>
@@ -125,6 +125,7 @@ pageEncoding="UTF-8"%>
 <script type="text/javascript" src="javascript/menu/pushy.min.js" charset="UTF-8"></script>
 
 
+
 <!-- Animação letras -->
 	<script type="text/javascript">
 		$(function () {
@@ -162,54 +163,56 @@ pageEncoding="UTF-8"%>
 
 <!-- ANGULAR JS -->
 	<script type="text/javascript">
-		var app = angular.module('vmApp',[] )
+		var app = angular.module('vmApp',[] );
 		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;		
 			acess.user = sessionStorage.getItem("user");
 			acess.tituloDoMenu = "Home";	
-
 			
-			var randomnb = function(){ return Math.round(Math.random()*300)};
-			var ano = "2017";
+			var anoDoSistema = new Date();
+			acess.anoCorrente = anoDoSistema.getFullYear();
 			
-			var GraficoSessoes = c3.generate({
-			    bindto: '#GraficoSessoes',
-			    data: {
-			        columns: [
-			            [ano, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-						['%', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-			        ],
-			        types: {
-			            '2222': 'area-spline',
-			            '%': 'area-spline'			
-			            // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
-			        },
-			        groups: [['2222', '%']]
-			    },axis: {
-			        x: {
-			            type: 'category',
-			            categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 
-						'Out', 'Nov', 'Dez']
-			        }
-			    }
-			});  
-			setTimeout(function () {
-			    GraficoSessoes.load({
-			        columns: [
-			            [ano, randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), 
-						randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()],
-			        ]
-			    });
-			}, 1000);
-			setTimeout(function () {
-			    GraficoSessoes.load({
-			        columns: [      
-						['%', randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), 
-						randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()]
-			        ]
-			    });
-			}, 2000);
+			
+			//var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+id_usuario+"&ano="+ano;
+	    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+sessionStorage.getItem("id")+"&ano=2017";
+	    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	console.log("Data: ", data);
+		        	if(data == "erro"){
+		        		acess.alertModal = 'alert-danger';
+		        		acess.btnModal = 'btn-danger';
+		        		acess.modalHeader = 'Atenção:'; 
+		        		acess.modalBody = 'Usuário ou senha está incorreto!';
+		        		acess.modalFooter = 'Fechar';
+		        		$("#modal").modal('show');
+		        		$("#loading").hide();
+		        	}else{							
+		        		acess.alertModal = 'alert-danger';
+			    		acess.btnModal = 'btn-danger';
+			        	acess.modalHeader = 'Atenção:'; 
+			    		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
+			    		acess.modalFooter = 'Fechar';
+			    		$("#modal").modal('show');
+			    		$("#loading").hide();
+		        	}	    	
+		    	}).error(function (data, status, header, config) {		            	
+		    		acess.alertModal = 'alert-danger';
+		    		acess.btnModal = 'btn-danger';
+		        	acess.modalHeader = 'Atenção:'; 
+		    		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
+		    		acess.modalFooter = 'Fechar';
+		    		$("#modal").modal('show');
+		    		$("#loading").hide();
+		    	});
+	    	
+			
+			
+			//ConstroiGraficoDeSessoesUsuario(sessionStorage.getItem("id"), acess.anoCorrente, $http, acess);
+			
+			
+			
+			
 	            
 			
 		}]);

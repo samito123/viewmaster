@@ -51,6 +51,11 @@
 	<!-- CSS -->
 		<link href="css/grafic/vm_c3_grafic.css" rel="stylesheet" type="text/css">
 	<!-- JS -->	
-		<script type="text/javascript" src="javascript/grafic/vm_d3_grafic.min.js"></script>
-		<script type="text/javascript" src="javascript/grafic/vm_c3_grafic.min.js"></script>
+		<script type="text/javascript" src="javascript/graficos/c3_grafic/vm_d3_grafic.min.js"></script>
+		<script type="text/javascript" src="javascript/graficos/c3_grafic/vm_c3_grafic.min.js"></script>
 <!-- Fim Corpo-->
+
+<!-- Graficos -->
+	<!-- JS -->	
+		<script type="text/javascript" src="javascript/graficos/graficos_tela_de_graficos/grafico_de_sessao.js" charset="UTF-8"></script>
+<!-- Fim Graficos -->

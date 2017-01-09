@@ -26,13 +26,22 @@
 	</servlet-mapping>
 	
 	<servlet>
-        <servlet-name>Graficos</servlet-name>
+        <servlet-name>TelaPrincipal</servlet-name>
         <jsp-file>/views/principal/graficos.jsp</jsp-file>
         </servlet>
     <servlet-mapping>
-        <servlet-name>Graficos</servlet-name>
-        <url-pattern>/Graficos</url-pattern>
+        <servlet-name>TelaPrincipal</servlet-name>
+        <url-pattern>/TelaPrincipal</url-pattern>
     </servlet-mapping>
+    
+    <servlet> 
+		<servlet-name>Graficos</servlet-name> 
+		<servlet-class>servlet.Graficos</servlet-class> 
+	</servlet>
+	<servlet-mapping> 
+		<servlet-name>Graficos</servlet-name> 
+		<url-pattern>/Graficos</url-pattern> 
+	</servlet-mapping>
 	
 	<servlet>
         <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
