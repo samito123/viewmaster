@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import dao.SessaoUsuarioDAO;
 import dao.UsuarioDAO;
 import model.Usuario;
 
@@ -69,11 +70,21 @@ public class LoginUsuario extends HttpServlet{
 		VerificaRetornoDeUsuarioParaLogin(usuario);
 	}
 	
-	private void VerificaRetornoDeUsuarioParaLogin(Usuario usuario) throws IOException{
+	private void VerificaRetornoDeUsuarioParaLogin(Usuario usuario) throws IOException, SQLException{
 		if(usuario.getNome_usuario() == null){
 			RetornaErroUsuarioOuSenhaIncorreta();
 		}else{
+			SalvaSessaoUsuario(usuario);
+		}
+	}
+	
+	private void SalvaSessaoUsuario(Usuario usuario) throws SQLException, IOException{
+		try{
+			SessaoUsuarioDAO dao = new SessaoUsuarioDAO();
+			dao.SalvarSessaoUsuario(usuario);
 			RetornaUsuarioJsonRecuperadoViaLogin(usuario);
+		}catch(Exception e){
+			RetornaErroUsuarioOuSenhaIncorreta();
 		}
 	}
 	

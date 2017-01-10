@@ -92,6 +92,13 @@ img, iframe, object, embed, video {
 		.conteiner_grande .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa{
   			padding: 10px 5px 10px 5px;
 		}
+		
+	@media all and (max-width: 1024px) { 
+	    .conteiner_grande{
+			width: 100%;
+			margin: 5.5em 0 1em 0;
+	    }
+	}
 	    
 .popup_loading{
   position: fixed;

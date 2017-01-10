@@ -14,6 +14,7 @@ import org.apache.commons.mail.EmailException;
 
 import com.google.gson.Gson;
 
+import control.CodificaUTF8;
 import dao.UsuarioDAO;
 import model.Email;
 import model.Usuario;
@@ -109,25 +110,7 @@ public class RecuperaSenha extends HttpServlet{
 	private void RetornaUsuarioJsonRecuperadoViaEmailDataDeNascimento(Usuario usuario) throws IOException{
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
-		out.write(gson.toJson(CodificaUsuarioUTF8(usuario)));
-	}
-	
-	private Usuario CodificaUsuarioUTF8(Usuario usuario) throws UnsupportedEncodingException{
-		if(usuario.getNome_usuario() != null)
-			usuario.setNome_usuario(CodificaStringUTF8(usuario.getNome_usuario()));	
-		if(usuario.getLogin_usuario() != null)
-			usuario.setLogin_usuario(CodificaStringUTF8(usuario.getLogin_usuario()));		
-		if(usuario.getSenha_usuario() != null)
-			usuario.setSenha_usuario(CodificaStringUTF8(usuario.getSenha_usuario()));
-		if(usuario.getEmail_usuario() != null)
-			usuario.setEmail_usuario(CodificaStringUTF8(usuario.getEmail_usuario()));
-		if(usuario.getData_nascimento_usuario() != null)
-			usuario.setData_nascimento_usuario(CodificaStringUTF8(usuario.getData_nascimento_usuario()));
-		if(usuario.getPergunta_secreta_usuario() != null)
-			usuario.setPergunta_secreta_usuario(CodificaStringUTF8(usuario.getPergunta_secreta_usuario()));
-		if(usuario.getResposta_pergunta_secreta_usuario() != null)
-			usuario.setResposta_pergunta_secreta_usuario(CodificaStringUTF8(usuario.getResposta_pergunta_secreta_usuario()));
-		return usuario;
+		out.write(gson.toJson(new CodificaUTF8().CodificaUsuarioUTF8(usuario)));
 	}
 	
 	private String CodificaStringUTF8(String string) throws UnsupportedEncodingException{

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class Ano {
 	
 	private Long id_de_busca;
-	private String nome_do_ano;
+	private String numero_do_ano;
 	private ArrayList<Mes> meses_do_ano;
 	
 	public Ano(){
-		Ano ano = new Ano();
-		ano.setMeses_do_ano(ConstroiMesesDoAno());
+		this.setMeses_do_ano(ConstroiMesesDoAno());
 	}
 	
 	public Long getId_de_busca() {
@@ -19,12 +18,15 @@ public class Ano {
 	public void setId_de_busca(Long id_de_busca) {
 		this.id_de_busca = id_de_busca;
 	}
-	public String getNome_do_ano() {
-		return nome_do_ano;
+	
+	public String getNumero_do_ano() {
+		return numero_do_ano;
 	}
-	public void setNome_do_ano(String nome_do_ano) {
-		this.nome_do_ano = nome_do_ano;
+
+	public void setNumero_do_ano(String numero_do_ano) {
+		this.numero_do_ano = numero_do_ano;
 	}
+
 	public ArrayList<Mes> getMeses_do_ano() {
 		return meses_do_ano;
 	}

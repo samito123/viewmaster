@@ -119,9 +119,9 @@ pageEncoding="UTF-8"%>
 		            		$("#modal").modal('show');
 		            		$("#loading").hide();
 		            	}else{							
-		            		sessionStorage.setItem("id", data.id_usuario);
-		            		sessionStorage.setItem("user", data.nome_usuario);
-		            		sessionStorage.setItem("user_log", "Y");
+		            		sessionStorage.setItem("id_usuario_logado", data.id_usuario);
+		            		sessionStorage.setItem("usuario", data.nome_usuario);
+		            		sessionStorage.setItem("usuario_logado", "Y");
 		            		window.location.assign("TelaPrincipal");
 		            	}	    	
 	            	}).error(function (data, status, header, config) {		            	

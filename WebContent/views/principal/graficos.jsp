@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 		<%@include  file="../importacoes/modal_mensagens.jsp" %>
 		
 		<script type="text/javascript">
-			if(sessionStorage.getItem("user_log") != "Y"){
+			if(sessionStorage.getItem("usuario_logado") != "Y"){
 				window.location.assign("Login");
 			}
 		</script>
@@ -124,8 +124,6 @@ pageEncoding="UTF-8"%>
 
 <script type="text/javascript" src="javascript/menu/pushy.min.js" charset="UTF-8"></script>
 
-
-
 <!-- Animação letras -->
 	<script type="text/javascript">
 		$(function () {
@@ -167,62 +165,37 @@ pageEncoding="UTF-8"%>
 		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;		
-			acess.user = sessionStorage.getItem("user");
+			acess.user = sessionStorage.getItem("usuario");
 			acess.tituloDoMenu = "Home";	
 			
 			var anoDoSistema = new Date();
 			acess.anoCorrente = anoDoSistema.getFullYear();
 			
+			ConstroiGraficoDeSessaoUsuario();
 			
-			//var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+id_usuario+"&ano="+ano;
-	    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+sessionStorage.getItem("id")+"&ano=2017";
-	    	$http.post('Graficos'+variaveis)
-		        .success(function (data, status, headers, config) {	
-		        	console.log("Data: ", data);
-		        	if(data == "erro"){
-		        		acess.alertModal = 'alert-danger';
-		        		acess.btnModal = 'btn-danger';
-		        		acess.modalHeader = 'Atenção:'; 
-		        		acess.modalBody = 'Usuário ou senha está incorreto!';
-		        		acess.modalFooter = 'Fechar';
-		        		$("#modal").modal('show');
-		        		$("#loading").hide();
-		        	}else{							
-		        		acess.alertModal = 'alert-danger';
-			    		acess.btnModal = 'btn-danger';
-			        	acess.modalHeader = 'Atenção:'; 
-			    		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
-			    		acess.modalFooter = 'Fechar';
-			    		$("#modal").modal('show');
-			    		$("#loading").hide();
-		        	}	    	
-		    	}).error(function (data, status, header, config) {		            	
-		    		acess.alertModal = 'alert-danger';
-		    		acess.btnModal = 'btn-danger';
-		        	acess.modalHeader = 'Atenção:'; 
-		    		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
-		    		acess.modalFooter = 'Fechar';
-		    		$("#modal").modal('show');
-		    		$("#loading").hide();
-		    	});
 	    	
+	    	function ConstroiGraficoDeSessaoUsuario() {
+		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
+		    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+		    	
+		    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	ConstroiGraficoDeSessoesUsuario(data);
+		    	}).error(function (data, status, header, config) {		            	
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, tente novamente mais tarde!");
+		    	});
+	    	};
 			
-			
-			//ConstroiGraficoDeSessoesUsuario(sessionStorage.getItem("id"), acess.anoCorrente, $http, acess);
-			
-			
-			
-			
-	            
+			function MensagemDeErroModal(mensagem){
+				acess.alertModal = 'alert-danger';
+	    		acess.btnModal = 'btn-danger';
+	        	acess.modalHeader = 'Atenção:'; 
+	    		acess.modalBody = mensagem;
+	    		acess.modalFooter = 'Fechar';
+	    		$("#modal").modal('show');
+	    		$("#loading").hide();
+			};
 			
 		}]);
 	</script>
 <!-- ANGULAR JS -->
-
-<!-- Gráficos -->
-	<script type="text/javascript">
-		
-	</script>
-	
-	
-<!-- Gráficos -->
