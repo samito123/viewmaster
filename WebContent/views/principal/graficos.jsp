@@ -27,7 +27,6 @@ pageEncoding="UTF-8"%>
 			<%@include  file="../importacoes/menu_de_opcoes_modulos.jsp" %>
 			
 			<div class="conteiner_grande">
-				
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -45,7 +44,6 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-						
 							<div id="sessaoTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
                  				<div class="titulo_da_caixa">
                						<h4>
@@ -54,10 +52,8 @@ pageEncoding="UTF-8"%>
                  				</div>
                  				<div class="conteudo_de_corpo_da_caixa">
 						            
-		                           <div id="GraficoSessoes" style="width:100%; 
-                             			height:200px;">
-	                              	
-	                              </div>
+		                           <div id="GraficoSessoes" class="caixa_de_grafico">                      	
+	                               </div>
 	                           							
 	                          	</div>
 	                          	<div class="rodape_da_caixa">
@@ -71,50 +67,101 @@ pageEncoding="UTF-8"%>
 						            </h4>
                  				</div>
                  				<div>
-						            
-			                        <p>
-		                 				<span style="font-size:18px;">
-		                 					- Total de sessões: xxx	
-		                 				</span>
-		                 			</p>			
-		                          	<p>
-			                          	<span style="font-size:18px;">
-			                          		- Sessões no ano de 2222: total clientes
-			                          	</span>
-		                          	</p>				  						  
-							        <p>
-							        	<span style="font-size:18px;">
-						          			- Porcentagem correspondente(2222): totalclientes%
-							          	</span>
-						          	</p>				  
-								 
-								  	<div style="position: fixed; margin-top:5px; border-color: #1f77b4 #1f77b4 #f5f4e9 #1f77b4;" class="quadrado">
-								  	</div>
-								  	
-								  	<p style="margin-left:15px;">
-								  		 <span style="font-size:18px;">
-								  	 		Sessões no ano de xxxx
-							  	 		</span>
+                 					<p>
+								 		<span class="quadrado_azul_para_legenda">
+								  		</span>
+						  				Sessões no ano de {{vm.anoCorrente}}.
 								  	</p>	
-
-								  	<div style="position: fixed; margin-top:5px; border-color: #ff7f0e #ff7f0e #f5f4e9 #ff7f0e;" class="quadrado">
-								  	</div>
- 							 		<p style="margin-left:15px;">
-	 							 		<span style="font-size:18px;">
-	 							 			Porcentagem correspondente(2222)
- 							 			</span>
-									</p> 
-	                           							
+									<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Total de sessões do usuário.		
+								  	</p>  	
+			                        <p>	              
+	                 					- Total de sessões do usuário: {{vm.totalSessoes}}.		     				
+		                 			</p>			
+		                          	<p>			                          	
+			                          	- Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSessoesAnoCorrente}}.			                          	
+		                          	</p>				  						  
+							        <p>							        
+						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrente}}%.							          
+						          	</p>				  					  					  	 						  	 													
 	                          	</div>
 	                          	<div class="rodape_da_caixa">
                   				</div>	
-							</div>
-	                 		
-						</div>
-						       				
+							</div>	             		
+						</div>					       				
                    	</div>			               	
-				</div>
+				</div>		
+			</div>
+			
+			<div class="conteiner_medio">
+			    <div class="caixa_com_borda_redonda">
+			      	<div class="borda_branca">               
 						
+						<ul class="nav nav-tabs">
+						  	<li class="active">
+							  	<a data-toggle="tab" style="color:#536376" href="#moduloTab1">
+							  		Modulos
+						  		</a>
+				  			</li>
+						  	<li>
+						  		<a data-toggle="tab" style="color:#536376" href="#moduloTab2">
+						  			Legendas
+					  			</a>
+				  			</li>
+						</ul>
+						
+						<div class="tab-content">
+							<div id="moduloTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
+                 				<div class="titulo_da_caixa">
+               						<h4>
+				              			Módulos mais usados - {{vm.anoCorrente}}         		
+						            </h4>
+                 				</div>
+                 				<div class="conteudo_de_corpo_da_caixa">
+						            
+		                           <div id="GraficoModulos" class="caixa_de_grafico">       	
+	                               </div>
+	                           							
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                 				</div>	              			
+	                 		</div>
+	                 		
+	                 		<div id="moduloTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
+								<div class="titulo_da_caixa">
+               						<h4>
+				              			Sessões do usuário - {{vm.anoCorrente}}        		
+						            </h4>
+                 				</div>
+                 				<div>
+                 					<p>
+								 		<span class="quadrado_azul_para_legenda">
+								  		</span>
+						  				Sessões no ano de {{vm.anoCorrente}}.
+								  	</p>	
+									<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Total de sessões do usuário.		
+								  	</p>  	
+			                        <p>	              
+	                 					- Total de sessões do usuário: {{vm.totalSessoes}}.		     				
+		                 			</p>			
+		                          	<p>			                          	
+			                          	- Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSessoesAnoCorrente}}.			                          	
+		                          	</p>				  						  
+							        <p>							        
+						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrente}}%.							          
+						          	</p>				  					  					  	 						  	 													
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                  				</div>	
+							</div>	             		
+						</div>					       				
+                   	</div>			               	
+				</div>		
 			</div>
 							
 		</div>
@@ -171,21 +218,46 @@ pageEncoding="UTF-8"%>
 			var anoDoSistema = new Date();
 			acess.anoCorrente = anoDoSistema.getFullYear();
 			
-			ConstroiGraficoDeSessaoUsuario();
-			
+			GraficoDeSessaoUsuario();
+			GraficoDeModulos();
 	    	
-	    	function ConstroiGraficoDeSessaoUsuario() {
+	    	function GraficoDeSessaoUsuario() {
 		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
 		    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
 		    	
 		    	$http.post('Graficos'+variaveis)
 		        .success(function (data, status, headers, config) {	
 		        	ConstroiGraficoDeSessoesUsuario(data);
+		        	SetLegendasParaGraficoDeSessoesDoUsuario(data);
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, tente novamente mais tarde!");
 		    	});
 	    	};
 			
+	    	function SetLegendasParaGraficoDeSessoesDoUsuario(ano){
+	    		acess.totalSessoes = ano[1].meses_do_ano[0].valor + ano[1].meses_do_ano[1].valor + 
+	    		ano[1].meses_do_ano[2].valor + ano[1].meses_do_ano[3].valor + ano[1].meses_do_ano[4].valor + 
+	    		ano[1].meses_do_ano[5].valor + ano[1].meses_do_ano[6].valor + ano[1].meses_do_ano[7].valor + 
+	    		ano[1].meses_do_ano[8].valor + ano[1].meses_do_ano[9].valor + ano[1].meses_do_ano[10].valor + 
+	    		ano[1].meses_do_ano[11].valor;
+	    		
+	    		acess.totalSessoesAnoCorrente = ano[0].meses_do_ano[0].valor + ano[0].meses_do_ano[1].valor + 
+	    		 ano[0].meses_do_ano[2].valor + ano[0].meses_do_ano[3].valor + ano[0].meses_do_ano[4].valor + 
+	    		 ano[0].meses_do_ano[5].valor + ano[0].meses_do_ano[6].valor + ano[0].meses_do_ano[7].valor + 
+	    		 ano[0].meses_do_ano[8].valor + ano[0].meses_do_ano[9].valor + ano[0].meses_do_ano[10].valor + 
+	    		 ano[0].meses_do_ano[11].valor;
+	    		
+	    		var total;
+	    		total = parseFloat((acess.totalSessoesAnoCorrente*100)/acess.totalSessoes);
+	    		acess.porcentagemDoAnoCorrente = parseFloat(total.toFixed(2));
+	    	}
+	    	
+	    	function GraficoDeModulos() {
+		    	
+		        	ConstroiGraficoDeModulos("2017");
+		        
+	    	};
+	    	
 			function MensagemDeErroModal(mensagem){
 				acess.alertModal = 'alert-danger';
 	    		acess.btnModal = 'btn-danger';

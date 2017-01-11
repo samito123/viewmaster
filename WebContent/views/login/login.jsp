@@ -105,34 +105,38 @@ pageEncoding="UTF-8"%>
 			
 			acess.LogarUsuario = function(){
 				$("#loading").show();
-				
 				var variaveis = "?metodo=VerificaLoginDoUsuario&login="+acess.login+"&senha="+acess.pass;
-				
 				$http.post('LogarUsuario'+variaveis)
-		            .success(function (data, status, headers, config) {				  
-		            	if(data == "erro"){
-		            		acess.alertModal = 'alert-danger';
-		            		acess.btnModal = 'btn-danger';
-		            		acess.modalHeader = 'Atenção:'; 
-		            		acess.modalBody = 'Usuário ou senha está incorreto!';
-		            		acess.modalFooter = 'Fechar';
-		            		$("#modal").modal('show');
-		            		$("#loading").hide();
-		            	}else{							
-		            		sessionStorage.setItem("id_usuario_logado", data.id_usuario);
-		            		sessionStorage.setItem("usuario", data.nome_usuario);
-		            		sessionStorage.setItem("usuario_logado", "Y");
-		            		window.location.assign("TelaPrincipal");
-		            	}	    	
-	            	}).error(function (data, status, header, config) {		            	
-	            		acess.alertModal = 'alert-danger';
-	            		acess.btnModal = 'btn-danger';
-		            	acess.modalHeader = 'Atenção:'; 
-	            		acess.modalBody = 'Ocorreu um erro no servidor, tente novamente mais tarde!';
-	            		acess.modalFooter = 'Fechar';
-	            		$("#modal").modal('show');
-	            		$("#loading").hide();
-	            	});
+	            .success(function (data, status, headers, config) {				  
+	            	if(data == "erro"){
+	            		MensagemDeErroModal("Usuário ou senha está incorreto!");
+	            	}else{							
+	            		GuardarSessaoUsuario(data);
+	            	}	    	
+            	}).error(function (data, status, header, config) {		            	
+            		MensagemDeErroModal("Ocorreu um erro no servidor, tente novamente mais tarde!");
+            	});
+			};
+			
+			function GuardarSessaoUsuario(usuario){
+				sessionStorage.setItem("id_usuario_logado", usuario.id_usuario);
+        		sessionStorage.setItem("usuario", usuario.nome_usuario);
+        		sessionStorage.setItem("usuario_logado", "Y");
+        		DirecionarFluxoParaTelaDeGraficos();
+			};
+			
+			function DirecionarFluxoParaTelaDeGraficos(){
+				window.location.assign("TelaPrincipal");
+			};
+			
+			function MensagemDeErroModal(mensagem){
+				acess.alertModal = 'alert-danger';
+	    		acess.btnModal = 'btn-danger';
+	        	acess.modalHeader = 'Atenção:'; 
+	    		acess.modalBody = mensagem;
+	    		acess.modalFooter = 'Fechar';
+	    		$("#modal").modal('show');
+	    		$("#loading").hide();
 			};
 		}]);	
 	</script>

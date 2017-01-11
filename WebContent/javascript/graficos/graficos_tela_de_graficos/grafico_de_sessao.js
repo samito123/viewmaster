@@ -1,8 +1,9 @@
+
 function ConstroiGraficoDeSessoesUsuario(ano) {
-	
+
 	var width = screen.width;
 	var a = 0;
-	if (width <= 500){
+	if (width <= 550){
 		a = 1;
 	}else{
 		a = 3;
@@ -13,14 +14,14 @@ function ConstroiGraficoDeSessoesUsuario(ano) {
 	    data: {
 	        columns: [
 	            [ano[0].numero_do_ano, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				['%', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+				['total', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	        ],
 	        types: {
 	            '2222': 'area-spline',
-	            '%': 'area-spline'			
+	            'total': 'area-spline'			
 	            // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
 	        },
-	        groups: [['2222', '%']]
+	        groups: [['2222', 'total']]
 	    },axis: {
 	        x: {
 	            type: 'category',
@@ -53,7 +54,7 @@ function ConstroiGraficoDeSessoesUsuario(ano) {
 	setTimeout(function () {
 	    GraficoSessoes.load({
 	        columns: [      
-				['%', 
+				['total', 
 	             ano[1].meses_do_ano[0].valor, ano[1].meses_do_ano[1].valor, ano[1].meses_do_ano[2].valor, 
 	             ano[1].meses_do_ano[3].valor, ano[1].meses_do_ano[4].valor, ano[1].meses_do_ano[5].valor, 
 	             ano[1].meses_do_ano[6].valor, ano[1].meses_do_ano[7].valor, ano[1].meses_do_ano[8].valor, 
