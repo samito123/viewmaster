@@ -116,7 +116,7 @@ pageEncoding="UTF-8"%>
 							<div id="moduloTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
                  				<div class="titulo_da_caixa">
                						<h4>
-				              			Módulos mais usados - {{vm.anoCorrente}}         		
+				              			Módulos mais usados         		
 						            </h4>
                  				</div>
                  				<div class="conteudo_de_corpo_da_caixa">

@@ -1,4 +1,4 @@
-package control;
+package controle.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 
-public class FabricaDeConexao {
+public class ControleFabricaDeConexao {
 	
 	public Connection getConnection() throws ClassNotFoundException, ServletException{
 		try{

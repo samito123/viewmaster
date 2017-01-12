@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/dao/GraficosDAO.java=UTF-8
-encoding//src/dao/SessaoUsuarioDAO.java=UTF-8
+encoding//src/dao/SessoesDeUsuarioDAO.java=UTF-8
+encoding//src/dao/UltimaSessaoUsuarioDAO.java=UTF-8
 encoding//src/dao/UsuarioDAO.java=UTF-8
 encoding//src/servlet/Graficos.java=UTF-8
 encoding//src/servlet/RecuperaSenha.java=UTF-8

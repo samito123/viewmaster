@@ -1,5 +1,5 @@
 
-function ConstroiGraficoDeModulos(ano) {
+function ConstroiGraficoDeModulos(modulos) {
 
 	var randomnb = function(){ return Math.round(Math.random()*300)};
 	
@@ -33,6 +33,8 @@ function ConstroiGraficoDeModulos(ano) {
 	        columns: [
 	            ['Serviços', randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()],
 				['Produtos', randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()],
+				['Vendas', randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()],
+				['Contas', randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb(), randomnb()],
 			]
 	    });
 	}, 2000);

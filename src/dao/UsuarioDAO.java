@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.Usuario;
-import control.FabricaDeConexao;
+
+import modelos.Usuario;
+import controle.conexao.ControleFabricaDeConexao;
 
 
 public class UsuarioDAO {
@@ -16,7 +17,7 @@ public class UsuarioDAO {
 	
 	public Usuario VerificaLoginDeAcessoRetornaUsuario(Usuario usuario) throws SQLException{
 		try {	
-			conn = new FabricaDeConexao().getConnection();
+			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "select * from tb_usuarios where login_usuario = ? "
 					+ "and senha_usuario = ?";
 			ps = conn.prepareStatement(sql);
@@ -45,7 +46,7 @@ public class UsuarioDAO {
 	
 	public Usuario VerificaEmailDataNascimentoRecuperaSenhaRetornaUsuario(Usuario usuario) throws SQLException{
 		try {	
-			conn = new FabricaDeConexao().getConnection();
+			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "select * from tb_usuarios where email_usuario = ? "
 					+ "and data_nascimento_usuario = ?";
 			ps = conn.prepareStatement(sql);
@@ -74,7 +75,7 @@ public class UsuarioDAO {
 	public boolean AlteraSenhaUsuario(Usuario usuario) throws SQLException{
 		boolean executouSQL = false;
 		try {	
-			conn = new FabricaDeConexao().getConnection();
+			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "update tb_usuarios "
 					+ "set senha_usuario = ? "
 					+ "where id_usuario = ?";

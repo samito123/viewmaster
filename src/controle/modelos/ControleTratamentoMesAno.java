@@ -1,40 +1,68 @@
-package model;
+package controle.modelos;
 
 import java.util.ArrayList;
 
-public class Ano {
-	
-	private Long id_de_busca;
-	private String numero_do_ano;
-	private ArrayList<Mes> meses_do_ano;
-	
-	public Ano(){
-		this.setMeses_do_ano(ConstroiMesesDoAno());
-	}
-	
-	public Long getId_de_busca() {
-		return id_de_busca;
-	}
-	public void setId_de_busca(Long id_de_busca) {
-		this.id_de_busca = id_de_busca;
-	}
-	
-	public String getNumero_do_ano() {
-		return numero_do_ano;
-	}
+import modelos.Mes;
 
-	public void setNumero_do_ano(String numero_do_ano) {
-		this.numero_do_ano = numero_do_ano;
+public class ControleTratamentoMesAno {
+	
+	public String TrataMesCalendario(int mes){
+		String mesTratado = "";
+		
+		switch (mes) {
+			case 0:
+				mesTratado = "01";
+			break;
+	
+			case 1:
+				mesTratado = "02";
+			break;
+			
+			case 2:
+				mesTratado = "03";
+			break;
+			
+			case 3:
+				mesTratado = "04";
+			break;
+			
+			case 4:
+				mesTratado = "05";
+			break;
+			
+			case 5:
+				mesTratado = "06";
+			break;
+			
+			case 6:
+				mesTratado = "07";
+			break;
+			
+			case 7:
+				mesTratado = "08";
+			break;
+			
+			case 8:
+				mesTratado = "09";
+			break;
+			
+			case 9:
+				mesTratado = "10";
+			break;
+			
+			case 10:
+				mesTratado = "11";
+			break;
+			
+			case 11:
+				mesTratado = "12";
+			break;
+		}
+		
+		return mesTratado;
 	}
-
-	public ArrayList<Mes> getMeses_do_ano() {
-		return meses_do_ano;
-	}
-	public void setMeses_do_ano(ArrayList<Mes> meses_do_ano) {
-		this.meses_do_ano = meses_do_ano;
-	}
-
-	private ArrayList<Mes> ConstroiMesesDoAno(){
+	
+	public ArrayList<Mes> ConstroiMesesDoAno(){
 		ArrayList<Mes> mesesDoAno = new ArrayList<>();
 		
 		for(int mesDoAno = 1; mesDoAno < 13; mesDoAno++){
@@ -58,7 +86,7 @@ public class Ano {
 			break;
 			
 			case 3:
-				mes.setNome_do_mes("Março");
+				mes.setNome_do_mes("Marï¿½o");
 				mes.setNumero_do_mes("03");
 			break;
 			

@@ -1,4 +1,4 @@
-package model;
+package modelos;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
@@ -11,21 +11,21 @@ public class Email {
 		   //Utilize o hostname do seu provedor de email
 		   System.out.println("alterando hostname...");
 		   email.setHostName("smtp.gmail.com");
-		   //Quando a porta utilizada não é a padrão (gmail = 465)
+		   //Quando a porta utilizada nï¿½o ï¿½ a padrï¿½o (gmail = 465)
 		   email.setSmtpPort(465);
-		   //Adicione os destinatários
+		   //Adicione os destinatï¿½rios
 		   email.addTo(usuario.getEmail_usuario(), usuario.getNome_usuario());
-		   //Configure o seu email do qual enviará
+		   //Configure o seu email do qual enviarï¿½
 		   email.setFrom("oticamasterapp@gmail.com", "ViewMaster");
 		   //Adicione um assunto
 		   email.setSubject("Nova Senha!");
 		   //Adicione a mensagem do email
-		   email.setMsg("Informativo\nCaro usuário "+usuario.getLogin_usuario()+", "
-		   		+ "você requisitou uma nova senha no sistema View Master.\nSua nova senha é "
-				+usuario.getSenha_usuario()+".\n\nEsse email é enviado de forma automatico, "
-				+ "não há nescessidade de respondê-lo.\nContato View Master."
-				+ "\nSistema de Gestão Para o Ramo Óptico.");
-		   //Para autenticar no servidor é necessário chamar os dois métodos abaixo
+		   email.setMsg("Informativo\nCaro usuï¿½rio "+usuario.getLogin_usuario()+", "
+		   		+ "vocï¿½ requisitou uma nova senha no sistema View Master.\nSua nova senha ï¿½ "
+				+usuario.getSenha_usuario()+".\n\nEsse email ï¿½ enviado de forma automatico, "
+				+ "nï¿½o hï¿½ nescessidade de respondï¿½-lo.\nContato View Master."
+				+ "\nSistema de Gestï¿½o Para o Ramo ï¿½ptico.");
+		   //Para autenticar no servidor ï¿½ necessï¿½rio chamar os dois mï¿½todos abaixo
 		   System.out.println("autenticando...");
 		   email.setSSL(true);
 		   email.setAuthentication("oticamasterapp@gmail.com", "otica478511master");

@@ -1,11 +1,11 @@
-package control;
+package controle.conexao;
 
 import java.io.UnsupportedEncodingException;
 
-import model.Ano;
-import model.Usuario;
+import modelos.Ano;
+import modelos.Usuario;
 
-public class CodificaUTF8 {
+public class ControleCodificaUTF8 {
 
 	public Usuario CodificaUsuarioUTF8(Usuario usuario) throws UnsupportedEncodingException{
 		if(usuario.getNome_usuario() != null)
@@ -36,7 +36,7 @@ public class CodificaUTF8 {
 		return ano;
 	}
 	
-	private String CodificaStringUTF8(String string) throws UnsupportedEncodingException{
+	public String CodificaStringUTF8(String string) throws UnsupportedEncodingException{
 		return new String(string.getBytes("UTF-8"), "ISO-8859-1");
 	}
 }

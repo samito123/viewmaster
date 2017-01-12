@@ -13,7 +13,7 @@
         		<img width="20" class="simple-tooltip" 
 		  		src="imagens/icones/menu/client_ico.png" 
 		  		title="Nesse modulo é possível consultar, editar, excluir e adicionar clientes!"/> 
-	  			Agenda
+	  			Clientes
 			</a>
 		</li>
 		<li class="pushy-link">

@@ -1,20 +1,15 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import dao.SessaoUsuarioDAO;
-import dao.UsuarioDAO;
-import model.Usuario;
+import modelos.Usuario;
+import controle.usuario.ControleLoginUsuario;
 
 
 public class LoginUsuario extends HttpServlet{
@@ -33,7 +28,8 @@ public class LoginUsuario extends HttpServlet{
 		switch (metodo) {
 			case "VerificaLoginDoUsuario":	
 				try {
-					VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
+					new ControleLoginUsuario(req, resp).
+						VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -63,39 +59,4 @@ public class LoginUsuario extends HttpServlet{
 		return usuario;
 	}
 	
-	private void VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(Usuario usuario) throws 
-	ServletException, SQLException, IOException{
-		UsuarioDAO dao = new UsuarioDAO();
-		usuario = dao.VerificaLoginDeAcessoRetornaUsuario(usuario);
-		VerificaRetornoDeUsuarioParaLogin(usuario);
-	}
-	
-	private void VerificaRetornoDeUsuarioParaLogin(Usuario usuario) throws IOException, SQLException{
-		if(usuario.getNome_usuario() == null){
-			RetornaErroUsuarioOuSenhaIncorreta();
-		}else{
-			SalvaSessaoUsuario(usuario);
-		}
-	}
-	
-	private void SalvaSessaoUsuario(Usuario usuario) throws SQLException, IOException{
-		try{
-			SessaoUsuarioDAO dao = new SessaoUsuarioDAO();
-			dao.SalvarSessaoUsuario(usuario);
-			RetornaUsuarioJsonRecuperadoViaLogin(usuario);
-		}catch(Exception e){
-			RetornaErroUsuarioOuSenhaIncorreta();
-		}
-	}
-	
-	private void RetornaErroUsuarioOuSenhaIncorreta() throws IOException{
-		PrintWriter out = response.getWriter();
-		out.write("erro"); 
-	}
-	
-	private void RetornaUsuarioJsonRecuperadoViaLogin(Usuario usuario) throws IOException{
-		Gson gson = new Gson();
-		PrintWriter out = response.getWriter();
-		out.write(gson.toJson(usuario)); 
-	}
 }

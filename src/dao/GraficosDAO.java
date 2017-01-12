@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Ano;
-import model.Mes;
-import model.Usuario;
-import control.FabricaDeConexao;
+
+import modelos.Ano;
+import modelos.Mes;
+import controle.conexao.ControleFabricaDeConexao;
 
 
 public class GraficosDAO {
@@ -22,7 +22,7 @@ public class GraficosDAO {
 		ArrayList<Mes> mesesDoAno = ano.getMeses_do_ano();
 		
 		try {	
-			conn = new FabricaDeConexao().getConnection();
+			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "select * from tb_sessoes_usuario where id_usuario = ? "
 					+ "and ano_sessao = ?";
 			ps = conn.prepareStatement(sql);
@@ -31,7 +31,7 @@ public class GraficosDAO {
 			rs = ps.executeQuery(); 
 			while (rs.next()) { 
 				int mes = rs.getInt("mes_sessao") - 1;
-				mesesDoAno.get(mes).setValor(mesesDoAno.get(mes).getValor() + 1);
+				mesesDoAno.get(mes).setValor(mesesDoAno.get(mes).getValor() + rs.getInt("quantidade_sessoes"));
 			}	
 		}catch (Exception e) {
 			System.out.print(e);
@@ -43,19 +43,19 @@ public class GraficosDAO {
 		return mesesDoAno;
 	}
 	
-public ArrayList<Mes> ConstroiDadosParaGraficoDeSessaoDoUsuarioPorcentagem(Ano ano) throws SQLException{
+	public ArrayList<Mes> ConstroiDadosParaGraficoDeSessaoDoUsuarioPorcentagem(Ano ano) throws SQLException{
 		
 		ArrayList<Mes> mesesDoAno = ano.getMeses_do_ano();
 		
 		try {	
-			conn = new FabricaDeConexao().getConnection();
+			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "select * from tb_sessoes_usuario where id_usuario = ? ";
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, ano.getId_de_busca()); 
 			rs = ps.executeQuery(); 
 			while (rs.next()) { 
 				int mes = rs.getInt("mes_sessao") - 1;
-				mesesDoAno.get(mes).setValor(mesesDoAno.get(mes).getValor() + 1);
+				mesesDoAno.get(mes).setValor(mesesDoAno.get(mes).getValor() + rs.getInt("quantidade_sessoes"));
 			}	
 		}catch (Exception e) {
 			System.out.print(e);
