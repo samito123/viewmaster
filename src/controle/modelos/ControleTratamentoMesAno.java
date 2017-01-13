@@ -86,7 +86,7 @@ public class ControleTratamentoMesAno {
 			break;
 			
 			case 3:
-				mes.setNome_do_mes("Mar�o");
+				mes.setNome_do_mes("Março");
 				mes.setNumero_do_mes("03");
 			break;
 			

@@ -2,11 +2,11 @@
 function ConstroiGraficoDeSessoesUsuario(ano) {
 
 	var width = screen.width;
-	var a = 0;
+	var qtd_letras_do_mes = 0;
 	if (width <= 550){
-		a = 1;
+		qtd_letras_do_mes = 1;
 	}else{
-		a = 3;
+		qtd_letras_do_mes = 3;
 	}
 	
 	var GraficoSessoes = c3.generate({
@@ -25,18 +25,18 @@ function ConstroiGraficoDeSessoesUsuario(ano) {
 	    },axis: {
 	        x: {
 	            type: 'category',
-	            categories: [ano[0].meses_do_ano[0].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[1].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[2].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[3].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[4].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[5].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[6].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[7].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[8].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[9].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[10].nome_do_mes.substring(0, a), 
-	                         ano[0].meses_do_ano[11].nome_do_mes.substring(0, a)]
+	            categories: [ano[0].meses_do_ano[0].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[1].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[2].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[3].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[4].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[5].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[6].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[7].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[8].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[9].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[10].nome_do_mes.substring(0, qtd_letras_do_mes), 
+	                         ano[0].meses_do_ano[11].nome_do_mes.substring(0, qtd_letras_do_mes)]
 	        }
 	    }
 	});  

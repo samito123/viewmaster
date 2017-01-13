@@ -4,7 +4,11 @@ public class Mes {
 
 	private String nome_do_mes;
 	private String numero_do_mes;
-	private int valor = 0;
+	private int valor;
+	
+	public Mes(){
+		this.valor = 0;
+	}
 	
 	public String getNome_do_mes() {
 		return nome_do_mes;

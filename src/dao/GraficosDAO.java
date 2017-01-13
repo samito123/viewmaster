@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 import modelos.Ano;
 import modelos.Mes;
+import modelos.Modulo;
 import controle.conexao.ControleFabricaDeConexao;
+import controle.modelos.ControleTratamentoModulo;
 
 
 public class GraficosDAO {
@@ -65,6 +67,36 @@ public class GraficosDAO {
 			conn.close();
 		}
 		return mesesDoAno;
+	}
+	
+	public ArrayList<Modulo> ConstroiDadosParaGraficoDeModulosGeralAno() throws SQLException{
+		
+		ArrayList<Modulo> modulos = new ControleTratamentoModulo().ConstroiArrayDeModulos();
+		Modulo modulo;
+		try {	
+			conn = new ControleFabricaDeConexao().getConnection();
+			String sql = "select id_modulo, mes_utilizado, "
+					+ "sum(quantidade_de_vezes_utilizada) as qtd "
+					+ "from tb_modulos_mais_utilizados_usuario "
+					+ "group by id_modulo, mes_utilizado";
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery(); 
+			while (rs.next()) { 
+				modulo = new Modulo();			
+				int id_modulo = rs.getInt("id_modulo") - 1;
+				int mes_ano = rs.getInt("mes_utilizado") - 1;
+				
+				modulos.get(id_modulo).getAno().getMeses_do_ano().get(mes_ano).setValor(rs.getInt("qtd"));
+			}	
+		}catch (Exception e) {
+			System.out.print(e);
+		}finally{
+			rs.close();
+			ps.close();
+			conn.close();
+		}
+		return modulos;
 	}
 
 }

@@ -132,20 +132,45 @@ pageEncoding="UTF-8"%>
 	                 		<div id="moduloTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
 								<div class="titulo_da_caixa">
                						<h4>
-				              			Sessões do usuário - {{vm.anoCorrente}}        		
+				              			Módulos mais usados          		
 						            </h4>
                  				</div>
                  				<div>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Sessões no ano de {{vm.anoCorrente}}.
+						  				Modulo agenda(qtd): {{vm.moduloAgendaQuantidade}}.
 								  	</p>	
 									<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Total de sessões do usuário.		
-								  	</p>  	
+						  				Clientes.		
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Receitas.		
+								  	</p> 
+								  	<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Serviços.		
+								  	</p>  
+								  	<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Produtos.		
+								  	</p> 
+								  	<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Vendas.		
+								  	</p>  
+								  	<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Contas.		
+								  	</p>      	
 			                        <p>	              
 	                 					- Total de sessões do usuário: {{vm.totalSessoes}}.		     				
 		                 			</p>			
@@ -230,33 +255,53 @@ pageEncoding="UTF-8"%>
 		        	ConstroiGraficoDeSessoesUsuario(data);
 		        	SetLegendasParaGraficoDeSessoesDoUsuario(data);
 		    	}).error(function (data, status, header, config) {		            	
-		    		MensagemDeErroModal("Ocorreu um erro no servidor, tente novamente mais tarde!");
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+		    				"não foi possível carregar gráfico de sessão!");
 		    	});
 	    	};
 			
 	    	function SetLegendasParaGraficoDeSessoesDoUsuario(ano){
 	    		acess.totalSessoes = ano[1].meses_do_ano[0].valor + ano[1].meses_do_ano[1].valor + 
-	    		ano[1].meses_do_ano[2].valor + ano[1].meses_do_ano[3].valor + ano[1].meses_do_ano[4].valor + 
-	    		ano[1].meses_do_ano[5].valor + ano[1].meses_do_ano[6].valor + ano[1].meses_do_ano[7].valor + 
-	    		ano[1].meses_do_ano[8].valor + ano[1].meses_do_ano[9].valor + ano[1].meses_do_ano[10].valor + 
-	    		ano[1].meses_do_ano[11].valor;
+		    		ano[1].meses_do_ano[2].valor + ano[1].meses_do_ano[3].valor + ano[1].meses_do_ano[4].valor + 
+		    		ano[1].meses_do_ano[5].valor + ano[1].meses_do_ano[6].valor + ano[1].meses_do_ano[7].valor + 
+		    		ano[1].meses_do_ano[8].valor + ano[1].meses_do_ano[9].valor + ano[1].meses_do_ano[10].valor + 
+		    		ano[1].meses_do_ano[11].valor;
 	    		
 	    		acess.totalSessoesAnoCorrente = ano[0].meses_do_ano[0].valor + ano[0].meses_do_ano[1].valor + 
-	    		 ano[0].meses_do_ano[2].valor + ano[0].meses_do_ano[3].valor + ano[0].meses_do_ano[4].valor + 
-	    		 ano[0].meses_do_ano[5].valor + ano[0].meses_do_ano[6].valor + ano[0].meses_do_ano[7].valor + 
-	    		 ano[0].meses_do_ano[8].valor + ano[0].meses_do_ano[9].valor + ano[0].meses_do_ano[10].valor + 
-	    		 ano[0].meses_do_ano[11].valor;
+		    		ano[0].meses_do_ano[2].valor + ano[0].meses_do_ano[3].valor + ano[0].meses_do_ano[4].valor + 
+		    		ano[0].meses_do_ano[5].valor + ano[0].meses_do_ano[6].valor + ano[0].meses_do_ano[7].valor + 
+		    		ano[0].meses_do_ano[8].valor + ano[0].meses_do_ano[9].valor + ano[0].meses_do_ano[10].valor + 
+		    		ano[0].meses_do_ano[11].valor;
 	    		
 	    		var total;
 	    		total = parseFloat((acess.totalSessoesAnoCorrente*100)/acess.totalSessoes);
 	    		acess.porcentagemDoAnoCorrente = parseFloat(total.toFixed(2));
+	    		
 	    	}
 	    	
 	    	function GraficoDeModulos() {
-		    	
-		        	ConstroiGraficoDeModulos("2017");
-		        
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeModulos&id_de_busca="+
+    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+    	
+		    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	ConstroiGraficoDeModulos(data);
+		        	SetLegendasParaGraficoDeModulos(data);
+		    	}).error(function (data, status, header, config) {		            	
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+		    				"não foi possível carregar gráfico de modulos!");
+		    	});
 	    	};
+	    	
+	    	function SetLegendasParaGraficoDeModulos(modulos){
+	    		acess.moduloAgendaQuantidade = modulos[0].ano.meses_do_ano[0].valor + modulos[0].ano.meses_do_ano[1].valor + 
+	 				modulos[0].ano.meses_do_ano[2].valor + modulos[0].ano.meses_do_ano[3].valor + 
+	 				modulos[0].ano.meses_do_ano[4].valor + modulos[0].ano.meses_do_ano[5].valor +
+	 				modulos[0].ano.meses_do_ano[6].valor + modulos[0].ano.meses_do_ano[7].valor +
+	 				modulos[0].ano.meses_do_ano[8].valor + modulos[0].ano.meses_do_ano[9].valor +
+	 				modulos[0].ano.meses_do_ano[10].valor + modulos[0].ano.meses_do_ano[11].valor;
+	    		
+	    	}
 	    	
 			function MensagemDeErroModal(mensagem){
 				acess.alertModal = 'alert-danger';

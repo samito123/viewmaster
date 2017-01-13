@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelos.Ano;
 import controle.graficos.ControleGraficoDeSessao;
+import controle.graficos.ControleGraficoModulos;
 
 
 public class Graficos extends HttpServlet{
@@ -36,7 +37,7 @@ public class Graficos extends HttpServlet{
 			
 			case "RecuperaDadosParaGraficoDeModulos":	
 				try {
-					new ControleGraficoDeSessao(req, resp).ConstroiArrayDeAnosParaGraficoDeSessaoUsuario(CriaObjetoAnoRequest());
+					new ControleGraficoModulos(req, resp).ConstroiArrayDeModulosParaGraficoDeModulos();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
