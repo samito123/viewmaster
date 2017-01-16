@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelos.Ano;
+import controle.graficos.ControleGraficoClientes;
 import controle.graficos.ControleGraficoDeSessao;
 import controle.graficos.ControleGraficoModulos;
 
@@ -42,6 +43,14 @@ public class Graficos extends HttpServlet{
 					e.printStackTrace();
 				}
 			break;
+			
+			case "RecuperaDadosParaGraficoDeClientes":	
+				try {
+					new ControleGraficoClientes(req, resp).ConstroiArrayDeAnosParaGraficoDeClientes(CriaObjetoAnoRequest());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			break;
 		}
 	}
 	
@@ -51,7 +60,6 @@ public class Graficos extends HttpServlet{
 			ano.setId_de_busca(Long.parseLong(request.getParameter("id_de_busca")));
 		if(request.getParameter("ano") != null)
 			ano.setNumero_do_ano(request.getParameter("ano"));
-		
 		return ano;
 	}
 	

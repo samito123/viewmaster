@@ -106,42 +106,59 @@ img, iframe, object, embed, video {
   			padding: 10px 5px 10px 5px;
 		}
 		
-	.conteiner_medio{
-		width: 40%;
-		margin: 2em 5% 0 5%;
+	.conteiner_medio_left{
+		width: 43%;
+		float: left;
+		margin: 2em 2% 0.5em 5%;
+    }
+    
+    .conteiner_medio_right{
+		width: 43%;
+		float: left;
+		margin: 2em 5% 0.5em 2%;
     }
     
     @media all and (max-width: 700px) { 
-	    .conteiner_medio{
+	    .conteiner_medio_left{
 			width: 100%;
-			margin: 2em 0 0 0;
+			margin: 2em 0 0.5em 0;
+	    }
+	    
+	    .conteiner_medio_right{
+			width: 100%;
+			margin: 2em 0 0.5em 0;
 	    }
 	}
     
-    	.conteiner_medio .caixa_com_borda_redonda{
+    	.conteiner_medio_left .caixa_com_borda_redonda, 
+    	.conteiner_medio_right .caixa_com_borda_redonda{
 			border: 1px solid;
 			border-color:#cfcbcb;
 			border-radius: 14px;
 		 }
 		 
-		.conteiner_medio .caixa_com_borda_redonda .borda_branca{
+		.conteiner_medio_left .caixa_com_borda_redonda .borda_branca,
+		.conteiner_medio_right .caixa_com_borda_redonda .borda_branca{
 			border: 8px solid;
 			border-color:#ffffff;
 			border-radius: 14px;
 		}
 		
-		.conteiner_medio .caixa_com_borda_redonda h4{
+		.conteiner_medio_left .caixa_com_borda_redonda h4,
+		.conteiner_medio_right .caixa_com_borda_redonda h4{
 			font-weight: bold;
 			text-align: center;
 		}
 		
 		@media all and (max-width: 480px) { 
-		    .conteiner_medio .caixa_com_borda_redonda h4{
+		    .conteiner_medio_left .caixa_com_borda_redonda h4,
+		    .conteiner_medio_right .caixa_com_borda_redonda h4{
 				font-size: 1em;
 			}
 		}
 		
-		.conteiner_medio .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa{
+		.conteiner_medio_left .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa,
+		.conteiner_medio_right .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa{
   			padding: 10px 5px 10px 5px;
 		}
 		
@@ -182,6 +199,51 @@ img, iframe, object, embed, video {
 	border-color: #ff7f0e #ff7f0e #f5f4e9 #ff7f0e;;
 }
 
+.quadrado_verde_para_legenda {
+	width: 10px;
+	height: 10px;
+	float: left; 
+	border: 7px solid;
+	margin: 4.5px 2.5px 0 0;
+	border-color: #2ca02c #2ca02c #f5f4e9 #2ca02c;;
+}
+
+.quadrado_vermelho_para_legenda {
+	width: 10px;
+	height: 10px;
+	float: left; 
+	border: 7px solid;
+	margin: 4.5px 2.5px 0 0;
+	border-color: #d62728 #d62728 #f5f4e9 #d62728;;
+}
+
+.quadrado_roxo_para_legenda {
+	width: 10px;
+	height: 10px;
+	float: left; 
+	border: 7px solid;
+	margin: 4.5px 2.5px 0 0;
+	border-color: #9467bd #9467bd #f5f4e9 #9467bd;;
+}
+
+.quadrado_marrom_para_legenda {
+	width: 10px;
+	height: 10px;
+	float: left; 
+	border: 7px solid;
+	margin: 4.5px 2.5px 0 0;
+	border-color: #8c564b #8c564b #f5f4e9 #8c564b;;
+}
+
+.quadrado_rosa_para_legenda {
+	width: 10px;
+	height: 10px;
+	float: left; 
+	border: 7px solid;
+	margin: 4.5px 2.5px 0 0;
+	border-color: #e377c2 #e377c2 #f5f4e9 #e377c2;;
+}
+
 @media all and (max-width: 480px) { 
     .quadrado_azul_para_legenda {
 		width: 7px;
@@ -198,7 +260,52 @@ img, iframe, object, embed, video {
 		float: left; 
 		border: 7px solid;
 		margin: 0 2.5px 0 0;
-		border-color: #ff7f0e #ff7f0e #f5f4e9 #ff7f0e;;
+		border-color: #ff7f0e #ff7f0e #f5f4e9 #ff7f0e;
+	}
+	
+	.quadrado_verde_para_legenda {
+		width: 7px;
+		height: 5px;
+		float: left; 
+		border: 7px solid;
+		margin: 0 2.5px 0 0;
+		border-color: #2ca02c #2ca02c #f5f4e9 #2ca02c;
+	}
+	
+	.quadrado_vermelho_para_legenda {
+		width: 7px;
+		height: 5px;
+		float: left; 
+		border: 7px solid;
+		margin: 0 2.5px 0 0;
+		border-color: #d62728 #d62728 #f5f4e9 #d62728;
+	}
+	
+	.quadrado_roxo_para_legenda {
+		width: 7px;
+		height: 5px;
+		float: left; 
+		border: 7px solid;
+		margin: 0 2.5px 0 0;
+		border-color: #9467bd #9467bd #f5f4e9 #9467bd;
+	}
+	
+	.quadrado_marrom_para_legenda {
+		width: 7px;
+		height: 5px;
+		float: left; 
+		border: 7px solid;
+		margin: 0 2.5px 0 0;
+		border-color: #8c564b #8c564b #f5f4e9 #8c564b;
+	}
+	
+	.quadrado_rosa_para_legenda {
+		width: 7px;
+		height: 5px;
+		float: left; 
+		border: 7px solid;
+		margin: 0 2.5px 0 0;
+		border-color: #e377c2 #e377c2 #f5f4e9 #e377c2;
 	}
 }
 	    

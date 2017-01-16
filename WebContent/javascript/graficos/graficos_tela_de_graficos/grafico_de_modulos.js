@@ -59,7 +59,7 @@ function ConstroiGraficoDeModulos(modulos) {
 	 				modulos[2].ano.meses_do_ano[10].valor, modulos[2].ano.meses_do_ano[11].valor],
 	        ]
 	    });
-	}, 1000);
+	}, 500);
 
 	setTimeout(function () {
 	    GraficoModulos.load({
@@ -93,6 +93,6 @@ function ConstroiGraficoDeModulos(modulos) {
 	 				modulos[6].ano.meses_do_ano[10].valor, modulos[6].ano.meses_do_ano[11].valor],
 			]
 	    });
-	}, 2000);
+	}, 1000);
 };
 

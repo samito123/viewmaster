@@ -59,4 +59,5 @@
 	<!-- JS -->	
 		<script type="text/javascript" src="javascript/graficos/graficos_tela_de_graficos/grafico_de_sessao.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="javascript/graficos/graficos_tela_de_graficos/grafico_de_modulos.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="javascript/graficos/graficos_tela_de_graficos/grafico_de_clientes.js" charset="UTF-8"></script>
 <!-- Fim Graficos -->

@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelos.Modulo;
+
 import com.google.gson.Gson;
 
-import modelos.Ano;
-import modelos.Modulo;
-import controle.conexao.ControleCodificaUTF8;
 import controle.conexao.ControleDeRetornoServidor;
 import dao.GraficosDAO;
 
@@ -35,10 +34,26 @@ public class ControleGraficoModulos {
 		try {
 			GraficosDAO dao = new GraficosDAO();
 			modulos = dao.ConstroiDadosParaGraficoDeModulosGeralAno();
-			RetornaDadosParaGraficoDeModulosGeral(modulos);
+			SomaTotalDeVezesModuloUtilizado(modulos);
 		} catch (Exception e) {
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
+	}
+	
+	private void SomaTotalDeVezesModuloUtilizado(ArrayList<Modulo> modulos) throws SQLException, IOException{
+		try{
+			int total = 0;
+			for(int modulo = 0; modulo <= 6; modulo++){
+				total = 0;
+				for(int mes = 0; mes <= 11; mes++){
+					total += modulos.get(modulo).getAno().getMeses_do_ano().get(mes).getValor();
+				}
+				modulos.get(modulo).getAno().setValor(total);
+			}
+			RetornaDadosParaGraficoDeModulosGeral(modulos);
+		}catch(Exception e){
+			new ControleDeRetornoServidor(request, response).RetornaErro();
+		}	
 	}
 	
 	private void RetornaDadosParaGraficoDeModulosGeral(ArrayList<Modulo> modulos) throws IOException{

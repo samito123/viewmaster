@@ -50,7 +50,7 @@ function ConstroiGraficoDeSessoesUsuario(ano) {
 	             ano[0].meses_do_ano[9].valor, ano[0].meses_do_ano[10].valor, ano[0].meses_do_ano[11].valor],
 	        ]
 	    });
-	}, 1000);
+	}, 500);
 	setTimeout(function () {
 	    GraficoSessoes.load({
 	        columns: [      
@@ -61,6 +61,6 @@ function ConstroiGraficoDeSessoesUsuario(ano) {
 	             ano[1].meses_do_ano[9].valor, ano[1].meses_do_ano[10].valor, ano[1].meses_do_ano[11].valor]
 	        ]
 	    });
-	}, 2000);
+	}, 1000);
 };
 

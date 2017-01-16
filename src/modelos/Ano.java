@@ -8,6 +8,7 @@ public class Ano {
 	
 	private Long id_de_busca;
 	private String numero_do_ano;
+	private int valor;
 	private ArrayList<Mes> meses_do_ano;
 	
 	public Ano(){
@@ -27,6 +28,14 @@ public class Ano {
 
 	public void setNumero_do_ano(String numero_do_ano) {
 		this.numero_do_ano = numero_do_ano;
+	}
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 
 	public ArrayList<Mes> getMeses_do_ano() {

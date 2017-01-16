@@ -8,68 +8,67 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelos.Ano;
-
 import com.google.gson.Gson;
 
+import modelos.Ano;
 import controle.conexao.ControleCodificaUTF8;
 import controle.conexao.ControleDeRetornoServidor;
 import dao.GraficosDAO;
 
-public class ControleGraficoDeSessao {
+public class ControleGraficoClientes {
 	
 	static private HttpServletRequest request;
 	static private HttpServletResponse response; 
 	
-	public ControleGraficoDeSessao(HttpServletRequest request, HttpServletResponse response){
+	public ControleGraficoClientes(HttpServletRequest request, HttpServletResponse response){
 		this.request = request;
 		this.response = response;
 	}
 	
-	public void ConstroiArrayDeAnosParaGraficoDeSessaoUsuario(Ano ano) throws IOException, SQLException{
+	public void ConstroiArrayDeAnosParaGraficoDeClientes(Ano ano) throws IOException, SQLException{
 		ArrayList<Ano> anos = new ArrayList<>();
 		anos.add(ano);
-		ConstroiDadosParaGraficoDeSessaoUsuarioAno(anos);
+		ConstroiDadosParaGraficoDeClientes(anos);
 	}
 	
-	private void ConstroiDadosParaGraficoDeSessaoUsuarioAno(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void ConstroiDadosParaGraficoDeClientes(ArrayList<Ano> anos) throws SQLException, IOException{
 		try {
 			GraficosDAO dao = new GraficosDAO();
-			anos.get(0).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeSessaoDoUsuarioAno(anos.get(0)));
-			SomaTotalDeSessoesUsuarioAnoCorrente(anos);
+			anos.get(0).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeClientesAno(anos.get(0)));
+			SomaTotalDeClientesAnoCorrente(anos);
 		} catch (Exception e) {
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
-	private void SomaTotalDeSessoesUsuarioAnoCorrente(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void SomaTotalDeClientesAnoCorrente(ArrayList<Ano> anos) throws SQLException, IOException{
 		try{
-			int totalDeSessoesAno = 0;
+			int totalDeClientes = 0;
 			for(int mes = 0; mes < 12; mes++){
-				totalDeSessoesAno += anos.get(0).getMeses_do_ano().get(mes).getValor();
+				totalDeClientes += anos.get(0).getMeses_do_ano().get(mes).getValor();
 			}
-			anos.get(0).setValor(totalDeSessoesAno);
-			ConstroiDadosParaGraficoDeSessaoUsuarioPorcentagem(anos);
+			anos.get(0).setValor(totalDeClientes);
+			ConstroiDadosParaGraficoDeClientesPorcentagem(anos);
 		}catch(Exception e){
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}	
 	}
 	
-	private void ConstroiDadosParaGraficoDeSessaoUsuarioPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void ConstroiDadosParaGraficoDeClientesPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
 		try {
 			Ano ano = new Ano();
 			ano.setId_de_busca(anos.get(0).getId_de_busca());
 			anos.add(ano);
 			
 			GraficosDAO dao = new GraficosDAO();
-			anos.get(1).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeSessaoDoUsuarioPorcentagem(anos.get(1)));	
-			SomaTotalDeSessoesUsuarioPorcentagem(anos);
+			anos.get(1).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeClientesPorcentagem(anos.get(1)));	
+			SomaTotalDeClientesPorcentagem(anos);
 		} catch (Exception e) {
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
-	private void SomaTotalDeSessoesUsuarioPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void SomaTotalDeClientesPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
 		try{
 			int totalDeSessoesAno = 0;
 			for(int mes = 0; mes < 12; mes++){
@@ -89,5 +88,4 @@ public class ControleGraficoDeSessao {
 		anos.set(1, new ControleCodificaUTF8().CodificaAnoUTF8(anos.get(1)));
 		out.write(gson.toJson(anos));
 	}
-	
 }

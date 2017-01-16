@@ -63,26 +63,21 @@ pageEncoding="UTF-8"%>
 	                 		<div id="sessaoTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
 								<div class="titulo_da_caixa">
                						<h4>
-				              			Sessões do usuário - {{vm.anoCorrente}}        		
+				              			Sessões do usuário       		
 						            </h4>
                  				</div>
                  				<div>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Sessões no ano de {{vm.anoCorrente}}.
+						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSessoesAnoCorrente}}.
 								  	</p>	
 									<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Total de sessões do usuário.		
+						  				Total de sessões do usuário: {{vm.totalSessoes}}.		
 								  	</p>  	
-			                        <p>	              
-	                 					- Total de sessões do usuário: {{vm.totalSessoes}}.		     				
-		                 			</p>			
-		                          	<p>			                          	
-			                          	- Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSessoesAnoCorrente}}.			                          	
-		                          	</p>				  						  
+			                   				  						  
 							        <p>							        
 						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrente}}%.							          
 						          	</p>				  					  					  	 						  	 													
@@ -95,7 +90,7 @@ pageEncoding="UTF-8"%>
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio">
+			<div class="conteiner_medio_left">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -139,47 +134,123 @@ pageEncoding="UTF-8"%>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Modulo agenda(qtd): {{vm.moduloAgendaQuantidade}}.
+						  				Módulo agenda(qtd): {{vm.moduloAgendaQuantidade}}.
 								  	</p>	
 									<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Clientes.		
+						  				Módulo clientes(qtd): {{vm.moduloClientesQuantidade}}.		
 								  	</p>
 								  	<p>
-								 		<span class="quadrado_laranja_para_legenda">
+								 		<span class="quadrado_verde_para_legenda">
 								  		</span>
-						  				Receitas.		
+						  				Módulo receitas(qtd): {{vm.moduloReceitasQuantidade}}.		
 								  	</p> 
 								  	<p>
-								 		<span class="quadrado_laranja_para_legenda">
+								 		<span class="quadrado_vermelho_para_legenda">
 								  		</span>
-						  				Serviços.		
+						  				Módulo serviços(qtd): {{vm.moduloProdutosQuantidade}}.		
 								  	</p>  
 								  	<p>
-								 		<span class="quadrado_laranja_para_legenda">
+								 		<span class="quadrado_roxo_para_legenda">
 								  		</span>
-						  				Produtos.		
+						  				Módulo produtos(qtd): {{vm.moduloEstoqueQuantidade}}.		
 								  	</p> 
 								  	<p>
-								 		<span class="quadrado_laranja_para_legenda">
+								 		<span class="quadrado_marrom_para_legenda">
 								  		</span>
-						  				Vendas.		
+						  				Módulo vendas(qtd): {{vm.moduloVendasQuantidade}}.		
 								  	</p>  
 								  	<p>
+								 		<span class="quadrado_rosa_para_legenda">
+								  		</span>
+						  				Módulo contas(qtd): {{vm.moduloContasQuantidade}}.		
+								  	</p>      					  					  					  	 						  	 													
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                  				</div>	
+							</div>	             		
+						</div>					       				
+                   	</div>			               	
+				</div>		
+			</div>
+			
+			<div class="conteiner_medio_right">
+			    <div class="caixa_com_borda_redonda">
+			      	<div class="borda_branca">               
+						
+						<ul class="nav nav-tabs">
+						  	<li class="active">
+							  	<a data-toggle="tab" style="color:#536376" href="#clientesTab1">
+							  		Modulos
+						  		</a>
+				  			</li>
+						  	<li>
+						  		<a data-toggle="tab" style="color:#536376" href="#clientesTab2">
+						  			Legendas
+					  			</a>
+				  			</li>
+						</ul>
+						
+						<div class="tab-content">
+							<div id="clientesTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
+                 				<div class="titulo_da_caixa">
+               						<h4>
+				              			Clientes  		
+						            </h4>
+                 				</div>
+                 				<div class="conteudo_de_corpo_da_caixa">
+						            
+		                           <div id="GraficoClientes" class="caixa_de_grafico">       	
+	                               </div>
+	                           							
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                 				</div>	              			
+	                 		</div>
+	                 		
+	                 		<div id="clientesTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
+								<div class="titulo_da_caixa">
+               						<h4>
+				              			Clientes      		
+						            </h4>
+                 				</div>
+                 				<div>
+                 					<p>
+								 		<span class="quadrado_azul_para_legenda">
+								  		</span>
+						  				Módulo agenda(qtd): {{vm.moduloAgendaQuantidade}}.
+								  	</p>	
+									<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Contas.		
-								  	</p>      	
-			                        <p>	              
-	                 					- Total de sessões do usuário: {{vm.totalSessoes}}.		     				
-		                 			</p>			
-		                          	<p>			                          	
-			                          	- Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSessoesAnoCorrente}}.			                          	
-		                          	</p>				  						  
-							        <p>							        
-						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrente}}%.							          
-						          	</p>				  					  					  	 						  	 													
+						  				Módulo clientes(qtd): {{vm.moduloClientesQuantidade}}.		
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_verde_para_legenda">
+								  		</span>
+						  				Módulo receitas(qtd): {{vm.moduloReceitasQuantidade}}.		
+								  	</p> 
+								  	<p>
+								 		<span class="quadrado_vermelho_para_legenda">
+								  		</span>
+						  				Módulo serviços(qtd): {{vm.moduloProdutosQuantidade}}.		
+								  	</p>  
+								  	<p>
+								 		<span class="quadrado_roxo_para_legenda">
+								  		</span>
+						  				Módulo produtos(qtd): {{vm.moduloEstoqueQuantidade}}.		
+								  	</p> 
+								  	<p>
+								 		<span class="quadrado_marrom_para_legenda">
+								  		</span>
+						  				Módulo vendas(qtd): {{vm.moduloVendasQuantidade}}.		
+								  	</p>  
+								  	<p>
+								 		<span class="quadrado_rosa_para_legenda">
+								  		</span>
+						  				Módulo contas(qtd): {{vm.moduloContasQuantidade}}.		
+								  	</p>      					  					  					  	 						  	 													
 	                          	</div>
 	                          	<div class="rodape_da_caixa">
                   				</div>	
@@ -189,8 +260,7 @@ pageEncoding="UTF-8"%>
 				</div>		
 			</div>
 							
-		</div>
-			
+		</div>	
 	</body>
 </html>
 
@@ -245,6 +315,7 @@ pageEncoding="UTF-8"%>
 			
 			GraficoDeSessaoUsuario();
 			GraficoDeModulos();
+			GraficoDeClientes();
 	    	
 	    	function GraficoDeSessaoUsuario() {
 		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
@@ -252,31 +323,25 @@ pageEncoding="UTF-8"%>
 		    	
 		    	$http.post('Graficos'+variaveis)
 		        .success(function (data, status, headers, config) {	
-		        	ConstroiGraficoDeSessoesUsuario(data);
-		        	SetLegendasParaGraficoDeSessoesDoUsuario(data);
+		        	if(data ==  "erro"){
+		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+	    				"não foi possível carregar gráfico de sessões!");
+		        	}else{
+		        		ConstroiGraficoDeSessoesUsuario(data);
+		        		SetLegendasParaGraficoDeSessoesDoUsuario(data);
+		        	}	
 		    	}).error(function (data, status, header, config) {		            	
-		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
-		    				"não foi possível carregar gráfico de sessão!");
+		    		MensagemDeErroModal("Ocorreu um erro, "+
+		    				"verifique sua conexão com a internet e tente novamente!");
 		    	});
 	    	};
 			
 	    	function SetLegendasParaGraficoDeSessoesDoUsuario(ano){
-	    		acess.totalSessoes = ano[1].meses_do_ano[0].valor + ano[1].meses_do_ano[1].valor + 
-		    		ano[1].meses_do_ano[2].valor + ano[1].meses_do_ano[3].valor + ano[1].meses_do_ano[4].valor + 
-		    		ano[1].meses_do_ano[5].valor + ano[1].meses_do_ano[6].valor + ano[1].meses_do_ano[7].valor + 
-		    		ano[1].meses_do_ano[8].valor + ano[1].meses_do_ano[9].valor + ano[1].meses_do_ano[10].valor + 
-		    		ano[1].meses_do_ano[11].valor;
-	    		
-	    		acess.totalSessoesAnoCorrente = ano[0].meses_do_ano[0].valor + ano[0].meses_do_ano[1].valor + 
-		    		ano[0].meses_do_ano[2].valor + ano[0].meses_do_ano[3].valor + ano[0].meses_do_ano[4].valor + 
-		    		ano[0].meses_do_ano[5].valor + ano[0].meses_do_ano[6].valor + ano[0].meses_do_ano[7].valor + 
-		    		ano[0].meses_do_ano[8].valor + ano[0].meses_do_ano[9].valor + ano[0].meses_do_ano[10].valor + 
-		    		ano[0].meses_do_ano[11].valor;
-	    		
+	    		acess.totalSessoes = ano[1].valor;
+	    		acess.totalSessoesAnoCorrente = ano[0].valor;
 	    		var total;
 	    		total = parseFloat((acess.totalSessoesAnoCorrente*100)/acess.totalSessoes);
 	    		acess.porcentagemDoAnoCorrente = parseFloat(total.toFixed(2));
-	    		
 	    	}
 	    	
 	    	function GraficoDeModulos() {
@@ -285,23 +350,48 @@ pageEncoding="UTF-8"%>
     	
 		    	$http.post('Graficos'+variaveis)
 		        .success(function (data, status, headers, config) {	
-		        	ConstroiGraficoDeModulos(data);
-		        	SetLegendasParaGraficoDeModulos(data);
+		        	if(data ==  "erro"){
+		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+	    				"não foi possível carregar gráfico de modulos!");
+		        	}else{
+		        		ConstroiGraficoDeModulos(data);
+			        	SetLegendasParaGraficoDeModulos(data);
+		        	}	
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
-		    				"não foi possível carregar gráfico de modulos!");
+		    				"verifique sua conexão com a internet e tente novamente!");
 		    	});
 	    	};
 	    	
 	    	function SetLegendasParaGraficoDeModulos(modulos){
-	    		acess.moduloAgendaQuantidade = modulos[0].ano.meses_do_ano[0].valor + modulos[0].ano.meses_do_ano[1].valor + 
-	 				modulos[0].ano.meses_do_ano[2].valor + modulos[0].ano.meses_do_ano[3].valor + 
-	 				modulos[0].ano.meses_do_ano[4].valor + modulos[0].ano.meses_do_ano[5].valor +
-	 				modulos[0].ano.meses_do_ano[6].valor + modulos[0].ano.meses_do_ano[7].valor +
-	 				modulos[0].ano.meses_do_ano[8].valor + modulos[0].ano.meses_do_ano[9].valor +
-	 				modulos[0].ano.meses_do_ano[10].valor + modulos[0].ano.meses_do_ano[11].valor;
-	    		
+	    		acess.moduloAgendaQuantidade = modulos[0].ano.valor;
+	    		acess.moduloClientesQuantidade = modulos[1].ano.valor;
+	    		acess.moduloReceitasQuantidade = modulos[2].ano.valor;
+	    		acess.moduloProdutosQuantidade = modulos[3].ano.valor;
+	    		acess.moduloEstoqueQuantidade = modulos[4].ano.valor;
+	    		acess.moduloVendasQuantidade = modulos[5].ano.valor;
+	    		acess.moduloContasQuantidade = modulos[6].ano.valor;
 	    	}
+	    	
+	    	function GraficoDeClientes() {
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeClientes&id_de_busca="+
+    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+    	
+		    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	console.log(data);
+		        	if(data ==  "erro"){
+		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+	    				"não foi possível carregar gráfico de clientes!");
+		        	}else{
+		        		//ConstroiGraficoDeModulos(data);
+			        	//SetLegendasParaGraficoDeModulos(data);
+		        	}	
+		    	}).error(function (data, status, header, config) {		            	
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+		    				"verifique sua conexão com a internet e tente novamente!");
+		    	});
+	    	};
 	    	
 			function MensagemDeErroModal(mensagem){
 				acess.alertModal = 'alert-danger';
