@@ -15,73 +15,73 @@ import controle.conexao.ControleCodificaUTF8;
 import controle.conexao.ControleDeRetornoServidor;
 import dao.GraficosDAO;
 
-public class ControleGraficoClientes {
+public class ControleGraficoTipoDeProdutoMaisVendido {
 	
 	static private HttpServletRequest request;
 	static private HttpServletResponse response; 
 	
-	public ControleGraficoClientes(HttpServletRequest request, HttpServletResponse response){
+	public ControleGraficoTipoDeProdutoMaisVendido(HttpServletRequest request, HttpServletResponse response){
 		this.request = request;
 		this.response = response;
 	}
 	
-	public void ConstroiArrayDeAnosParaGraficoDeClientes(Ano ano) throws IOException, SQLException{
+	public void ConstroiArrayDeAnosParaGraficoDeReceitas(Ano ano) throws IOException, SQLException{
 		ArrayList<Ano> anos = new ArrayList<>();
 		anos.add(ano);
-		ConstroiDadosParaGraficoDeClientes(anos);
+		ConstroiDadosParaGraficoDeReceitas(anos);
 	}
 	
-	private void ConstroiDadosParaGraficoDeClientes(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void ConstroiDadosParaGraficoDeReceitas(ArrayList<Ano> anos) throws SQLException, IOException{
 		try {
 			GraficosDAO dao = new GraficosDAO();
-			anos.get(0).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeClientesAno(anos.get(0)));
-			SomaTotalDeClientesAnoCorrente(anos);
+			anos.get(0).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeReceitasAno(anos.get(0)));
+			SomaTotalDeReceitasAnoCorrente(anos);
 		} catch (Exception e) {
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
-	private void SomaTotalDeClientesAnoCorrente(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void SomaTotalDeReceitasAnoCorrente(ArrayList<Ano> anos) throws SQLException, IOException{
 		try{
-			int totalDeClientes = 0;
+			int totalDeReceitas = 0;
 			for(int mes = 0; mes < 12; mes++){
-				totalDeClientes += anos.get(0).getMeses_do_ano().get(mes).getValor();
+				totalDeReceitas += anos.get(0).getMeses_do_ano().get(mes).getValor();
 			}
-			anos.get(0).setValor(totalDeClientes);
-			ConstroiDadosParaGraficoDeClientesPorcentagem(anos);
+			anos.get(0).setValor(totalDeReceitas);
+			ConstroiDadosParaGraficoDeReceitasPorcentagem(anos);
 		}catch(Exception e){
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}	
 	}
 	
-	private void ConstroiDadosParaGraficoDeClientesPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void ConstroiDadosParaGraficoDeReceitasPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
 		try {
 			Ano ano = new Ano();
 			ano.setId_de_busca(anos.get(0).getId_de_busca());
 			anos.add(ano);
 			
 			GraficosDAO dao = new GraficosDAO();
-			anos.get(1).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeClientesPorcentagem(anos.get(1)));	
-			SomaTotalDeClientesPorcentagem(anos);
+			anos.get(1).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeReceitasPorcentagem(anos.get(1)));	
+			SomaTotalDeReceitasPorcentagem(anos);
 		} catch (Exception e) {
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
-	private void SomaTotalDeClientesPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
+	private void SomaTotalDeReceitasPorcentagem(ArrayList<Ano> anos) throws SQLException, IOException{
 		try{
 			int totalDeSessoesAno = 0;
 			for(int mes = 0; mes < 12; mes++){
 				totalDeSessoesAno += anos.get(1).getMeses_do_ano().get(mes).getValor();
 			}
 			anos.get(1).setValor(totalDeSessoesAno);
-			RetornaDadosParaGraficoDeClientes(anos);
+			RetornaDadosParaGraficoReceitas(anos);
 		}catch(Exception e){
 			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}	
 	}
 	
-	private void RetornaDadosParaGraficoDeClientes(ArrayList<Ano> anos) throws IOException{
+	private void RetornaDadosParaGraficoReceitas(ArrayList<Ano> anos) throws IOException{
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		anos.set(0, new ControleCodificaUTF8().CodificaAnoUTF8(anos.get(0)));

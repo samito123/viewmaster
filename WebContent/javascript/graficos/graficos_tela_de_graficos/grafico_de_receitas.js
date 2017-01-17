@@ -1,5 +1,5 @@
 
-function ConstroiGraficoDeClientes(ano) {
+function ConstroiGraficoDeReceitas(ano) {
 
 	var width = screen.width;
 	var qtd_letras_do_mes = 0;
@@ -9,15 +9,15 @@ function ConstroiGraficoDeClientes(ano) {
 		qtd_letras_do_mes = 3;
 	}
 	
-	var GraficoClientes = c3.generate({
-	    bindto: '#GraficoClientes',
+	var GraficoReceitas = c3.generate({
+	    bindto: '#GraficoReceitas',
 	    data: {
 	        columns: [
 	            [ano[0].numero_do_ano, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				['total', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	        ],
 	        types: {
-	            'xxxx': 'line',
+	            'xxxx': 'area-step',
 	            'total': 'bar'			
 	            // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
 	        },
@@ -41,7 +41,7 @@ function ConstroiGraficoDeClientes(ano) {
 	    }
 	});  
 	setTimeout(function () {
-	    GraficoClientes.load({
+		GraficoReceitas.load({
 	        columns: [
 	            [ano[0].numero_do_ano, 
 	             ano[0].meses_do_ano[0].valor, ano[0].meses_do_ano[1].valor, ano[0].meses_do_ano[2].valor, 
@@ -52,7 +52,7 @@ function ConstroiGraficoDeClientes(ano) {
 	    });
 	}, 500);
 	setTimeout(function () {
-	    GraficoClientes.load({
+		GraficoReceitas.load({
 	        columns: [      
 				['total', ano[1].meses_do_ano[0].valor, ano[1].meses_do_ano[1].valor, ano[1].meses_do_ano[2].valor, 
 	             ano[1].meses_do_ano[3].valor, ano[1].meses_do_ano[4].valor, ano[1].meses_do_ano[5].valor, 

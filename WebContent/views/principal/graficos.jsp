@@ -70,16 +70,16 @@ pageEncoding="UTF-8"%>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSessoesAnoCorrente}}.
+						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSeSessoesAnoCorrente}}.
 								  	</p>	
 									<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Total de sessões do usuário: {{vm.totalSessoes}}.		
+						  				Total de sessões do usuário: {{vm.totalDeSessoes}}.		
 								  	</p>  	
 			                   				  						  
 							        <p>							        
-						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrente}}%.							          
+						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteSessoes}}%.							          
 						          	</p>				  					  					  	 						  	 													
 	                          	</div>
 	                          	<div class="rodape_da_caixa">
@@ -182,7 +182,7 @@ pageEncoding="UTF-8"%>
 						<ul class="nav nav-tabs">
 						  	<li class="active">
 							  	<a data-toggle="tab" style="color:#536376" href="#clientesTab1">
-							  		Modulos
+							  		Clientes
 						  		</a>
 				  			</li>
 						  	<li>
@@ -219,38 +219,145 @@ pageEncoding="UTF-8"%>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Módulo agenda(qtd): {{vm.moduloAgendaQuantidade}}.
+						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalDeClientesAnoCorrente}}.
 								  	</p>	
 									<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Módulo clientes(qtd): {{vm.moduloClientesQuantidade}}.		
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_verde_para_legenda">
+						  				Total de clientes geral: {{vm.totalDeClientes}}.		
+								  	</p>  	
+			                   				  						  
+							        <p>							        
+						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteClientes}}%.							          
+						          	</p>				  					  					  	 						  	 													
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                  				</div>	
+							</div>	             		
+						</div>					       				
+                   	</div>			               	
+				</div>		
+			</div>
+			
+			<div class="conteiner_medio_left">
+			    <div class="caixa_com_borda_redonda">
+			      	<div class="borda_branca">               
+						
+						<ul class="nav nav-tabs">
+						  	<li class="active">
+							  	<a data-toggle="tab" style="color:#536376" href="#receitasTab1">
+							  		Receitas
+						  		</a>
+				  			</li>
+						  	<li>
+						  		<a data-toggle="tab" style="color:#536376" href="#receitasTab2">
+						  			Legendas
+					  			</a>
+				  			</li>
+						</ul>
+						
+						<div class="tab-content">
+							<div id="receitasTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
+                 				<div class="titulo_da_caixa">
+               						<h4>
+				              			Receitas  		
+						            </h4>
+                 				</div>
+                 				<div class="conteudo_de_corpo_da_caixa">
+						            
+		                           <div id="GraficoReceitas" class="caixa_de_grafico">       	
+	                               </div>
+	                           							
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                 				</div>	              			
+	                 		</div>
+	                 		
+	                 		<div id="receitasTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
+								<div class="titulo_da_caixa">
+               						<h4>
+				              			Receitas      		
+						            </h4>
+                 				</div>
+                 				<div>
+                 					<p>
+								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Módulo receitas(qtd): {{vm.moduloReceitasQuantidade}}.		
-								  	</p> 
-								  	<p>
-								 		<span class="quadrado_vermelho_para_legenda">
+						  				Receitas no ano de {{vm.anoCorrente}}: {{vm.totalDeReceitasAnoCorrente}}.
+								  	</p>	
+									<p>
+								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Módulo serviços(qtd): {{vm.moduloProdutosQuantidade}}.		
-								  	</p>  
-								  	<p>
-								 		<span class="quadrado_roxo_para_legenda">
+						  				Total de receitas geral: {{vm.totalDeReceitas}}.		
+								  	</p>  	
+			                   				  						  
+							        <p>							        
+						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteReceitas}}%.							          
+						          	</p>				  					  					  	 						  	 													
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                  				</div>	
+							</div>	             		
+						</div>					       				
+                   	</div>			               	
+				</div>		
+			</div>
+			
+			<div class="conteiner_medio_right">
+			    <div class="caixa_com_borda_redonda">
+			      	<div class="borda_branca">               
+						
+						<ul class="nav nav-tabs">
+						  	<li class="active">
+							  	<a data-toggle="tab" style="color:#536376" href="#produtosTab1">
+							  		Produtos
+						  		</a>
+				  			</li>
+						  	<li>
+						  		<a data-toggle="tab" style="color:#536376" href="#produtosTab2">
+						  			Legendas
+					  			</a>
+				  			</li>
+						</ul>
+						
+						<div class="tab-content">
+							<div id="produtosTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
+                 				<div class="titulo_da_caixa">
+               						<h4>
+				              			Produtos em estoque  		
+						            </h4>
+                 				</div>
+                 				<div class="conteudo_de_corpo_da_caixa">
+						            
+		                           <div id="GraficoProdutosEmEstoque" class="caixa_de_grafico">       	
+	                               </div>
+	                           							
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                 				</div>	              			
+	                 		</div>
+	                 		
+	                 		<div id="produtosTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
+								<div class="titulo_da_caixa">
+               						<h4>
+				              			Produtos em estoque   		
+						            </h4>
+                 				</div>
+                 				<div>
+                 					<p>
+								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Módulo produtos(qtd): {{vm.moduloEstoqueQuantidade}}.		
-								  	</p> 
-								  	<p>
-								 		<span class="quadrado_marrom_para_legenda">
+						  				Receitas no ano de {{vm.anoCorrente}}: {{vm.totalDeReceitasAnoCorrente}}.
+								  	</p>	
+									<p>
+								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Módulo vendas(qtd): {{vm.moduloVendasQuantidade}}.		
-								  	</p>  
-								  	<p>
-								 		<span class="quadrado_rosa_para_legenda">
-								  		</span>
-						  				Módulo contas(qtd): {{vm.moduloContasQuantidade}}.		
-								  	</p>      					  					  					  	 						  	 													
+						  				Total de receitas geral: {{vm.totalDeReceitas}}.		
+								  	</p>  	
+			                   				  						  
+							        <p>							        
+						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteReceitas}}%.							          
+						          	</p>				  					  					  	 						  	 													
 	                          	</div>
 	                          	<div class="rodape_da_caixa">
                   				</div>	
@@ -316,6 +423,8 @@ pageEncoding="UTF-8"%>
 			GraficoDeSessaoUsuario();
 			GraficoDeModulos();
 			GraficoDeClientes();
+			GraficoDeReceitas();
+			ConstroiGraficoDeProdutosEmEstoque();
 	    	
 	    	function GraficoDeSessaoUsuario() {
 		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
@@ -337,11 +446,11 @@ pageEncoding="UTF-8"%>
 	    	};
 			
 	    	function SetLegendasParaGraficoDeSessoesDoUsuario(ano){
-	    		acess.totalSessoes = ano[1].valor;
-	    		acess.totalSessoesAnoCorrente = ano[0].valor;
+	    		acess.totalDeSessoes = ano[1].valor;
+	    		acess.totalDeSessoesAnoCorrente = ano[0].valor;
 	    		var total;
-	    		total = parseFloat((acess.totalSessoesAnoCorrente*100)/acess.totalSessoes);
-	    		acess.porcentagemDoAnoCorrente = parseFloat(total.toFixed(2));
+	    		total = parseFloat((acess.totalDeSessoesAnoCorrente*100)/acess.totalDeSessoes);
+	    		acess.porcentagemDoAnoCorrenteSessoes = parseFloat(total.toFixed(2));
 	    	}
 	    	
 	    	function GraficoDeModulos() {
@@ -374,7 +483,61 @@ pageEncoding="UTF-8"%>
 	    	}
 	    	
 	    	function GraficoDeClientes() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeClientes&id_de_busca="+
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeClientes&id_de_busca="+	    		
+    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+    	
+		    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	if(data ==  "erro"){
+		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+	    				"não foi possível carregar gráfico de clientes!");
+		        	}else{
+		        		ConstroiGraficoDeClientes(data);
+			        	SetLegendasParaGraficoDeClientes(data);
+		        	}	
+		    	}).error(function (data, status, header, config) {		            	
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+		    				"verifique sua conexão com a internet e tente novamente!");
+		    	});
+	    	};
+	    	
+	    	function SetLegendasParaGraficoDeClientes(ano){
+	    		acess.totalDeClientes = ano[1].valor;
+	    		acess.totalDeClientesAnoCorrente = ano[0].valor;
+	    		var total;
+	    		total = parseFloat((acess.totalDeClientesAnoCorrente*100)/acess.totalDeClientes);
+	    		acess.porcentagemDoAnoCorrenteClientes = parseFloat(total.toFixed(2));
+	    	}
+	    	
+	    	function GraficoDeReceitas() {
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeReceitas&id_de_busca="+	    		
+    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+    	
+		    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	if(data ==  "erro"){
+		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+	    				"não foi possível carregar gráfico de clientes!");
+		        	}else{
+		        		ConstroiGraficoDeReceitas(data);
+			        	SetLegendasParaGraficoDeReceitas(data);
+		        	}	
+		    	}).error(function (data, status, header, config) {		            	
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+		    				"verifique sua conexão com a internet e tente novamente!");
+		    	});
+	    	};
+	    	
+	    	function SetLegendasParaGraficoDeReceitas(ano){
+	    		acess.totalDeReceitas = ano[1].valor;
+	    		acess.totalDeReceitasAnoCorrente = ano[0].valor;
+	    		var total;
+	    		total = parseFloat((acess.totalDeReceitasAnoCorrente*100)/acess.totalDeReceitas);
+	    		acess.porcentagemDoAnoCorrenteReceitas = parseFloat(total.toFixed(2));
+	    	}
+	    	
+	    	function GraficoDeProdutos() {
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeTipoProdutoMaisVendido&id_de_busca="+	    		
     			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
     	
 		    	$http.post('Graficos'+variaveis)
@@ -384,8 +547,8 @@ pageEncoding="UTF-8"%>
 		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 	    				"não foi possível carregar gráfico de clientes!");
 		        	}else{
-		        		//ConstroiGraficoDeModulos(data);
-			        	//SetLegendasParaGraficoDeModulos(data);
+		        		ConstroiGraficoDeReceitas(data);
+			        	SetLegendasParaGraficoDeReceitas(data);
 		        	}	
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
