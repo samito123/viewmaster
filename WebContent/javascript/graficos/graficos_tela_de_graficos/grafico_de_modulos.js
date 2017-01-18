@@ -3,7 +3,7 @@ function ConstroiGraficoDeModulos(modulos) {
 
 	var width = screen.width;
 	var qtd_letras_do_mes = 0;
-	if (width <= 550){
+	if (width <= 800){
 		qtd_letras_do_mes = 1;
 	}else{
 		qtd_letras_do_mes = 3;

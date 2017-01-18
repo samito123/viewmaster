@@ -68,11 +68,11 @@ img, iframe, object, embed, video {
 	    }
 	    
 	.conteiner_grande{
-		width: 90%;
-		margin: 5.5em 5% 0 5%;
+		width: 97%;
+		margin: 5.5em 1.5% 0 1.5%;
     }
     
-    @media all and (max-width: 480px) { 
+    @media all and (max-width: 700px) { 
 	    .conteiner_grande{
 			width: 100%;
 			margin: 5.5em 0 0 0;
@@ -103,13 +103,14 @@ img, iframe, object, embed, video {
 		}
 		
 		.conteiner_grande .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa{
+			height: 22em;
   			padding: 10px 5px 10px 5px;
 		}
 		
 	.conteiner_medio_left{
-		width: 43%;
+		width: 47%;
 		float: left;
-		margin: 2em 2% 0.5em 5%;
+		margin: 2em 1.5% 0.5em 1.5%;
     }
     
     .conteiner_medio_right{
@@ -159,6 +160,7 @@ img, iframe, object, embed, video {
 		
 		.conteiner_medio_left .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa,
 		.conteiner_medio_right .caixa_com_borda_redonda .conteudo_de_corpo_da_caixa{
+			height: 22em;
   			padding: 10px 5px 10px 5px;
 		}
 		

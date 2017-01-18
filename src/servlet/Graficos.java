@@ -13,7 +13,7 @@ import controle.graficos.ControleGraficoClientes;
 import controle.graficos.ControleGraficoDeSessao;
 import controle.graficos.ControleGraficoModulos;
 import controle.graficos.ControleGraficoReceitas;
-import controle.graficos.ControleGraficoTipoDeProdutoMaisVendido;
+import controle.graficos.ControleGraficoTiposDeProdutosMaisVendidos;
 
 
 public class Graficos extends HttpServlet{
@@ -62,10 +62,10 @@ public class Graficos extends HttpServlet{
 				}
 			break;
 			
-			case "RecuperaDadosParaGraficoDeTipoProdutoMaisVendido":	
+			case "RecuperaDadosParaGraficoDeTiposDeProdutosMaisVendidos":	
 				try {
-					new ControleGraficoTipoDeProdutoMaisVendido(req, resp).
-					ConstroiArrayDeAnosParaGraficoDeReceitas(CriaObjetoAnoRequest());
+					new ControleGraficoTiposDeProdutosMaisVendidos(req, resp).
+						ConstroiArrayDeTiposDeProdutoParaGraficoDeTiposDeProdutosMaisVendidos(CriaObjetoAnoRequest());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,11 +81,5 @@ public class Graficos extends HttpServlet{
 			ano.setNumero_do_ano(request.getParameter("ano"));
 		return ano;
 	}
-	
-	select tp.tipo_produto, sum(ve.quantidade_produto_venda) as qtd
-	from tb_produtos as pr 
-	left outer join tb_tipo_produto as tp on pr.fk_tipo_produto = tp.id_tipo_produto
-	left outer join tb_vendas as ve on pr.id_produto = ve.fk_produto 
-	group by tp.tipo_produto
 	
 }

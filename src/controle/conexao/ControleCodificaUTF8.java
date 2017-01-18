@@ -3,6 +3,7 @@ package controle.conexao;
 import java.io.UnsupportedEncodingException;
 
 import modelos.Ano;
+import modelos.TipoDeProduto;
 import modelos.Usuario;
 
 public class ControleCodificaUTF8 {
@@ -34,6 +35,13 @@ public class ControleCodificaUTF8 {
 						CodificaStringUTF8(ano.getMeses_do_ano().get(mesDoAno).getNome_do_mes()));		
 			}
 		return ano;
+	}
+	
+	public TipoDeProduto CodificaTipoProdutoUTF8(TipoDeProduto tipoDeProduto) throws UnsupportedEncodingException{
+		if(tipoDeProduto.getTipo_produto() != null)
+			tipoDeProduto.setTipo_produto(CodificaStringUTF8(tipoDeProduto.getTipo_produto()));	
+		
+		return tipoDeProduto;
 	}
 	
 	public String CodificaStringUTF8(String string) throws UnsupportedEncodingException{

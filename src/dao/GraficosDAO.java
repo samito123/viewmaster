@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import modelos.Ano;
 import modelos.Mes;
 import modelos.Modulo;
+import modelos.TipoDeProduto;
 import controle.conexao.ControleFabricaDeConexao;
 import controle.modelos.ControleTratamentoModulo;
 
@@ -209,6 +210,37 @@ public ArrayList<Mes> ConstroiDadosParaGraficoDeClientesPorcentagem(Ano ano) thr
 			conn.close();
 		}
 		return mesesDoAno;
+	}
+	
+	public ArrayList<TipoDeProduto> ConstroiDadosParaGraficoDeTiposDeProdutosMaisVendidos
+		(ArrayList<TipoDeProduto> tiposDeProdutos) throws SQLException{
+		
+		TipoDeProduto tipoDeProduto;
+		
+		try {	
+			conn = new ControleFabricaDeConexao().getConnection();
+			String sql = "select tp.tipo_produto, coalesce(sum(ve.quantidade_produto_venda), 0) as qtd "
+					+ "from tb_produtos as pr "
+					+ "left outer join tb_tipo_produto as tp on pr.fk_tipo_produto = tp.id_tipo_produto "
+					+ "left outer join tb_vendas as ve on pr.id_produto = ve.fk_produto "
+					+ "group by tp.tipo_produto "
+					+ "order by tp.id_tipo_produto asc";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery(); 
+			while (rs.next()) { 
+				tipoDeProduto = new TipoDeProduto();
+				tipoDeProduto.setTipo_produto(rs.getString("tp.tipo_produto"));
+				tipoDeProduto.setValor(rs.getString("qtd"));
+				tiposDeProdutos.add(tipoDeProduto);
+			}	
+		}catch (Exception e) {
+			System.out.print(e);
+		}finally{
+			rs.close();
+			ps.close();
+			conn.close();
+		}
+		return tiposDeProdutos;
 	}
 
 }

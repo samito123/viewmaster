@@ -70,7 +70,7 @@ pageEncoding="UTF-8"%>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalSeSessoesAnoCorrente}}.
+						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalDeSessoesAnoCorrente}}.
 								  	</p>	
 									<p>
 								 		<span class="quadrado_laranja_para_legenda">
@@ -175,7 +175,7 @@ pageEncoding="UTF-8"%>
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_right">
+			<div class="conteiner_medio_left">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -303,14 +303,14 @@ pageEncoding="UTF-8"%>
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_right">
+			<div class="conteiner_medio_left">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
 						<ul class="nav nav-tabs">
 						  	<li class="active">
 							  	<a data-toggle="tab" style="color:#536376" href="#produtosTab1">
-							  		Produtos
+							  		Tipo de produto
 						  		</a>
 				  			</li>
 						  	<li>
@@ -324,12 +324,12 @@ pageEncoding="UTF-8"%>
 							<div id="produtosTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
                  				<div class="titulo_da_caixa">
                						<h4>
-				              			Produtos em estoque  		
+				              			Tipos de produtos mais vendidos  		
 						            </h4>
                  				</div>
                  				<div class="conteudo_de_corpo_da_caixa">
 						            
-		                           <div id="GraficoProdutosEmEstoque" class="caixa_de_grafico">       	
+		                           <div id="GraficoDeTiposDeProdutosMaisVendidos" class="caixa_de_grafico">       	
 	                               </div>
 	                           							
 	                          	</div>
@@ -340,24 +340,131 @@ pageEncoding="UTF-8"%>
 	                 		<div id="produtosTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
 								<div class="titulo_da_caixa">
                						<h4>
-				              			Produtos em estoque   		
+				              			Tipos de produtos mais vendidos  		
 						            </h4>
                  				</div>
                  				<div>
                  					<p>
 								 		<span class="quadrado_azul_para_legenda">
 								  		</span>
-						  				Receitas no ano de {{vm.anoCorrente}}: {{vm.totalDeReceitasAnoCorrente}}.
+						  				Armações(qtd): {{vm.vendasGeralArmacoes}}.
 								  	</p>	
-									<p>
+								  	<p>
 								 		<span class="quadrado_laranja_para_legenda">
 								  		</span>
-						  				Total de receitas geral: {{vm.totalDeReceitas}}.		
-								  	</p>  	
-			                   				  						  
-							        <p>							        
-						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteReceitas}}%.							          
-						          	</p>				  					  					  	 						  	 													
+						  				Lentes de contato(qtd): {{vm.vendasGeralLentesDeContato}}.
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_verde_para_legenda">
+								  		</span>
+						  				Relógios(qtd): {{vm.vendasGeralRelogios}}.
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_vermelho_para_legenda">
+								  		</span>
+						  				Ouro(qtd): {{vm.vendasGeralOuro}}.
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_roxo_para_legenda">
+								  		</span>
+						  				Outros(qtd): {{vm.vendasGeralOutros}}.
+								  	</p>			  					  					  	 						  	 													
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                  				</div>	
+							</div>	             		
+						</div>					       				
+                   	</div>			               	
+				</div>		
+			</div>
+			
+			<div class="conteiner_medio_left">
+			    <div class="caixa_com_borda_redonda">
+			      	<div class="borda_branca">               
+						
+						<ul class="nav nav-tabs">
+						  	<li class="active">
+							  	<a data-toggle="tab" style="color:#536376" href="#assinaturaTab1">
+							  		Assinatura Atual
+						  		</a>
+				  			</li>
+						  	<li>
+						  		<a data-toggle="tab" style="color:#536376" href="#assinaturaTab2">
+						  			Historico
+					  			</a>
+				  			</li>
+						</ul>
+						
+						<div class="tab-content">
+							<div id="assinaturaTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
+                 				<div class="titulo_da_caixa">
+               						<h4>
+				              			Validade da assinatura   		
+						            </h4>
+                 				</div>
+                 				<div class="conteudo_de_corpo_da_caixa">
+						            
+	                               <div>                               		                            	  
+										<cite title="Source Title">
+											<div>
+	                              	   				Plano de assinatura: {{vm.planoDeAssinatura}}
+	                              	   			</div>								
+											<div>
+	                               	   			Assinatura ativa:  {{vm.assinaturaAtiva}}
+	                               	   		</div>
+											<div>
+	                               	   			Dt.inicial da assinatura: {{vm.dataInicialAssinatura}} 
+	                               	   		</div>										
+											<div>
+	                               	   			Dt.final da assinatura: {{vm.dataFinalAssinatura}} 
+	                               	   		</div>										
+											<div>
+												<a href="#">
+													A assinatura pode ser 
+													renovada a qualquer momento 
+													nas configurações de assinatura
+												</a>
+											</div>
+										</cite>											
+	                               </div>
+                              				
+	                          	</div>
+	                          	<div class="rodape_da_caixa">
+                 				</div>	              			
+	                 		</div>
+	                 		
+	                 		<div id="assinaturaTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
+								<div class="titulo_da_caixa">
+               						<h4>
+				              			Historico de Assinaturas 		
+						            </h4>
+                 				</div>
+                 				<div>
+                 					<p>
+								 		<span class="quadrado_azul_para_legenda">
+								  		</span>
+						  				Armações(qtd): {{vm.vendasGeralArmacoes}}.
+								  	</p>	
+								  	<p>
+								 		<span class="quadrado_laranja_para_legenda">
+								  		</span>
+						  				Lentes de contato(qtd): {{vm.vendasGeralLentesDeContato}}.
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_verde_para_legenda">
+								  		</span>
+						  				Relógios(qtd): {{vm.vendasGeralRelogios}}.
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_vermelho_para_legenda">
+								  		</span>
+						  				Ouro(qtd): {{vm.vendasGeralOuro}}.
+								  	</p>
+								  	<p>
+								 		<span class="quadrado_roxo_para_legenda">
+								  		</span>
+						  				Outros(qtd): {{vm.vendasGeralOutros}}.
+								  	</p>			  					  					  	 						  	 													
 	                          	</div>
 	                          	<div class="rodape_da_caixa">
                   				</div>	
@@ -424,7 +531,7 @@ pageEncoding="UTF-8"%>
 			GraficoDeModulos();
 			GraficoDeClientes();
 			GraficoDeReceitas();
-			ConstroiGraficoDeProdutosEmEstoque();
+			GraficoDeTiposDeProdutosMaisVendidos();
 	    	
 	    	function GraficoDeSessaoUsuario() {
 		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
@@ -536,19 +643,50 @@ pageEncoding="UTF-8"%>
 	    		acess.porcentagemDoAnoCorrenteReceitas = parseFloat(total.toFixed(2));
 	    	}
 	    	
-	    	function GraficoDeProdutos() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeTipoProdutoMaisVendido&id_de_busca="+	    		
+	    	function GraficoDeTiposDeProdutosMaisVendidos() {
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeTiposDeProdutosMaisVendidos&id_de_busca="+	    		
     			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
     	
 		    	$http.post('Graficos'+variaveis)
 		        .success(function (data, status, headers, config) {	
-		        	console.log(data);
 		        	if(data ==  "erro"){
 		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 	    				"não foi possível carregar gráfico de clientes!");
 		        	}else{
-		        		ConstroiGraficoDeReceitas(data);
-			        	SetLegendasParaGraficoDeReceitas(data);
+		        		ConstroiGraficoDeTiposDeProdutosMaisVendidos(data);
+			        	SetLegendasParaGraficoDeDeTiposDeProdutosMaisVendidos(data);
+		        	}	
+		    	}).error(function (data, status, header, config) {		            	
+		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+		    				"verifique sua conexão com a internet e tente novamente!");
+		    	});
+	    	};
+	    	
+	    	function SetLegendasParaGraficoDeDeTiposDeProdutosMaisVendidos(tipoDeProduto){
+	    		acess.vendasGeralArmacoes = tipoDeProduto[0].valor;
+	    		acess.vendasGeralLentesDeContato = tipoDeProduto[1].valor;
+	    		acess.vendasGeralRelogios = tipoDeProduto[2].valor;
+	    		acess.vendasGeralOuro = tipoDeProduto[3].valor;
+	    		acess.vendasGeralOutros = tipoDeProduto[4].valor;
+	    		
+	    		
+	    		var total;
+	    		total = parseFloat((acess.totalDeReceitasAnoCorrente*100)/acess.totalDeReceitas);
+	    		acess.porcentagemDoAnoCorrenteReceitas = parseFloat(total.toFixed(2));
+	    	}
+	    	
+	    	function PlanoDeAssinatura() {
+	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeTiposDeProdutosMaisVendidos&id_de_busca="+	    		
+    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+    	
+		    	$http.post('Graficos'+variaveis)
+		        .success(function (data, status, headers, config) {	
+		        	if(data ==  "erro"){
+		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
+	    				"não foi possível carregar gráfico de clientes!");
+		        	}else{
+		        		ConstroiGraficoDeTiposDeProdutosMaisVendidos(data);
+			        	SetLegendasParaGraficoDeDeTiposDeProdutosMaisVendidos(data);
 		        	}	
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+

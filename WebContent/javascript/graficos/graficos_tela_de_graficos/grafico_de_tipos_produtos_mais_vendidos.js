@@ -1,11 +1,11 @@
 
-function ConstroiGraficoDeTipoProdutoMaisVendido(ano) {
+function ConstroiGraficoDeTiposDeProdutosMaisVendidos(tipoDeProduto) {
 
 	var randomnb = function(){ return Math.round(Math.random()*300)};
 	var ano = '2017';
 	
-	var GraficoProdutosEmEstoque = c3.generate({
-	    bindto: '#GraficoProdutosEmEstoque',
+	var GraficoDeTiposDeProdutosMaisVendidos = c3.generate({
+	    bindto: '#GraficoDeTiposDeProdutosMaisVendidos',
 	    data: {
 	        columns: [
 	            ['Armações', 0],
@@ -23,15 +23,15 @@ function ConstroiGraficoDeTipoProdutoMaisVendido(ano) {
 	    }
 	});  
 	setTimeout(function () {
-		GraficoProdutosEmEstoque.load({
+		GraficoDeTiposDeProdutosMaisVendidos.load({
 	        columns: [
-	            ['Armações', randomnb()],
-	            ['Lentes de contato', randomnb()],
-				['Relógios', randomnb()],
-				['Ouro', randomnb()],
-				['Outros', randomnb()]
+	            [tipoDeProduto[0].tipo_produto, tipoDeProduto[0].valor],
+	            [tipoDeProduto[1].tipo_produto, tipoDeProduto[1].valor],
+				[tipoDeProduto[2].tipo_produto, tipoDeProduto[2].valor],
+				[tipoDeProduto[3].tipo_produto, tipoDeProduto[3].valor],
+				[tipoDeProduto[4].tipo_produto, tipoDeProduto[4].valor]
 	        ]
 	    });
-	}, 1000);
+	}, 500);
 };
 
