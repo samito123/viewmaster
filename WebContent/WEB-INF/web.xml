@@ -43,6 +43,15 @@
 		<url-pattern>/Graficos</url-pattern> 
 	</servlet-mapping>
 	
+	<servlet> 
+		<servlet-name>Assinaturas</servlet-name> 
+		<servlet-class>servlet.ServletAssinaturas</servlet-class> 
+	</servlet>
+	<servlet-mapping> 
+		<servlet-name>Assinaturas</servlet-name> 
+		<url-pattern>/Assinaturas</url-pattern> 
+	</servlet-mapping>
+	
 	<servlet>
         <servlet-name>TelaRecuperarSenhaPassoUm</servlet-name>
         <jsp-file>/views/login/recuperar_senha_passo_um.jsp</jsp-file>

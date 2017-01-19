@@ -44,53 +44,60 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-							<div id="sessaoTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
-                 				<div class="titulo_da_caixa">
-               						<h4>
-				              			Sessões do usuário - {{vm.anoCorrente}}         		
-						            </h4>
-                 				</div>
+							<div id="sessaoTab1" class="tab-pane fade in active cor_de_fundo_do_corpo_da_caixa">	             
                  				<div class="conteudo_de_corpo_da_caixa">
-						            
-		                           <div id="GraficoSessoes" class="caixa_de_grafico">                      	
-	                               </div>
-	                           							
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                 				</div>	              			
+	                 				<div class="titulo_da_caixa">
+	               						<h4>
+					              			Sessões do usuário - {{vm.anoCorrente}}         		
+							            </h4>
+	                 				</div>
+	                 				<div class="conteudo_de_corpo_da_caixa">
+							            
+			                           <div id="GraficoSessoes" class="caixa_de_grafico">                      	
+		                               </div>
+		                           							
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                 				</div>	    
+                 				</div>          			
 	                 		</div>
 	                 		
-	                 		<div id="sessaoTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-								<div class="titulo_da_caixa">
-               						<h4>
-				              			Sessões do usuário       		
-						            </h4>
-                 				</div>
-                 				<div>
-                 					<p>
-								 		<span class="quadrado_azul_para_legenda">
-								  		</span>
-						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalDeSessoesAnoCorrente}}.
-								  	</p>	
-									<p>
-								 		<span class="quadrado_laranja_para_legenda">
-								  		</span>
-						  				Total de sessões do usuário: {{vm.totalDeSessoes}}.		
-								  	</p>  	
-			                   				  						  
-							        <p>							        
-						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteSessoes}}%.							          
-						          	</p>				  					  					  	 						  	 													
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                  				</div>	
+	                 		<div id="sessaoTab2" class="tab-pane fade cor_de_fundo_do_corpo_da_caixa">
+								<div class="conteudo_de_corpo_da_caixa">
+									<div class="titulo_da_caixa">
+	               						<h4>
+					              			Sessões do usuário       		
+							            </h4>
+	                 				</div>
+	                 				<div>
+	                 					<cite title="Source Title">
+		                 					<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_azul_para_legenda">
+										  		</span>
+								  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalDeSessoesAnoCorrente}}.
+										  	</div>	
+											<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_laranja_para_legenda">
+										  		</span>
+								  				Total de sessões do usuário: {{vm.totalDeSessoes}}.		
+										  	</div>  	
+					                   				  						  
+									        <div class="bloco_de_texto_de_corpo_da_caixa">							        
+								          		- Porcentagem correspondente ao ano de 
+								          		{{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteSessoes}}%.							          
+								          	</div>
+							          	</cite>				  					  					  	 						  	 													
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                  				</div>	
+                  				</div>
 							</div>	             		
 						</div>					       				
                    	</div>			               	
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_left">
+			<div class="conteiner_medio">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -108,74 +115,80 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-							<div id="moduloTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
-                 				<div class="titulo_da_caixa">
-               						<h4>
-				              			Módulos mais usados         		
-						            </h4>
-                 				</div>
+							<div id="moduloTab1" class="tab-pane fade in active cor_de_fundo_do_corpo_da_caixa">	             
                  				<div class="conteudo_de_corpo_da_caixa">
-						            
-		                           <div id="GraficoModulos" class="caixa_de_grafico">       	
-	                               </div>
-	                           							
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
+	                 				<div class="titulo_da_caixa">
+	               						<h4>
+					              			Módulos mais usados         		
+							            </h4>
+	                 				</div>
+	                 				<div class="conteudo_de_corpo_da_caixa">
+							            
+			                           <div id="GraficoModulos" class="caixa_de_grafico">       	
+		                               </div>
+		                           							
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                 				</div>
                  				</div>	              			
 	                 		</div>
 	                 		
-	                 		<div id="moduloTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-								<div class="titulo_da_caixa">
-               						<h4>
-				              			Módulos mais usados          		
-						            </h4>
-                 				</div>
-                 				<div>
-                 					<p>
-								 		<span class="quadrado_azul_para_legenda">
-								  		</span>
-						  				Módulo agenda(qtd): {{vm.moduloAgendaQuantidade}}.
-								  	</p>	
-									<p>
-								 		<span class="quadrado_laranja_para_legenda">
-								  		</span>
-						  				Módulo clientes(qtd): {{vm.moduloClientesQuantidade}}.		
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_verde_para_legenda">
-								  		</span>
-						  				Módulo receitas(qtd): {{vm.moduloReceitasQuantidade}}.		
-								  	</p> 
-								  	<p>
-								 		<span class="quadrado_vermelho_para_legenda">
-								  		</span>
-						  				Módulo serviços(qtd): {{vm.moduloProdutosQuantidade}}.		
-								  	</p>  
-								  	<p>
-								 		<span class="quadrado_roxo_para_legenda">
-								  		</span>
-						  				Módulo produtos(qtd): {{vm.moduloEstoqueQuantidade}}.		
-								  	</p> 
-								  	<p>
-								 		<span class="quadrado_marrom_para_legenda">
-								  		</span>
-						  				Módulo vendas(qtd): {{vm.moduloVendasQuantidade}}.		
-								  	</p>  
-								  	<p>
-								 		<span class="quadrado_rosa_para_legenda">
-								  		</span>
-						  				Módulo contas(qtd): {{vm.moduloContasQuantidade}}.		
-								  	</p>      					  					  					  	 						  	 													
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                  				</div>	
+	                 		<div id="moduloTab2" class="tab-pane fade cor_de_fundo_do_corpo_da_caixa">
+								<div class="conteudo_de_corpo_da_caixa">
+									<div class="titulo_da_caixa">
+	               						<h4>
+					              			Módulos mais usados          		
+							            </h4>
+	                 				</div>
+	                 				<div>
+	                 					<cite title="Source Title">
+		                 					<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_azul_para_legenda">
+										  		</span>
+								  				Módulo agenda(total): {{vm.moduloAgendaQuantidade}}.
+										  	</div>	
+											<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_laranja_para_legenda">
+										  		</span>
+								  				Módulo clientes(total): {{vm.moduloClientesQuantidade}}.		
+										  	</div>
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_verde_para_legenda">
+										  		</span>
+								  				Módulo receitas(total): {{vm.moduloReceitasQuantidade}}.		
+										  	</div> 
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_vermelho_para_legenda">
+										  		</span>
+								  				Módulo serviços(total): {{vm.moduloProdutosQuantidade}}.		
+										  	</div>  
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_roxo_para_legenda">
+										  		</span>
+								  				Módulo produtos(total): {{vm.moduloEstoqueQuantidade}}.		
+										  	</div> 
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_marrom_para_legenda">
+										  		</span>
+								  				Módulo vendas(total): {{vm.moduloVendasQuantidade}}.		
+										  	</div>  
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_rosa_para_legenda">
+										  		</span>
+								  				Módulo contas(total): {{vm.moduloContasQuantidade}}.		
+										  	</div>   
+									  	</cite>   					  					  					  	 						  	 													
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                  				</div>	
+                  				</div>
 							</div>	             		
 						</div>					       				
                    	</div>			               	
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_left">
+			<div class="conteiner_medio">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -193,53 +206,58 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-							<div id="clientesTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
-                 				<div class="titulo_da_caixa">
-               						<h4>
-				              			Clientes  		
-						            </h4>
-                 				</div>
+							<div id="clientesTab1" class="tab-pane fade in active cor_de_fundo_do_corpo_da_caixa">	             
                  				<div class="conteudo_de_corpo_da_caixa">
-						            
-		                           <div id="GraficoClientes" class="caixa_de_grafico">       	
-	                               </div>
-	                           							
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                 				</div>	              			
+	                 				<div class="titulo_da_caixa">
+	               						<h4>
+					              			Clientes  		
+							            </h4>
+	                 				</div>
+	                 				<div class="conteudo_de_corpo_da_caixa">
+							            
+			                           <div id="GraficoClientes" class="caixa_de_grafico">       	
+		                               </div>
+		                           							
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                 				</div>	
+                 				</div>              			
 	                 		</div>
 	                 		
-	                 		<div id="clientesTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-								<div class="titulo_da_caixa">
-               						<h4>
-				              			Clientes      		
-						            </h4>
-                 				</div>
-                 				<div>
-                 					<p>
-								 		<span class="quadrado_azul_para_legenda">
-								  		</span>
-						  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalDeClientesAnoCorrente}}.
-								  	</p>	
-									<p>
-								 		<span class="quadrado_laranja_para_legenda">
-								  		</span>
-						  				Total de clientes geral: {{vm.totalDeClientes}}.		
-								  	</p>  	
-			                   				  						  
-							        <p>							        
-						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteClientes}}%.							          
-						          	</p>				  					  					  	 						  	 													
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                  				</div>	
+	                 		<div id="clientesTab2" class="tab-pane fade cor_de_fundo_do_corpo_da_caixa">
+								<div class="conteudo_de_corpo_da_caixa">
+									<div class="titulo_da_caixa">
+	               						<h4>
+					              			Clientes      		
+							            </h4>
+	                 				</div>
+	                 				<div>
+	                 					<cite title="Source Title">
+		                 					<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_azul_para_legenda">
+										  		</span>
+								  				Sessões no ano de {{vm.anoCorrente}}: {{vm.totalDeClientesAnoCorrente}}.
+										  	</div>	
+											<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_laranja_para_legenda">
+										  		</span>
+								  				Total de clientes geral: {{vm.totalDeClientes}}.		
+										  	</div>  				                   				  						  
+									        <div class="bloco_de_texto_de_corpo_da_caixa">							        
+								          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteClientes}}%.							          
+								          	</div>	
+							          	</cite>			  					  					  	 						  	 													
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                  				</div>	
+                  				</div>
 							</div>	             		
 						</div>					       				
                    	</div>			               	
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_left">
+			<div class="conteiner_medio">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -257,45 +275,50 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-							<div id="receitasTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
-                 				<div class="titulo_da_caixa">
-               						<h4>
-				              			Receitas  		
-						            </h4>
-                 				</div>
+							<div id="receitasTab1" class="tab-pane fade in active cor_de_fundo_do_corpo_da_caixa">	             
                  				<div class="conteudo_de_corpo_da_caixa">
-						            
-		                           <div id="GraficoReceitas" class="caixa_de_grafico">       	
-	                               </div>
-	                           							
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
+	                 				<div class="titulo_da_caixa">
+	               						<h4>
+					              			Receitas  		
+							            </h4>
+	                 				</div>
+	                 				<div class="conteudo_de_corpo_da_caixa">
+							            
+			                           <div id="GraficoReceitas" class="caixa_de_grafico">       	
+		                               </div>
+		                           							
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                 				</div>
                  				</div>	              			
 	                 		</div>
 	                 		
-	                 		<div id="receitasTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-								<div class="titulo_da_caixa">
-               						<h4>
-				              			Receitas      		
-						            </h4>
-                 				</div>
-                 				<div>
-                 					<p>
-								 		<span class="quadrado_azul_para_legenda">
-								  		</span>
-						  				Receitas no ano de {{vm.anoCorrente}}: {{vm.totalDeReceitasAnoCorrente}}.
-								  	</p>	
-									<p>
-								 		<span class="quadrado_laranja_para_legenda">
-								  		</span>
-						  				Total de receitas geral: {{vm.totalDeReceitas}}.		
-								  	</p>  	
-			                   				  						  
-							        <p>							        
-						          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteReceitas}}%.							          
-						          	</p>				  					  					  	 						  	 													
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
+	                 		<div id="receitasTab2" class="tab-pane fade cor_de_fundo_do_corpo_da_caixa">
+								<div class="conteudo_de_corpo_da_caixa">
+									<div class="titulo_da_caixa">
+	               						<h4>
+					              			Receitas      		
+							            </h4>
+	                 				</div>
+	                 				<div>
+	                 					<cite title="Source Title">
+		                 					<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_azul_para_legenda">
+										  		</span>
+								  				Receitas no ano de {{vm.anoCorrente}}: {{vm.totalDeReceitasAnoCorrente}}.
+										  	</div>	
+											<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_laranja_para_legenda">
+										  		</span>
+								  				Total de receitas geral: {{vm.totalDeReceitas}}.		
+										  	</div>  				                   				  						  
+									        <div class="bloco_de_texto_de_corpo_da_caixa">							        
+								          		- Porcentagem correspondente ao ano de {{vm.anoCorrente}}: {{vm.porcentagemDoAnoCorrenteReceitas}}%.							          
+								          	</div>
+							          	</cite>				  					  					  	 						  	 													
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                  				</div>
                   				</div>	
 							</div>	             		
 						</div>					       				
@@ -303,7 +326,7 @@ pageEncoding="UTF-8"%>
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_left">
+			<div class="conteiner_medio">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -321,64 +344,70 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-							<div id="produtosTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
-                 				<div class="titulo_da_caixa">
-               						<h4>
-				              			Tipos de produtos mais vendidos  		
-						            </h4>
-                 				</div>
+							<div id="produtosTab1" class="tab-pane fade in active cor_de_fundo_do_corpo_da_caixa">	             
                  				<div class="conteudo_de_corpo_da_caixa">
-						            
-		                           <div id="GraficoDeTiposDeProdutosMaisVendidos" class="caixa_de_grafico">       	
-	                               </div>
-	                           							
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                 				</div>	              			
+	                 				<div class="titulo_da_caixa">
+	               						<h4>
+					              			Tipos de produtos mais vendidos  		
+							            </h4>
+	                 				</div>
+	                 				<div class="conteudo_de_corpo_da_caixa">
+							            
+			                           <div id="GraficoDeTiposDeProdutosMaisVendidos" class="caixa_de_grafico">       	
+		                               </div>
+		                           							
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                 				</div>	   
+                 				</div>           			
 	                 		</div>
 	                 		
-	                 		<div id="produtosTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-								<div class="titulo_da_caixa">
-               						<h4>
-				              			Tipos de produtos mais vendidos  		
-						            </h4>
-                 				</div>
-                 				<div>
-                 					<p>
-								 		<span class="quadrado_azul_para_legenda">
-								  		</span>
-						  				Armações(qtd): {{vm.vendasGeralArmacoes}}.
-								  	</p>	
-								  	<p>
-								 		<span class="quadrado_laranja_para_legenda">
-								  		</span>
-						  				Lentes de contato(qtd): {{vm.vendasGeralLentesDeContato}}.
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_verde_para_legenda">
-								  		</span>
-						  				Relógios(qtd): {{vm.vendasGeralRelogios}}.
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_vermelho_para_legenda">
-								  		</span>
-						  				Ouro(qtd): {{vm.vendasGeralOuro}}.
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_roxo_para_legenda">
-								  		</span>
-						  				Outros(qtd): {{vm.vendasGeralOutros}}.
-								  	</p>			  					  					  	 						  	 													
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                  				</div>	
+	                 		<div id="produtosTab2" class="tab-pane fade cor_de_fundo_do_corpo_da_caixa">
+								<div class="conteudo_de_corpo_da_caixa">
+									<div class="titulo_da_caixa">
+	               						<h4>
+					              			Tipos de produtos mais vendidos  		
+							            </h4>
+	                 				</div>
+	                 				<div>
+	                 					<cite title="Source Title">
+		                 					<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_azul_para_legenda">
+										  		</span>
+								  				Armações(qtd): {{vm.vendasGeralArmacoes}}.
+										  	</div>	
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_laranja_para_legenda">
+										  		</span>
+								  				Lentes de contato(qtd): {{vm.vendasGeralLentesDeContato}}.
+										  	</div>
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_verde_para_legenda">
+										  		</span>
+								  				Relógios(qtd): {{vm.vendasGeralRelogios}}.
+										  	</div>
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_vermelho_para_legenda">
+										  		</span>
+								  				Ouro(qtd): {{vm.vendasGeralOuro}}.
+										  	</div>
+										  	<div class="bloco_de_texto_de_corpo_da_caixa">
+										 		<span class="quadrado_roxo_para_legenda">
+										  		</span>
+								  				Outros(qtd): {{vm.vendasGeralOutros}}.
+										  	</div>	
+									  	</cite>		  					  					  	 						  	 													
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                  				</div>	
+                  				</div>
 							</div>	             		
 						</div>					       				
                    	</div>			               	
 				</div>		
 			</div>
 			
-			<div class="conteiner_medio_left">
+			<div class="conteiner_medio">
 			    <div class="caixa_com_borda_redonda">
 			      	<div class="borda_branca">               
 						
@@ -396,78 +425,82 @@ pageEncoding="UTF-8"%>
 						</ul>
 						
 						<div class="tab-content">
-							<div id="assinaturaTab1" class="tab-pane fade in active conteudo_de_corpo_da_caixa">	             
-                 				<div class="titulo_da_caixa">
-               						<h4>
-				              			Validade da assinatura   		
-						            </h4>
-                 				</div>
+							<div id="assinaturaTab1" class="tab-pane fade in active cor_de_fundo_do_corpo_da_caixa">	             
                  				<div class="conteudo_de_corpo_da_caixa">
-						            
-	                               <div>                               		                            	  
-										<cite title="Source Title">
-											<div>
+	                 				<div class="titulo_da_caixa">
+	               						<h4>
+					              			Validade da assinatura   		
+							            </h4>
+	                 				</div>
+	                 				<div class="conteudo_de_corpo_da_caixa">
+							            
+		                               <div>                               		                            	  
+											<cite title="Source Title">										
+		                 						<div class="bloco_de_texto_de_corpo_da_caixa">
 	                              	   				Plano de assinatura: {{vm.planoDeAssinatura}}
 	                              	   			</div>								
-											<div>
-	                               	   			Assinatura ativa:  {{vm.assinaturaAtiva}}
-	                               	   		</div>
-											<div>
-	                               	   			Dt.inicial da assinatura: {{vm.dataInicialAssinatura}} 
-	                               	   		</div>										
-											<div>
-	                               	   			Dt.final da assinatura: {{vm.dataFinalAssinatura}} 
-	                               	   		</div>										
-											<div>
-												<a href="#">
-													A assinatura pode ser 
-													renovada a qualquer momento 
-													nas configurações de assinatura
-												</a>
-											</div>
-										</cite>											
-	                               </div>
-                              				
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                 				</div>	              			
+												<div class="bloco_de_texto_de_corpo_da_caixa">
+		                               	   			Assinatura ativa:  {{vm.assinaturaAtiva}}
+		                               	   		</div>
+												<div class="bloco_de_texto_de_corpo_da_caixa">
+		                               	   			Dt.inicial da assinatura: {{vm.dataInicialAssinatura}} 
+		                               	   		</div>										
+												<div class="bloco_de_texto_de_corpo_da_caixa">
+		                               	   			Dt.final da assinatura: {{vm.dataFinalAssinatura}} 
+		                               	   		</div>										
+												<div class="bloco_de_texto_de_corpo_da_caixa">
+													<a href="#">
+														A assinatura pode ser 
+														renovada a qualquer momento 
+														nas configurações de assinatura
+													</a>
+												</div>
+											</cite>											
+		                               </div>
+	                              				
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                 				</div>	 
+                 				</div>             			
 	                 		</div>
 	                 		
-	                 		<div id="assinaturaTab2" class="tab-pane fade conteudo_de_corpo_da_caixa">
-								<div class="titulo_da_caixa">
-               						<h4>
-				              			Historico de Assinaturas 		
-						            </h4>
-                 				</div>
-                 				<div>
-                 					<p>
-								 		<span class="quadrado_azul_para_legenda">
-								  		</span>
-						  				Armações(qtd): {{vm.vendasGeralArmacoes}}.
-								  	</p>	
-								  	<p>
-								 		<span class="quadrado_laranja_para_legenda">
-								  		</span>
-						  				Lentes de contato(qtd): {{vm.vendasGeralLentesDeContato}}.
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_verde_para_legenda">
-								  		</span>
-						  				Relógios(qtd): {{vm.vendasGeralRelogios}}.
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_vermelho_para_legenda">
-								  		</span>
-						  				Ouro(qtd): {{vm.vendasGeralOuro}}.
-								  	</p>
-								  	<p>
-								 		<span class="quadrado_roxo_para_legenda">
-								  		</span>
-						  				Outros(qtd): {{vm.vendasGeralOutros}}.
-								  	</p>			  					  					  	 						  	 													
-	                          	</div>
-	                          	<div class="rodape_da_caixa">
-                  				</div>	
+	                 		<div id="assinaturaTab2" class="tab-pane fade cor_de_fundo_do_corpo_da_caixa">
+								<div class="conteudo_de_corpo_da_caixa">
+									<div class="titulo_da_caixa">
+	               						<h4>
+					              			Historico de Assinaturas 		
+							            </h4>
+	                 				</div>
+	                 				<div>
+	                 					<p>
+									 		<span class="quadrado_azul_para_legenda">
+									  		</span>
+							  				Armações(total): {{vm.vendasGeralArmacoes}}.
+									  	</p>	
+									  	<p>
+									 		<span class="quadrado_laranja_para_legenda">
+									  		</span>
+							  				Lentes de contato(total): {{vm.vendasGeralLentesDeContato}}.
+									  	</p>
+									  	<p>
+									 		<span class="quadrado_verde_para_legenda">
+									  		</span>
+							  				Relógios(total): {{vm.vendasGeralRelogios}}.
+									  	</p>
+									  	<p>
+									 		<span class="quadrado_vermelho_para_legenda">
+									  		</span>
+							  				Ouro(total): {{vm.vendasGeralOuro}}.
+									  	</p>
+									  	<p>
+									 		<span class="quadrado_roxo_para_legenda">
+									  		</span>
+							  				Outros(total): {{vm.vendasGeralOutros}}.
+									  	</p>			  					  					  	 						  	 													
+		                          	</div>
+		                          	<div class="rodape_da_caixa">
+	                  				</div>	
+                  				</div>
 							</div>	             		
 						</div>					       				
                    	</div>			               	
@@ -532,6 +565,7 @@ pageEncoding="UTF-8"%>
 			GraficoDeClientes();
 			GraficoDeReceitas();
 			GraficoDeTiposDeProdutosMaisVendidos();
+			PlanoDeAssinatura();
 	    	
 	    	function GraficoDeSessaoUsuario() {
 		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
@@ -668,31 +702,62 @@ pageEncoding="UTF-8"%>
 	    		acess.vendasGeralRelogios = tipoDeProduto[2].valor;
 	    		acess.vendasGeralOuro = tipoDeProduto[3].valor;
 	    		acess.vendasGeralOutros = tipoDeProduto[4].valor;
-	    		
-	    		
-	    		var total;
-	    		total = parseFloat((acess.totalDeReceitasAnoCorrente*100)/acess.totalDeReceitas);
-	    		acess.porcentagemDoAnoCorrenteReceitas = parseFloat(total.toFixed(2));
 	    	}
 	    	
 	    	function PlanoDeAssinatura() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeTiposDeProdutosMaisVendidos&id_de_busca="+	    		
-    			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
+	    		var variaveis = "?metodo=RecuperaListaDeAssinaturas";
     	
-		    	$http.post('Graficos'+variaveis)
+		    	$http.post('Assinaturas'+variaveis)
 		        .success(function (data, status, headers, config) {	
 		        	if(data ==  "erro"){
 		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 	    				"não foi possível carregar gráfico de clientes!");
 		        	}else{
-		        		ConstroiGraficoDeTiposDeProdutosMaisVendidos(data);
-			        	SetLegendasParaGraficoDeDeTiposDeProdutosMaisVendidos(data);
+		        		SetLegendasParaAssinaturaAtual(data);
+			        	//SetLegendasParaGraficoDeDeTiposDeProdutosMaisVendidos(data);
 		        	}	
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 		    				"verifique sua conexão com a internet e tente novamente!");
 		    	});
 	    	};
+	    	
+	    	function SetLegendasParaAssinaturaAtual(assinaturas){
+	    		acess.planoDeAssinatura = assinaturas[0].tipo_assinatura;
+	    		VerificaAssinaturaAtiva(assinaturas[0].data_final_assinatura);
+	    		acess.dataInicialAssinatura = assinaturas[0].data_inicial_assinatura;
+	    		acess.dataFinalAssinatura = assinaturas[0].data_final_assinatura;
+	    	}
+	    	
+	    	function VerificaAssinaturaAtiva(data){
+	    		acess.assinaturaAtiva = "expirada";
+	    	}
+	    	
+	    	var datainicial = document.getElementById('datainicial');
+	    	var datafinal = document.getElementById('datafinal');
+
+	    	function formatar(mascara, documento) {
+	    	    var i = documento.value.length;
+	    	    var saida = mascara.substring(0, 1);
+	    	    var texto = mascara.substring(i);
+	    	    if (texto.substring(0, 1) != saida) {
+	    	        documento.value += texto.substring(0, 1);
+	    	    }
+	    	    verificar();
+	    	}
+
+	    	function gerarData(str) {
+	    	    var partes = str.split("/");
+	    	    return new Date(partes[2], partes[1] - 1, partes[0]);
+	    	}
+
+	    	function verificar() {
+	    	    var inicio = datainicial.value;
+	    	    var fim = datafinal.value;
+	    	    if (inicio.length != 10 || fim.length != 10) return;
+
+	    	    if (gerarData(fim) <= gerarData(inicio)) alert("A data inicial é maior que a data final");
+	    	}
 	    	
 			function MensagemDeErroModal(mensagem){
 				acess.alertModal = 'alert-danger';

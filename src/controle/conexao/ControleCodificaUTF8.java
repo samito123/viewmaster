@@ -3,6 +3,7 @@ package controle.conexao;
 import java.io.UnsupportedEncodingException;
 
 import modelos.Ano;
+import modelos.Assinatura;
 import modelos.TipoDeProduto;
 import modelos.Usuario;
 
@@ -35,6 +36,19 @@ public class ControleCodificaUTF8 {
 						CodificaStringUTF8(ano.getMeses_do_ano().get(mesDoAno).getNome_do_mes()));		
 			}
 		return ano;
+	}
+	
+	public Assinatura CodificaAssinaturaUTF8(Assinatura assinatura) throws UnsupportedEncodingException{
+		if(assinatura.getTipo_assinatura() != null)
+			assinatura.setTipo_assinatura(CodificaStringUTF8(assinatura.getTipo_assinatura()));
+		if(assinatura.getData_inicial_assinatura() != null)
+			assinatura.setData_inicial_assinatura(CodificaStringUTF8(assinatura.getData_inicial_assinatura()));
+		if(assinatura.getData_final_assinatura() != null)
+			assinatura.setData_final_assinatura(CodificaStringUTF8(assinatura.getData_final_assinatura()));
+		if(assinatura.getData_bloqueio_assinatura() != null)
+			assinatura.setData_bloqueio_assinatura(CodificaStringUTF8(assinatura.getData_bloqueio_assinatura()));
+		
+		return assinatura;
 	}
 	
 	public TipoDeProduto CodificaTipoProdutoUTF8(TipoDeProduto tipoDeProduto) throws UnsupportedEncodingException{
