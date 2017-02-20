@@ -11,7 +11,6 @@ public class Usuario {
 	private String pergunta_secreta_usuario;
 	private String resposta_pergunta_secreta_usuario;
 	
-	
 	public Long getId_usuario() {
 		return id_usuario;
 	}

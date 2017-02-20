@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import servlet.controle.usuario.ControleEnvioDeSenha;
+import servlet.controle.usuario.ControleVerificacaoEmailDataNacimento;
 import modelos.Usuario;
-import controle.usuario.ControleEnvioDeSenha;
-import controle.usuario.ControleVerificacaoEmailDataNacimento;
 
 public class RecuperaSenha extends HttpServlet{
 	

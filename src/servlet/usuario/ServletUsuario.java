@@ -1,4 +1,4 @@
-package servlet;
+package servlet.usuario;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controle.conexao.ControleDeRetornoServidor;
+import servlet.controle.usuario.ServletControleLoginDeUsuario;
 import modelos.Usuario;
-import controle.usuario.ControleLoginUsuario;
 
 
-public class LoginUsuario extends HttpServlet{
+public class ServletUsuario extends HttpServlet{
 	
 	static private HttpServletRequest request;
 	static private HttpServletResponse response;
@@ -21,23 +22,31 @@ public class LoginUsuario extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		request = req;
-		response = resp;
+		this.request = req;
+		this.response = resp;
 		
-		String metodo = request.getParameter("metodo");
-		switch (metodo) {
+		try{
+			String metodo = request.getParameter("metodo");
+			switch (metodo) {
 			case "VerificaLoginDoUsuario":	
 				try {
-					new ControleLoginUsuario(req, resp).
-						VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
-				} catch (SQLException e) {
+					//new ServletControleLoginDeUsuario(req, resp).
+						//VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			break;
+				break;
+				
+				default:
+					new ControleDeRetornoServidor(request, response).RetornaErro();
+					break;
+			}
+		}catch(Exception e){
+			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
-	private Usuario CriaObjetoUsuarioRequest(){
+	/*private Usuario CriaObjetoUsuarioRequest(){
 		Usuario usuario = new Usuario();
 		if(request.getParameter("id") != null)
 			usuario.setId_usuario(Long.parseLong(request.getParameter("id")));
@@ -57,6 +66,6 @@ public class LoginUsuario extends HttpServlet{
 			usuario.setResposta_pergunta_secreta_usuario(request.getParameter("resposta_pergunta_secreta"));
 		
 		return usuario;
-	}
+	}*/
 	
 }

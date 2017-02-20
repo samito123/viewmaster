@@ -1,4 +1,4 @@
-package controle.usuario;
+package servlet.controle.usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;

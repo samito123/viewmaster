@@ -43,7 +43,8 @@ public class SessoesDeUsuarioDAO {
 		return quantidadeDeSessoes;
 	}
 	
-	public void UpdateSessaoUsuario(Usuario usuario, long quantidadeDeSessoes) throws SQLException{
+	public int UpdateSessaoUsuario(Usuario usuario, long quantidadeDeSessoes) throws SQLException{
+		int transacaoRealizada = 0;
 		try {	
 			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "update tb_sessoes_usuario set " 
@@ -55,13 +56,15 @@ public class SessoesDeUsuarioDAO {
 			ps.setLong(2, usuario.getId_usuario()); 
 			ps.setString(3, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
 			ps.setString(4, ""+Calendar.getInstance().get(Calendar.YEAR)); 
-			ps.execute(); 
+			transacaoRealizada = ps.executeUpdate();
+			
 		}catch (Exception e) {
-			System.out.print(e);
+			transacaoRealizada = 0;
 		}finally{
 			ps.close();
-			conn.close();
+			conn.close();	
 		}
+		return transacaoRealizada;
 	}
 	
 	public void SalvarSessaoUsuario(Usuario usuario) throws SQLException{

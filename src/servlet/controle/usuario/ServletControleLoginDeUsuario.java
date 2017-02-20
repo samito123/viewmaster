@@ -1,4 +1,4 @@
-package controle.usuario;
+package servlet.controle.usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,28 +17,52 @@ import dao.SessoesDeUsuarioDAO;
 import dao.UltimaSessaoUsuarioDAO;
 import dao.UsuarioDAO;
 
-public class ControleLoginUsuario {
+public class ServletControleLoginDeUsuario {
 
 	static private HttpServletRequest request;
 	static private HttpServletResponse response; 
 	
-	public ControleLoginUsuario(HttpServletRequest request, HttpServletResponse response){
+	public ServletControleLoginDeUsuario(HttpServletRequest request, HttpServletResponse response){
 		this.request = request;
 		this.response = response;
 	}
 	
-	public void VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(Usuario usuario) throws 
-		ServletException, SQLException, IOException{
-			UsuarioDAO dao = new UsuarioDAO();
-			usuario = dao.VerificaLoginDeAcessoRetornaUsuario(usuario);
-			VerificaRetornoDeUsuarioParaLogin(usuario);
+	public void VerificaLoginDiferenteDeNullOuVazio(){
+		if(request.getParameter("login") != null){
+			VerificaSenhaDiferenteDeNull();
+		}else{
+			new ControleDeRetornoServidor(request, response).RetornaErro();
+		}
 	}
 	
-	private void VerificaRetornoDeUsuarioParaLogin(Usuario usuario) throws IOException, SQLException{
-		if(usuario.getNome_usuario() == null){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+	private void VerificaSenhaDiferenteDeNull(){
+		if(request.getParameter("login") != null){
+			
 		}else{
+			new ControleDeRetornoServidor(request, response).RetornaErro();
+		}
+	}
+	
+	public void CriaUsuarioRequest() throws SQLException, IOException{
+		Usuario usuario = new Usuario();
+		
+		usuario.setLogin_usuario(request.getParameter("login"));		
+		usuario.setSenha_usuario(request.getParameter("senha"));
+		
+		RecuperaUsuarioDoBancoViaLoginSenha(usuario);
+	}
+	
+	private void RecuperaUsuarioDoBancoViaLoginSenha(Usuario usuario) throws SQLException, IOException{
+			UsuarioDAO dao = new UsuarioDAO();
+			usuario = dao.VerificaLoginDeAcessoRetornaUsuario(usuario);
+			VerificaUsuarioRetornado(usuario);
+	}
+	
+	private void VerificaUsuarioRetornado(Usuario usuario) throws IOException, SQLException{
+		if(usuario.getNome_usuario() != null && usuario.getNome_usuario() != ""){
 			VerificaSeSessaoDoUsuarioExiste(usuario);
+		}else{
+			new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
@@ -53,12 +77,17 @@ public class ControleLoginUsuario {
 	}
 	
 	private void UpdateSessaoUsuario(Usuario usuario, Long quantidadeDeSessoes) throws SQLException, IOException{
-		try{
-			SessoesDeUsuarioDAO dao = new SessoesDeUsuarioDAO();
-			dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
+		SessoesDeUsuarioDAO dao = new SessoesDeUsuarioDAO();
+		int transacaoRealizada = dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
+		//VerificarUltimaSessaoUsuario(usuario);
+	}
+	
+	private void VerificaSeUpdateSessaoDeUsuarioOcorreuComSucesso(Usuario usuario, int transacaoRealizada) 
+			throws SQLException, IOException{
+		if(transacaoRealizada == 1){
 			VerificarUltimaSessaoUsuario(usuario);
-		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+		}else{
+			
 		}
 	}
 	

@@ -16,13 +16,21 @@ public class ControleDeRetornoServidor {
 		this.response = response;
 	}
 	
-	public void RetornaSucesso() throws IOException{
-		PrintWriter out = response.getWriter();
-		out.write("sucesso"); 
+	public void RetornaSucesso(){
+		try{
+			PrintWriter out = response.getWriter();
+			out.write("sucesso"); 
+		}catch(Exception e){
+			System.out.println(e);
+		} 
 	}
 	
-	public void RetornaErro() throws IOException{
-		PrintWriter out = response.getWriter();
-		out.write("erro"); 
+	public void RetornaErro(){
+		try{
+			PrintWriter out = response.getWriter();
+			out.write("erro");	
+		}catch(Exception e){
+			System.out.println(e);
+		} 
 	}
 }
