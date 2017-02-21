@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controle.conexao.ControleDeRetornoServidor;
-import servlet.controle.usuario.ServletControleLoginDeUsuario;
+import controle.servlet.ServletControleLoginDeUsuario;
 import modelos.Usuario;
 
 
@@ -29,12 +29,9 @@ public class ServletUsuario extends HttpServlet{
 			String metodo = request.getParameter("metodo");
 			switch (metodo) {
 			case "VerificaLoginDoUsuario":	
-				try {
+				ChamaVerificacaoDeLoginDoUsuario();
 					//new ServletControleLoginDeUsuario(req, resp).
 						//VerificaLoginRecuperaUsuarioOuEnviaMensagemDeErro(CriaObjetoUsuarioRequest());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 				break;
 				
 				default:
@@ -43,9 +40,14 @@ public class ServletUsuario extends HttpServlet{
 			}
 		}catch(Exception e){
 			new ControleDeRetornoServidor(request, response).RetornaErro();
+			System.out.println(e);
 		}
 	}
 	
+	private void ChamaVerificacaoDeLoginDoUsuario(){
+		
+	}
+
 	/*private Usuario CriaObjetoUsuarioRequest(){
 		Usuario usuario = new Usuario();
 		if(request.getParameter("id") != null)

@@ -1,27 +1,17 @@
 package testes.unitarios.usuario.controle.servlet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import controle.conexao.ControleDeRetornoServidor;
-import controle.conexao.ControleFabricaDeConexao;
-import controle.modelos.ControleTratamentoMesAno;
 import modelos.Usuario;
 import dao.SessoesDeUsuarioDAO;
 import dao.UsuarioDAO;
@@ -29,7 +19,7 @@ import dao.UsuarioDAO;
 public class ServletControleLoginDeUsuarioTest {
 
 	@Test
-	public void VerificaLoginDiferenteDeNullOuVazio_ParametroString(){
+	public void VerificaLoginDiferenteDeNullOuVazio_ParametroString() throws Exception{
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("login")).thenReturn("xxxx");
 		boolean sucesso;
@@ -38,45 +28,43 @@ public class ServletControleLoginDeUsuarioTest {
 			sucesso = true;
 		}else{
 			sucesso = false;
-			//new ControleDeRetornoServidor(request, response).RetornaErro();
+			throw new Exception("Erro: login.request null ou vazio");
 		}
 
-		assertEquals(sucesso, true);
+		assertTrue(sucesso);
 	}
 	
-	@Test
-	public void VerificaLoginDiferenteDeNullOuVazio_ParametroStringVazia(){
+	@Test(expected=Exception.class)
+	public void VerificaLoginDiferenteDeNullOuVazio_ParametroStringVazia() throws Exception{
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("login")).thenReturn("");
 		boolean sucesso;
 		
 		if(request.getParameter("login") != null && request.getParameter("login") != ""){
-			sucesso = true;
-		}else{
 			sucesso = false;
-			//new ControleDeRetornoServidor(request, response).RetornaErro();
+		}else{
+			sucesso = true;
+			assertTrue(sucesso);
+			throw new Exception("Erro: login.request null ou vazio");
 		}
-
-		assertEquals(sucesso, false);
 	}
 	
-	@Test
-	public void VerificaLoginDiferenteDeNullOuVazio_ParametroNull(){
+	@Test(expected=Exception.class)
+	public void VerificaLoginDiferenteDeNullOuVazio_ParametroNull() throws Exception{
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		boolean sucesso;
 		
 		if(request.getParameter("login") != null && request.getParameter("login") != ""){
-			sucesso = true;
-		}else{
 			sucesso = false;
-			//new ControleDeRetornoServidor(request, response).RetornaErro();
+		}else{
+			sucesso = true;
+			assertTrue(sucesso);
+			throw new Exception("Erro: login.request null ou vazio");
 		}
-
-		assertEquals(sucesso, false);
 	}
 	
 	@Test
-	public void VerificaSenhaDiferenteDeNull_ParametroString(){
+	public void VerificaSenhaDiferenteDeNull_ParametroString() throws Exception{
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("senha")).thenReturn("xxxx");
 		boolean sucesso;
@@ -85,45 +73,43 @@ public class ServletControleLoginDeUsuarioTest {
 			sucesso = true;
 		}else{
 			sucesso = false;
-			//new ControleDeRetornoServidor(request, response).RetornaErro();
+			throw new Exception("Erro: senha.request null ou vazio");
 		}
 
-		assertEquals(sucesso, true);
+		assertTrue(sucesso);
 	}
 	
-	@Test
-	public void VerificaSenhaDiferenteDeNull_ParametroStringVazio(){
+	@Test(expected=Exception.class)
+	public void VerificaSenhaDiferenteDeNull_ParametroStringVazio() throws Exception{
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("senha")).thenReturn("");
 		boolean sucesso;
 		
 		if(request.getParameter("senha") != null && request.getParameter("senha") != ""){
-			sucesso = true;
-		}else{
 			sucesso = false;
-			//new ControleDeRetornoServidor(request, response).RetornaErro();
+		}else{
+			sucesso = true;
+			assertTrue(sucesso);
+			throw new Exception("Erro: senha.request null ou vazio");
 		}
-
-		assertEquals(sucesso, false);
 	}
 	
-	@Test
-	public void VerificaSenhaDiferenteDeNull_ParametroNull(){
+	@Test(expected=Exception.class)
+	public void VerificaSenhaDiferenteDeNull_ParametroNull() throws Exception{
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		boolean sucesso;
 		
 		if(request.getParameter("senha") != null && request.getParameter("senha") != ""){
-			sucesso = true;
-		}else{
 			sucesso = false;
-			//new ControleDeRetornoServidor(request, response).RetornaErro();
+		}else{
+			sucesso = true;
+			assertTrue(sucesso);
+			throw new Exception("Erro: senha.request null ou vazio");
 		}
-
-		assertEquals(sucesso, false);
 	}
 	
 	@Test
-	public void CriaUsuarioRequest_PassandoParametrosLoginSenha(){
+	public void CriaUsuarioRequest(){
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		when(request.getParameter("login")).thenReturn("xxxx");
 		when(request.getParameter("senha")).thenReturn("1111");
@@ -131,17 +117,16 @@ public class ServletControleLoginDeUsuarioTest {
 		Usuario usuario = new Usuario();
 		
 		usuario.setLogin_usuario(request.getParameter("login"));
-		assertEquals(usuario.getLogin_usuario(), "xxxx");
 		usuario.setSenha_usuario(request.getParameter("senha"));
+		assertEquals(usuario.getLogin_usuario(), "xxxx");
 		assertEquals(usuario.getSenha_usuario(), "1111");
 	}
 	
 	@Test
-	public void RecuperaUsuarioDoBancoViaLoginSenha() throws SQLException{
+	public void RecuperaUsuarioDoBancoViaLoginSenha() throws Exception{
 		Usuario usuarioRequest = mock(Usuario.class);
 		when(usuarioRequest.getLogin_usuario()).thenReturn("xxxx");
-		when(usuarioRequest.getSenha_usuario()).thenReturn("1111");
-		
+		when(usuarioRequest.getSenha_usuario()).thenReturn("1111");	
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
 		when(usuario.getNome_usuario()).thenReturn("Luiz Samuel Pinheiro Lima");
@@ -160,43 +145,48 @@ public class ServletControleLoginDeUsuarioTest {
 	}
 	
 	@Test
-	public void VerificaUsuarioRetornado_RetornandoUsuarioGetNomeString(){
+	public void VerificaUsuarioRetornado_RetornandoUsuarioGetNomeString() throws Exception{
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getNome_usuario()).thenReturn("Luiz Samuel Pinheiro Lima");
-		
+		boolean sucesso = false;
 		if(usuario.getNome_usuario() != null && usuario.getNome_usuario() != ""){
-			assertEquals(usuario.getNome_usuario(), "Luiz Samuel Pinheiro Lima");
+			sucesso = true;
 		}else{
-			fail();
+			throw new Exception("Erro: Usuario ou senha incorreto!");
 		}
+		assertTrue(sucesso);
 	}
 	
-	@Test
-	public void VerificaUsuarioRetornado_RetornandoUsuarioGetNomeStringVazia(){
-		Usuario usuario = mock(Usuario.class);
-		when(usuario.getNome_usuario()).thenReturn("");
-		
-		if(usuario.getNome_usuario() != null && usuario.getNome_usuario() != ""){
-			fail();
-		}else{
-			assertEquals(usuario.getNome_usuario(), "");
-		}
-	}
-	
-	@Test
-	public void VerificaUsuarioRetornado_RetornandoUsuarioGetNomeNull(){
+	@Test(expected=Exception.class)
+	public void VerificaUsuarioRetornado_RetornandoUsuarioGetNomeNull() throws Exception{
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getNome_usuario()).thenReturn(null);
-		
+		boolean sucesso = false;
 		if(usuario.getNome_usuario() != null && usuario.getNome_usuario() != ""){
-			fail();
+			
 		}else{
-			assertEquals(usuario.getNome_usuario(), null);
+			sucesso = true;
+			assertTrue(sucesso);
+			throw new Exception("Erro: Usuario ou senha incorreto!");
+		}
+	}
+	
+	@Test(expected=Exception.class)
+	public void VerificaUsuarioRetornado_RetornandoUsuarioGetNomeStringVazia() throws Exception{
+		Usuario usuario = mock(Usuario.class);
+		when(usuario.getNome_usuario()).thenReturn("");
+		boolean sucesso = false;
+		if(usuario.getNome_usuario() != null && usuario.getNome_usuario() != ""){
+			
+		}else{
+			sucesso = true;
+			assertTrue(sucesso);
+			throw new Exception("Erro: Usuario ou senha incorreto!");
 		}
 	}
 	
 	@Test
-	public void VerificaSeSessaoDoUsuarioExiste_SessaoExiste() throws SQLException{		
+	public void VerificaSeSessaoDoUsuarioExiste_SessaoExiste() throws Exception{		
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
 		
@@ -212,7 +202,7 @@ public class ServletControleLoginDeUsuarioTest {
 	}
 	
 	@Test
-	public void VerificaSeSessaoDoUsuarioExiste_SessaoNãoExiste() throws SQLException{		
+	public void VerificaSeSessaoDoUsuarioExiste_SessaoNãoExiste() throws Exception{		
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
 		

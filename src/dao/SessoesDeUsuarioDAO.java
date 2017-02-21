@@ -17,7 +17,7 @@ public class SessoesDeUsuarioDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
-	public Long VerificaSeSessaoDoUsuarioExiste(Usuario usuario) throws SQLException{
+	public Long VerificaSeSessaoDoUsuarioExiste(Usuario usuario) throws Exception{
 		
 		long quantidadeDeSessoes = 0;
 		
@@ -34,7 +34,7 @@ public class SessoesDeUsuarioDAO {
 				quantidadeDeSessoes = rs.getLong(("quantidade_sessoes"));
 			}	
 		}catch (Exception e) {
-			System.out.print(e);
+			throw new Exception("Erro: VerificaSeSessaoDoUsuarioExiste, "+e);
 		}finally{
 			rs.close();
 			ps.close();

@@ -2,7 +2,7 @@ package modelos;
 
 public class Usuario {
 	
-	private Long id_usuario;
+	private long id_usuario;
 	private String nome_usuario;
 	private String login_usuario;
 	private String senha_usuario;
@@ -11,10 +11,30 @@ public class Usuario {
 	private String pergunta_secreta_usuario;
 	private String resposta_pergunta_secreta_usuario;
 	
-	public Long getId_usuario() {
+	public Usuario(){
+		this.nome_usuario = "";
+		this.login_usuario = "";
+		this.senha_usuario = "";
+		this.email_usuario = "";
+		this.data_nascimento_usuario = "";
+		this.pergunta_secreta_usuario = "";
+		this.resposta_pergunta_secreta_usuario = "";
+	}
+	
+	public Usuario(String nome, String login, String senha){
+		this.nome_usuario = nome;
+		this.login_usuario = login;
+		this.senha_usuario = senha;
+		this.email_usuario = "";
+		this.data_nascimento_usuario = "";
+		this.pergunta_secreta_usuario = "";
+		this.resposta_pergunta_secreta_usuario = "";
+	}
+	
+	public long getId_usuario() {
 		return id_usuario;
 	}
-	public void setId_usuario(Long id_usuario) {
+	public void setId_usuario(long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 	public String getNome_usuario() {

@@ -8,15 +8,15 @@ import javax.servlet.ServletException;
 
 public class ControleFabricaDeConexao {
 	
-	public Connection getConnection() throws ClassNotFoundException, ServletException{
+	public Connection getConnection() throws ClassNotFoundException, ServletException {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection(
-					 "jdbc:mysql://localhost/viewmaster", "sam", "123"); 
+					 "jdbc:mysql://localhost/viewmaster", "sam", "123");
 		}catch(SQLException e){
-			throw new ServletException(e);
+			throw new ServletException("Sem conexão com o banco de dados, "+e);
 		}
 		
 	}
-
+	
 }

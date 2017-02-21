@@ -1,4 +1,4 @@
-package servlet.controle.usuario;
+package controle.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,28 +22,30 @@ public class ServletControleLoginDeUsuario {
 	static private HttpServletRequest request;
 	static private HttpServletResponse response; 
 	
-	public ServletControleLoginDeUsuario(HttpServletRequest request, HttpServletResponse response){
+	public ServletControleLoginDeUsuario(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception{
 		this.request = request;
 		this.response = response;
+		VerificaLoginDiferenteDeNullOuVazio();
 	}
 	
-	public void VerificaLoginDiferenteDeNullOuVazio(){
-		if(request.getParameter("login") != null){
+	private void VerificaLoginDiferenteDeNullOuVazio() throws Exception{
+		if(request.getParameter("login") != null && request.getParameter("login") != ""){
 			VerificaSenhaDiferenteDeNull();
 		}else{
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			throw new Exception("Erro: login.request null ou vazio");
 		}
 	}
 	
-	private void VerificaSenhaDiferenteDeNull(){
-		if(request.getParameter("login") != null){
-			
+	private void VerificaSenhaDiferenteDeNull() throws Exception{
+		if(request.getParameter("login") != null && request.getParameter("senha") != ""){
+			CriaUsuarioRequest();
 		}else{
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			throw new Exception("Erro: senha.request null ou vazio");
 		}
 	}
 	
-	public void CriaUsuarioRequest() throws SQLException, IOException{
+	public void CriaUsuarioRequest() throws Exception{
 		Usuario usuario = new Usuario();
 		
 		usuario.setLogin_usuario(request.getParameter("login"));		
@@ -52,21 +54,21 @@ public class ServletControleLoginDeUsuario {
 		RecuperaUsuarioDoBancoViaLoginSenha(usuario);
 	}
 	
-	private void RecuperaUsuarioDoBancoViaLoginSenha(Usuario usuario) throws SQLException, IOException{
+	private void RecuperaUsuarioDoBancoViaLoginSenha(Usuario usuario) throws Exception{
 			UsuarioDAO dao = new UsuarioDAO();
 			usuario = dao.VerificaLoginDeAcessoRetornaUsuario(usuario);
 			VerificaUsuarioRetornado(usuario);
 	}
 	
-	private void VerificaUsuarioRetornado(Usuario usuario) throws IOException, SQLException{
+	private void VerificaUsuarioRetornado(Usuario usuario) throws Exception{
 		if(usuario.getNome_usuario() != null && usuario.getNome_usuario() != ""){
 			VerificaSeSessaoDoUsuarioExiste(usuario);
 		}else{
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			throw new Exception("Erro: Usuario ou senha incorreto!");
 		}
 	}
 	
-	private void VerificaSeSessaoDoUsuarioExiste(Usuario usuario) throws SQLException, IOException{
+	private void VerificaSeSessaoDoUsuarioExiste(Usuario usuario) throws Exception{
 		SessoesDeUsuarioDAO dao = new SessoesDeUsuarioDAO();
 		long quantidadeDeSessoes = dao.VerificaSeSessaoDoUsuarioExiste(usuario);
 		if(quantidadeDeSessoes > 0){

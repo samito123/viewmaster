@@ -1,24 +1,16 @@
-package testes.unitarios.usuario.servlet;
+package testes.unitarios.servlet;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import static org.junit.Assert.assertTrue;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import modelos.Usuario;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import servlet.controle.usuario.ServletControleLoginDeUsuario;
-import controle.conexao.ControleDeRetornoServidor;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class ServletUsuarioTest extends Mockito{
+public class ServletUsuarioTest{
 	
 	@Test
 	public void doPost_NomeDoMetodoCorreto(){	
@@ -39,8 +31,9 @@ public class ServletUsuarioTest extends Mockito{
 			}
 		}catch(Exception e){
 			sucesso = false;
+			System.out.println(e);
 		}
-		assertEquals(sucesso, true);
+		assertTrue(sucesso);
 	}
 	
 	@Test
@@ -62,8 +55,9 @@ public class ServletUsuarioTest extends Mockito{
 			}
 		}catch(Exception e){
 			sucesso = false;
+			System.out.println(e);
 		}
-		assertEquals(sucesso, true);
+		assertTrue(sucesso);
 	}
 	
 	@Test
@@ -79,12 +73,14 @@ public class ServletUsuarioTest extends Mockito{
 					break;
 				
 				default:
-					sucesso = true;
+					sucesso = false;
 					break;
 			}
 		}catch(Exception e){
-			sucesso = false;
+			sucesso = true;
+			System.out.println(e);
 		}
+		assertTrue(sucesso);
 	}
 	
 	@Test
@@ -105,14 +101,15 @@ public class ServletUsuarioTest extends Mockito{
 					break;
 			}
 		}catch(Exception e){
-			System.out.println(e);
 			sucesso = true;
+			System.out.println(e);
 		}
-		assertEquals(sucesso, true);
+		assertTrue(sucesso);
 	}
 	
 	private void GeraExcessao() throws Exception{
-		throw new Exception("Erro: Blah! Blah! Blah!.");
+		throw new Exception("Erro: Gerando exceção do metodo "
+				+ "doPost no caso de uso VerificaLoginDoUsuario.");
 	}
 	
 	/*private Usuario CriaUsuarioParaTeste(String nome ,String login, String senha){

@@ -19,9 +19,10 @@ public class ControleDeRetornoServidor {
 	public void RetornaSucesso(){
 		try{
 			PrintWriter out = response.getWriter();
-			out.write("sucesso"); 
+			out.write("sucesso");
+			out.close();
 		}catch(Exception e){
-			System.out.println(e);
+			System.out.println("Erro: Controle de retorno de sucesso do servidor, "+e);
 		} 
 	}
 	
@@ -29,8 +30,9 @@ public class ControleDeRetornoServidor {
 		try{
 			PrintWriter out = response.getWriter();
 			out.write("erro");	
+			out.close();
 		}catch(Exception e){
-			System.out.println(e);
+			System.out.println("Erro: Controle de retorno de erro do servidor, "+e);
 		} 
 	}
 }

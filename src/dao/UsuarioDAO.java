@@ -15,7 +15,7 @@ public class UsuarioDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
-	public Usuario VerificaLoginDeAcessoRetornaUsuario(Usuario usuario) throws SQLException{
+	public Usuario VerificaLoginDeAcessoRetornaUsuario(Usuario usuario) throws Exception{
 		try {	
 			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "select * from tb_usuarios where login_usuario = ? "
@@ -35,7 +35,7 @@ public class UsuarioDAO {
 				usuario.setResposta_pergunta_secreta_usuario(rs.getString("resposta_pergunta_secreta_usuario"));
 			}	
 		}catch (Exception e) {
-			System.out.print(e);
+			throw new Exception("Erro: VerificaLoginDeAcessoRetornaUsuario, "+e);
 		}finally{
 			rs.close();
 			ps.close();
