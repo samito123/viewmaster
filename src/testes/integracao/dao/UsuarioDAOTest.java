@@ -33,7 +33,7 @@ public class UsuarioDAOTest {
 			conn = new ControleFabricaDeConexao().getConnection();
 			conn.setAutoCommit(false);
 			CenarioDeUsuario();
-			CenarioDeUsuario();
+			CenarioDeSessao();
 		} catch (Exception e) {
 			System.out.println(e);
 		}	
@@ -46,18 +46,19 @@ public class UsuarioDAOTest {
 		int transacaoSucesso = 0;
 		try{
 			String sql = "insert into tb_usuarios "
-					+ "(nome_usuario, login_usuario, senha_usuario,"
+					+ "(id_usuario, nome_usuario, login_usuario, senha_usuario,"
 					+ "email_usuario, data_nascimento_usuario, "
 					+ "pergunta_secreta_usuario, resposta_pergunta_secreta_usuario) values"
-					+ "(?,?,?,?,?,?,?)";
+					+ "(?,?,?,?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, usuario.getNome_usuario()); 
-			ps.setString(2, usuario.getLogin_usuario()); 
-			ps.setString(3, usuario.getSenha_usuario()); 
-			ps.setString(4, usuario.getEmail_usuario());
-			ps.setString(5, usuario.getData_nascimento_usuario());
-			ps.setString(6, usuario.getPergunta_secreta_usuario());
-			ps.setString(7, usuario.getResposta_pergunta_secreta_usuario());
+			ps.setLong(1, -1); 
+			ps.setString(2, usuario.getNome_usuario()); 
+			ps.setString(3, usuario.getLogin_usuario()); 
+			ps.setString(4, usuario.getSenha_usuario()); 
+			ps.setString(5, usuario.getEmail_usuario());
+			ps.setString(6, usuario.getData_nascimento_usuario());
+			ps.setString(7, usuario.getPergunta_secreta_usuario());
+			ps.setString(8, usuario.getResposta_pergunta_secreta_usuario());
 			transacaoSucesso = ps.executeUpdate(); 
 		}catch(Exception e){
 			System.out.println(e);
@@ -178,41 +179,95 @@ public class UsuarioDAOTest {
 	//TESTECRIASESSAO
 	@Test
 	public void LoginDeUsuario_UsuarioExistente() throws Exception{
-		Usuario usuarioMock = mock(Usuario.class);
-		when(usuarioMock.getLogin_usuario()).thenReturn("testeLogin");
-		when(usuarioMock.getSenha_usuario()).thenReturn("testeSenha");
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		String login = "testeLogin";
+		String senha = "testeSenha";
 		
-		Usuario usuario;
-		int qtdErros = 0;
+		//conn = new ControleFabricaDeConexao().getConnection();
+		//conn.setAutoCommit(false);
 		try {
-			String sql = "select * from tb_usuarios where login_usuario = ? "
-				+ "and senha_usuario = ?";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, usuarioMock.getLogin_usuario()); 
-			ps.setString(2, usuarioMock.getSenha_usuario()); 
-			rs = ps.executeQuery(); 
 			
-			usuario = new Usuario(rs);
-			
-			if(usuario.getNome_usuario() == null || usuario.getNome_usuario() == "")
-				qtdErros +=1;
-			
-			
+			Usuario usuario = BuscaUsuarioLogin(login, senha);
+			if(usuario != null){
+				VerificaSessaoUsuario(usuario.getId_usuario());
+			}else{
+				//RetornaErro
+			}
 		} catch (Exception e) {
 			throw new Exception("Erro: LoginDeUsuario, "+e);
 		}finally{
-			rs.close();
-			ps.close();
+			//conn.rollback();
+			//conn.close();
 		}
-		assertEquals(usuario.getNome_usuario(), "UsuarioTeste");
+		
 	}
 	
-	private Usuario VerificaUsuarioExiste(String login, String senha){
+	private Usuario BuscaUsuarioLogin(String login, String senha) throws SQLException{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		Usuario usuario = null;
+		
+		String sql = "select * from tb_usuarios "
+				+ "where login_usuario = '"+login+"' "
+				+ "and senha_usuario = '"+senha+"'";
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery(); 
+		
+		if(rs.isBeforeFirst()) {
+			usuario = new Usuario(rs);
+		}
 		
 		return usuario;
 	}
-
+	
+	private void VerificaSessaoUsuario(long IdUsuario){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		long quantidadeDeSessoes = 0;
+		
+		try{
+			String mes = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
+			String ano = ""+Calendar.getInstance().get(Calendar.YEAR);
+			String sql = "select * from tb_sessoes_usuario "
+					+ "where id_usuario = "+IdUsuario+" "
+					+ "and mes_sessao = '"+mes+"' "
+					+ "and ano_sessao = '"+ano+"' ";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery(); 
+			if (rs.first()) { 
+				quantidadeDeSessoes = rs.getLong(("quantidade_sessoes"));
+				UpdateSessaoUsuario();
+			}else{
+				//CriaSessaoUsuario();
+			}
+		}catch(Exception e){
+			System.out.println("erro: "+e);
+		}
+		System.out.println("ID: "+IdUsuario);
+		System.out.println("Quantidade de sessões: "+quantidadeDeSessoes);
+	}
+	
+	private int UpdateSessaoUsuario(long quntidade, long idUsuario){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try{
+			String sql = "update tb_sessoes_usuario "
+					+ "set quantidade_sessoes = "
+					+ "where id_usuario = "+idUsuario+" "
+					+ "and mes_sessao = '"+mes+"' "
+					+ "and ano_sessao = '"+ano+"' "; 
+			ps = conn.prepareStatement(sql);
+			return ps.executeUpdate(); 
+		}catch(Exception e){
+			return 0;
+		}
+		
+	}
+	
+	private void CriaSessaoUsuario(){
+		
+	}
+	
+	
 }
