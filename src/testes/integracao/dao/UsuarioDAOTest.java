@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 
@@ -20,20 +21,30 @@ import org.junit.Before;
 import org.junit.Test;
 
 import controle.conexao.ControleFabricaDeConexao;
+import controle.modelos.ControleTratamentoMesAno;
 
 public class UsuarioDAOTest {
 	
 	Connection conn;
 	
 	@Before
-	public void ConstroiCenarioDeUsuarioExistenteBancoDeDados() throws SQLException{
+	public void ConstroiCenario() throws SQLException{
+		try {
+			conn = new ControleFabricaDeConexao().getConnection();
+			conn.setAutoCommit(false);
+			CenarioDeUsuario();
+			CenarioDeUsuario();
+		} catch (Exception e) {
+			System.out.println(e);
+		}	
+	}
+	
+	private void CenarioDeUsuario() throws SQLException{
 		Usuario usuario = new Usuario("UsuarioTeste", "testeLogin", "testeSenha");
 		
 		PreparedStatement ps = null;
 		int transacaoSucesso = 0;
 		try{
-			conn = new ControleFabricaDeConexao().getConnection();
-			conn.setAutoCommit(false);
 			String sql = "insert into tb_usuarios "
 					+ "(nome_usuario, login_usuario, senha_usuario,"
 					+ "email_usuario, data_nascimento_usuario, "
@@ -57,8 +68,36 @@ public class UsuarioDAOTest {
 		//assertEquals(transacaoSucesso, 1);
 	}
 	
+	private void CenarioDeSessao() throws SQLException{
+		Usuario usuario = mock(Usuario.class);
+		when(usuario.getId_usuario()).thenReturn((long) -1);
+	
+		PreparedStatement ps = null;
+		int transacaoSucesso = 0;
+		try{
+			String sql = "insert into tb_sessoes_usuario "
+					+ "(id_usuario, dia_sessao, mes_sessao,"
+					+ "ano_sessao, horario_sessao, quantidade_sessoes) values"
+					+ "(?,?,?,?,?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, usuario.getId_usuario()); 
+			ps.setString(2, ""+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)); 
+			ps.setString(3, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
+			ps.setString(4, ""+Calendar.getInstance().get(Calendar.YEAR)); 
+			ps.setString(5, Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE)); 
+			ps.setInt(6, 5); 
+			transacaoSucesso = ps.executeUpdate(); 
+		}catch(Exception e){
+			System.out.println(e);
+		}finally{
+			ps.close();
+			//System.out.println(transacaoSucesso);
+		}
+		//assertEquals(transacaoSucesso, 1);
+	}
+	
 	@After
-	public void FechaCenarioDeUsuarioBancoDeDados() throws SQLException{
+	public void FechaCenario() throws SQLException{
 		conn.rollback();
 		conn.close();
 	}
@@ -134,6 +173,46 @@ public class UsuarioDAOTest {
 			ps.close();
 		}
 		assertNull(usuario);
+	}
+	
+	//TESTECRIASESSAO
+	@Test
+	public void LoginDeUsuario_UsuarioExistente() throws Exception{
+		Usuario usuarioMock = mock(Usuario.class);
+		when(usuarioMock.getLogin_usuario()).thenReturn("testeLogin");
+		when(usuarioMock.getSenha_usuario()).thenReturn("testeSenha");
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		Usuario usuario;
+		int qtdErros = 0;
+		try {
+			String sql = "select * from tb_usuarios where login_usuario = ? "
+				+ "and senha_usuario = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, usuarioMock.getLogin_usuario()); 
+			ps.setString(2, usuarioMock.getSenha_usuario()); 
+			rs = ps.executeQuery(); 
+			
+			usuario = new Usuario(rs);
+			
+			if(usuario.getNome_usuario() == null || usuario.getNome_usuario() == "")
+				qtdErros +=1;
+			
+			
+		} catch (Exception e) {
+			throw new Exception("Erro: LoginDeUsuario, "+e);
+		}finally{
+			rs.close();
+			ps.close();
+		}
+		assertEquals(usuario.getNome_usuario(), "UsuarioTeste");
+	}
+	
+	private Usuario VerificaUsuarioExiste(String login, String senha){
+		Usuario usuario = null;
+		
+		return usuario;
 	}
 
 }

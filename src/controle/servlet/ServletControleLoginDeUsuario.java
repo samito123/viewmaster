@@ -72,16 +72,16 @@ public class ServletControleLoginDeUsuario {
 		SessoesDeUsuarioDAO dao = new SessoesDeUsuarioDAO();
 		long quantidadeDeSessoes = dao.VerificaSeSessaoDoUsuarioExiste(usuario);
 		if(quantidadeDeSessoes > 0){
-			UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
+			//UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
 		}else{
 			SalvarSessaoUsuario(usuario);
 		}
 	}
 	
-	private void UpdateSessaoUsuario(Usuario usuario, Long quantidadeDeSessoes) throws SQLException, IOException{
+	private void UpdateSessoesDeUsuario(Usuario usuario, long quantidadeDeSessoes) throws SQLException, IOException{
 		SessoesDeUsuarioDAO dao = new SessoesDeUsuarioDAO();
 		int transacaoRealizada = dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
-		//VerificarUltimaSessaoUsuario(usuario);
+		VerificaSeUpdateSessaoDeUsuarioOcorreuComSucesso(usuario, transacaoRealizada);
 	}
 	
 	private void VerificaSeUpdateSessaoDeUsuarioOcorreuComSucesso(Usuario usuario, int transacaoRealizada) 

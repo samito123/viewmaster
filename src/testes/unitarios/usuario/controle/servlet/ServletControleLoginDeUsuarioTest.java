@@ -1,9 +1,7 @@
 package testes.unitarios.usuario.controle.servlet;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 import java.sql.SQLException;
@@ -189,32 +187,34 @@ public class ServletControleLoginDeUsuarioTest {
 	public void VerificaSeSessaoDoUsuarioExiste_SessaoExiste() throws Exception{		
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
-		
 		SessoesDeUsuarioDAO dao = mock(SessoesDeUsuarioDAO.class);
 		when(dao.VerificaSeSessaoDoUsuarioExiste(usuario)).thenReturn((long) 1);
+		boolean sucesso;
 		
 		long quantidadeDeSessoes = dao.VerificaSeSessaoDoUsuarioExiste(usuario);
 		if(quantidadeDeSessoes > 0){
-			assertEquals(quantidadeDeSessoes, 1);
+			sucesso = true;
 		}else{
-			fail();
+			sucesso = false;
 		}
+		assertTrue(sucesso);
 	}
 	
 	@Test
 	public void VerificaSeSessaoDoUsuarioExiste_SessaoNãoExiste() throws Exception{		
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
-		
 		SessoesDeUsuarioDAO dao = mock(SessoesDeUsuarioDAO.class);
 		when(dao.VerificaSeSessaoDoUsuarioExiste(usuario)).thenReturn((long) 0);
+		boolean sucesso;
 		
 		long quantidadeDeSessoes = dao.VerificaSeSessaoDoUsuarioExiste(usuario);
 		if(quantidadeDeSessoes > 0){
-			fail();	
+			sucesso = false;
 		}else{
-			assertEquals(quantidadeDeSessoes, 0);
+			sucesso = true;
 		}
+		assertTrue(sucesso);
 	}
 	
 	@Test
@@ -222,12 +222,11 @@ public class ServletControleLoginDeUsuarioTest {
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
 		long quantidadeDeSessoes = 1;
-		
 		SessoesDeUsuarioDAO dao = mock(SessoesDeUsuarioDAO.class);
 		when(dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes)).thenReturn(1);
 		
-		dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
-		assertEquals(dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes), 1);
+		int transacaoRealizada = dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
+		assertEquals(transacaoRealizada, 1);
 	}
 	
 	@Test
@@ -235,65 +234,39 @@ public class ServletControleLoginDeUsuarioTest {
 		Usuario usuario = mock(Usuario.class);
 		when(usuario.getId_usuario()).thenReturn((long) 1);
 		long quantidadeDeSessoes = 1;
-		
 		SessoesDeUsuarioDAO dao = mock(SessoesDeUsuarioDAO.class);
 		when(dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes)).thenReturn(0);
 		
-		dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
-		assertEquals(dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes), 0);
+		int transacaoRealizada = dao.UpdateSessaoUsuario(usuario, quantidadeDeSessoes);
+		assertEquals(transacaoRealizada, 0);
 	}
 	
 	@Test
 	public void VerificaSeUpdateSessaoDeUsuarioOcorreuComSucesso_TransacaoComSucesso() throws SQLException{
+		boolean sucesso;
+		
 		long transacaoRealizada = 1;
 		if(transacaoRealizada == 1){
-			assertEquals(transacaoRealizada, 1);
+			sucesso = true;
 		}else{
-			fail();
+			sucesso = false;
 		}
+		assertTrue(sucesso);
 	}
 	
 	@Test
 	public void VerificaSeUpdateSessaoDeUsuarioOcorreuComSucesso_TransacaoComErro() throws SQLException{
+		boolean sucesso;
+		
 		long transacaoRealizada = 0;
 		if(transacaoRealizada == 1){
-			fail();
+			sucesso = false;
 		}else{
-			assertEquals(transacaoRealizada, 0);
+			sucesso = true;
 		}
+		assertTrue(sucesso);
 	}
 	
-	/*@Test
-	public void UpdateSessaoUsuario() throws Exception{
-		int TransacaoRealizada = 0;
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs;
-		try {		
-			conn = new ControleFabricaDeConexao().getConnection();
-			String sql = "update tb_sessoes_usuario set " 
-					+ "quantidade_sessoes=? "
-					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?"; 
-			
-			ps = conn.prepareStatement(sql);
-			ps.setLong(1, 6); 
-			ps.setLong(2, 40); 
-			ps.setString(3, "02"); 
-			ps.setString(4, "2016"); 
-			TransacaoRealizada = ps.executeUpdate();
-			
-		}catch (Exception e) {
-			TransacaoRealizada = 0;
-			System.out.println("catch");
-			throw new Exception("Erro ao persistir objeto.", e);
-		}finally{
-			ps.close();
-			conn.close();
-			//return transacaoRealizada;
-			System.out.println(TransacaoRealizada);
-			//if(TransacaoRealizada == 0)
-			//	throw new Exception("Erro ao persistir objeto.");
-		}
-	}*/
+	
 	
 }

@@ -122,4 +122,131 @@ public class SessoesDeUsuarioDAOTest {
 		}
 	}
 	
+	@Test(expected=Exception.class)
+	public void VerificaSeSessaoDoUsuarioExiste_ErroSQL() throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Usuario usuario = mock(Usuario.class);
+		when(usuario.getId_usuario()).thenReturn((long) -2);
+		int trasacaoErro = 0;
+		
+		long quantidadeDeSessoes = 0;
+		try {	
+			//conn = new ControleFabricaDeConexao().getConnection();
+			String sql = "select * from tb_xxx where id_usuario = ? "
+					+ "and mes_sessao = ? and ano_sessao = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, usuario.getId_usuario()); 
+			ps.setString(2, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
+			ps.setString(3, ""+Calendar.getInstance().get(Calendar.YEAR)); 
+			rs = ps.executeQuery(); 
+			if (rs.first()) { 
+				quantidadeDeSessoes = rs.getLong(("quantidade_sessoes"));
+			}	
+		}catch (Exception e) {
+			trasacaoErro = 1;
+			throw new Exception("Erro: VerificaSeSessaoDoUsuarioExiste, "+e);
+		}finally{
+			assertEquals(trasacaoErro, 1);
+			rs.close();
+			ps.close();
+			//conn.close();
+		}
+	}
+	
+	@Test
+	public void UpdateSessaoUsuario_TransacaoComSucesso() throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Usuario usuario = mock(Usuario.class);
+		when(usuario.getId_usuario()).thenReturn((long) -1);
+	
+		long quantidadeDeSessoes = 8;
+		int transacaoRealizada = 0;
+		try {	
+			//conn = new ControleFabricaDeConexao().getConnection();
+			String sql = "update tb_sessoes_usuario set " 
+					+ "quantidade_sessoes=? "
+					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?"; 
+			
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, quantidadeDeSessoes+1); 
+			ps.setLong(2, usuario.getId_usuario()); 
+			ps.setString(3, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
+			ps.setString(4, ""+Calendar.getInstance().get(Calendar.YEAR)); 
+			transacaoRealizada = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			transacaoRealizada = 0;
+			throw new Exception("Erro: UpdateSessaoUsuario, "+e);
+		}finally{
+			assertEquals(transacaoRealizada, 1);
+			ps.close();
+			//conn.close();	
+		}
+	}
+	
+	@Test
+	public void UpdateSessaoUsuario_TransacaoSemSucesso() throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Usuario usuario = mock(Usuario.class);
+		when(usuario.getId_usuario()).thenReturn((long) -2);
+	
+		long quantidadeDeSessoes = 8;
+		int transacaoRealizada = 0;
+		try {	
+			//conn = new ControleFabricaDeConexao().getConnection();
+			String sql = "update tb_sessoes_usuario set " 
+					+ "quantidade_sessoes=? "
+					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?"; 
+			
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, quantidadeDeSessoes+1); 
+			ps.setLong(2, usuario.getId_usuario()); 
+			ps.setString(3, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
+			ps.setString(4, ""+Calendar.getInstance().get(Calendar.YEAR)); 
+			transacaoRealizada = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			transacaoRealizada = 0;
+			throw new Exception("Erro: UpdateSessaoUsuario, "+e);
+		}finally{
+			assertEquals(transacaoRealizada, 0);
+			ps.close();
+			//conn.close();	
+		}
+	}
+	
+	@Test(expected=Exception.class)
+	public void UpdateSessaoUsuario_ErroSQL() throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Usuario usuario = mock(Usuario.class);
+		when(usuario.getId_usuario()).thenReturn((long) -2);
+	
+		long quantidadeDeSessoes = 8;
+		int transacaoRealizada = 0;
+		try {	
+			//conn = new ControleFabricaDeConexao().getConnection();
+			String sql = "update tb_xxx set " 
+					+ "quantidade_sessoes=? "
+					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?"; 
+			
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, quantidadeDeSessoes+1); 
+			ps.setLong(2, usuario.getId_usuario()); 
+			ps.setString(3, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
+			ps.setString(4, ""+Calendar.getInstance().get(Calendar.YEAR)); 
+			transacaoRealizada = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			transacaoRealizada = 1;
+			throw new Exception("Erro: UpdateSessaoUsuario, "+e);
+		}finally{
+			assertEquals(transacaoRealizada, 1);
+			ps.close();
+			//conn.close();	
+		}
+	}
 }

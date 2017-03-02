@@ -1,5 +1,8 @@
 package modelos;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Usuario {
 	
 	private long id_usuario;
@@ -29,6 +32,19 @@ public class Usuario {
 		this.data_nascimento_usuario = "";
 		this.pergunta_secreta_usuario = "";
 		this.resposta_pergunta_secreta_usuario = "";
+	}
+	
+	public Usuario(ResultSet rs) throws SQLException{
+		while (rs.next()) {
+			this.id_usuario = rs.getLong("id_usuario");
+			this.nome_usuario = rs.getString("nome_usuario");
+			this.login_usuario = rs.getString("login_usuario");
+			this.senha_usuario = rs.getString("senha_usuario");
+			this.email_usuario = rs.getString("email_usuario");
+			this.data_nascimento_usuario = rs.getString("data_nascimento_usuario");
+			this.pergunta_secreta_usuario = rs.getString("pergunta_secreta_usuario");
+			this.resposta_pergunta_secreta_usuario = rs.getString("resposta_pergunta_secreta_usuario");
+		}
 	}
 	
 	public long getId_usuario() {
