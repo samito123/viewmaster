@@ -14,6 +14,7 @@ import java.util.Calendar;
 
 import javax.servlet.ServletException;
 
+import modelos.Sessao;
 import modelos.Usuario;
 
 import org.junit.After;
@@ -40,7 +41,10 @@ public class UsuarioDAOTest {
 	}
 	
 	private void CenarioDeUsuario() throws SQLException{
-		Usuario usuario = new Usuario("UsuarioTeste", "testeLogin", "testeSenha");
+		Usuario usuario = new Usuario();
+		usuario.setNome_usuario("UsuarioTeste");
+		usuario.setLogin_usuario("testeLogin");
+		usuario.setSenha_usuario("testeSenha");
 		
 		PreparedStatement ps = null;
 		int transacaoSucesso = 0;
@@ -78,18 +82,17 @@ public class UsuarioDAOTest {
 		try{
 			String sql = "insert into tb_sessoes_usuario "
 					+ "(id_usuario, dia_sessao, mes_sessao,"
-					+ "ano_sessao, horario_sessao, quantidade_sessoes) values"
-					+ "(?,?,?,?,?,?)";
+					+ "ano_sessao, quantidade_sessoes) values"
+					+ "(?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, usuario.getId_usuario()); 
 			ps.setString(2, ""+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)); 
 			ps.setString(3, new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH))); 
 			ps.setString(4, ""+Calendar.getInstance().get(Calendar.YEAR)); 
-			ps.setString(5, Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE)); 
-			ps.setInt(6, 5); 
+			ps.setInt(5, 5); 
 			transacaoSucesso = ps.executeUpdate(); 
 		}catch(Exception e){
-			System.out.println(e);
+			System.out.println("Erro: CenarioDeSessao, "+e);
 		}finally{
 			ps.close();
 			//System.out.println(transacaoSucesso);
@@ -103,7 +106,7 @@ public class UsuarioDAOTest {
 		conn.close();
 	}
 	
-	@Test
+	/*@Test
 	public void VerificaLoginSenhaDeAcessoRetornaUsuario_UsuarioExistente() throws Exception{
 		Usuario usuarioMock = mock(Usuario.class);
 		when(usuarioMock.getLogin_usuario()).thenReturn("testeLogin");
@@ -174,7 +177,7 @@ public class UsuarioDAOTest {
 			ps.close();
 		}
 		assertNull(usuario);
-	}
+	}*/
 	
 	//TESTECRIASESSAO
 	@Test
@@ -186,88 +189,136 @@ public class UsuarioDAOTest {
 		//conn.setAutoCommit(false);
 		try {
 			
-			Usuario usuario = BuscaUsuarioLogin(login, senha);
+			Sessao usuario = BuscaUsuarioLogin(login, senha);
+			assertEquals(usuario.getQuantidade_de_sessoes(), 5);
 			if(usuario != null){
-				VerificaSessaoUsuario(usuario.getId_usuario());
+				TrataSessaoDeUsuario(usuario);
 			}else{
 				//RetornaErro
 			}
 		} catch (Exception e) {
-			throw new Exception("Erro: LoginDeUsuario, "+e);
+			System.out.println("Erro: LoginDeUsuario, "+e);
 		}finally{
 			//conn.rollback();
 			//conn.close();
 		}
 		
 	}
-	
-	private Usuario BuscaUsuarioLogin(String login, String senha) throws SQLException{
+
+	private Sessao BuscaUsuarioLogin(String login, String senha) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Usuario usuario = null;
+		Sessao usuario = null;
 		
-		String sql = "select * from tb_usuarios "
-				+ "where login_usuario = '"+login+"' "
-				+ "and senha_usuario = '"+senha+"'";
-		ps = conn.prepareStatement(sql);
-		rs = ps.executeQuery(); 
-		
-		if(rs.isBeforeFirst()) {
-			usuario = new Usuario(rs);
+		try{
+			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
+			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
+				
+			String sql = "select id_usuario, nome_usuario, login_usuario, "
+					+ "(select s.quantidade_sessoes "
+					+ "from tb_usuarios as u "
+					+ "left join tb_sessoes_usuario as s "
+					+ "on u.id_usuario = s.id_usuario "
+					+ "where login_usuario = ? "
+					+ "and senha_usuario = ? "
+					+ "and mes_sessao = ? "
+					+ "and ano_sessao = ?) "
+					+ "as quantidade_sessoes "
+					+ "from tb_usuarios "
+					+ "where login_usuario = ? "
+					+ "and senha_usuario = ? ";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, login); 
+			ps.setString(2, senha); 
+			ps.setString(3, mesAtual); 
+			ps.setString(4, anoAtual); 
+			ps.setString(5, login); 
+			ps.setString(6, senha); 
+			rs = ps.executeQuery(); 
+
+			while (rs.next()) {
+				usuario = new Sessao();
+				usuario.setId_usuario(rs.getLong("id_usuario"));
+				usuario.setNome_usuario(rs.getString("nome_usuario"));
+				usuario.setLogin_usuario(rs.getString("login_usuario"));
+				usuario.setQuantidade_de_sessoes(rs.getInt(("quantidade_sessoes")));
+			}
+		}catch(Exception e){
+			
+		}finally{
+			rs.close();
+			ps.close();
 		}
-		
 		return usuario;
 	}
 	
-	private void VerificaSessaoUsuario(long IdUsuario){
+	private void TrataSessaoDeUsuario(Sessao usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*private int VerificaSessaoUsuario(long idUsuario) throws SQLException{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
+		int quantidadeDeErros = 0;
 		long quantidadeDeSessoes = 0;
-		
 		try{
-			String mes = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String ano = ""+Calendar.getInstance().get(Calendar.YEAR);
+			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
+			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR);
 			String sql = "select * from tb_sessoes_usuario "
-					+ "where id_usuario = "+IdUsuario+" "
-					+ "and mes_sessao = '"+mes+"' "
-					+ "and ano_sessao = '"+ano+"' ";
+					+ "where id_usuario = "+idUsuario+" "
+					+ "and mes_sessao = '"+mesAtual+"' "
+					+ "and ano_sessao = '"+anoAtual+"' ";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery(); 
 			if (rs.first()) { 
 				quantidadeDeSessoes = rs.getLong(("quantidade_sessoes"));
-				UpdateSessaoUsuario();
+				if(UpdateSessaoUsuario(idUsuario, quantidadeDeSessoes) == 0){
+					quantidadeDeErros++;
+				}
 			}else{
 				//CriaSessaoUsuario();
 			}
 		}catch(Exception e){
 			System.out.println("erro: "+e);
+		}finally{
+			rs.close();
+			ps.close();
 		}
-		System.out.println("ID: "+IdUsuario);
+		System.out.println("ID: "+idUsuario);
 		System.out.println("Quantidade de sessões: "+quantidadeDeSessoes);
+		return quantidadeDeErros;
 	}
 	
-	private int UpdateSessaoUsuario(long quntidade, long idUsuario){
+	private int UpdateSessaoUsuario(long idUsuario, long quntidade) throws SQLException{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+	
+		int sucesso = 0;
 		try{
+			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
+			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR);
 			String sql = "update tb_sessoes_usuario "
 					+ "set quantidade_sessoes = "
 					+ "where id_usuario = "+idUsuario+" "
-					+ "and mes_sessao = '"+mes+"' "
-					+ "and ano_sessao = '"+ano+"' "; 
+					+ "and mes_sessao = '"+mesAtual+"' "
+					+ "and ano_sessao = '"+anoAtual+"' "; 
 			ps = conn.prepareStatement(sql);
-			return ps.executeUpdate(); 
+			sucesso = ps.executeUpdate(); 
 		}catch(Exception e){
-			return 0;
+			System.out.println("Erro: UpdateSessaoUsuario, "+e);
+		}finally{
+			rs.close();
+			ps.close();
 		}
-		
+		return sucesso;
 	}
 	
 	private void CriaSessaoUsuario(){
 		
-	}
+	}*/
 	
 	
 }
