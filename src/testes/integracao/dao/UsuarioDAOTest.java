@@ -111,7 +111,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	public void BuscarUsuarioLogin_UsuarioExistente() throws SQLException {
+	public void BuscaUsuarioLogin_UsuarioExistente() throws SQLException {
 		String login = "testeLogin";
 		String senha = "testeSenha";
 		
@@ -172,7 +172,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	public void BuscarUsuarioLogin_UsuarioNaoExistente() throws SQLException {
+	public void BuscaUsuarioLogin_UsuarioNaoExistente() throws SQLException {
 		String login = "xxxxx";
 		String senha = "xxxxx";
 		
@@ -233,7 +233,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	public void BuscarUsuarioLogin_LancandoExcecao() throws SQLException {
+	public void BuscaUsuarioLogin_LancandoExcecao() throws SQLException {
 		boolean sucesso = false;
 		String login = "xxxxx";
 		String senha = "xxxxx";

@@ -28,7 +28,7 @@ public class ServletUsuario extends HttpServlet{
 			String metodo = request.getParameter("metodo");
 			switch (metodo) {
 			case "LogarUsuario":	
-				//new LogarUsuario(req, resp)
+				new LogarUsuario(request, response);
 				break;
 				
 			default:

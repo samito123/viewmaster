@@ -1,6 +1,7 @@
 package controle.servlet.usuario;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelos.Sessao;
 import controle.conexao.ControleFabricaDeConexao;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.UsuarioDAO;
 
 
@@ -25,26 +27,44 @@ public class LogarUsuario {
 	}
 	
 	public void LoginDeUsuario() throws Exception{
-
+		System.out.println("entrou");
 		Connection conn = new ControleFabricaDeConexao().getConnection();
 		conn.setAutoCommit(false);
 		try {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
-			Sessao usuario = new UsuarioDAO(conn).BuscarUsuarioLogin(login, senha);
+			Sessao usuario = new UsuarioDAO(conn).BuscaUsuarioLogin(login, senha);
 			if(usuario != null){
-				//TrataSessaoDeUsuario(usuario);
+				TrataSessaoDeUsuario(usuario);
 			}else{
-				//RetornaErroParaUsuario("Usuario ou senha está incorreto!");
+				RetornaErroServlet("Os parametros informados estão incorretos!");
 			}
 		} catch (Exception e) {
 			System.out.println("Erro: LoginDeUsuario, "+e);
+			RetornaErroServlet("Erro: LoginDeUsuario, "+e);
 		}finally{
 			conn.rollback();
 			conn.close();
 		}
 	}
 	
+	
+	private void RetornaErroServlet(String erro){
+		new ControleDeRetornoServlet(request, response)
+		.RetornaErro(erro);
+	}
+	
+	public void TrataSessaoDeUsuario(Sessao usuario) throws SQLException {
+		int qtdErros = 0;
+		if(usuario.getQuantidade_de_sessoes() > 0){
+			//qtdErros = AtualizaSessaoUsuario(usuario);
+			RetornaErroServlet("Deu certo");
+		}else{
+			//qtdErros = InsereSessaoUsuario(usuario);
+			RetornaErroServlet("Nps");
+		}
+		//ValidaSessaoUsuario(qtdErros);
+	}
 	
 	/*private void VerificaLoginDiferenteDeNullOuVazio() throws Exception{
 		if(request.getParameter("login") != null && request.getParameter("login") != ""){

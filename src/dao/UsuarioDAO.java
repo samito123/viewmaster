@@ -8,8 +8,6 @@ import java.util.Calendar;
 
 
 import modelos.Sessao;
-import modelos.Usuario;
-import controle.conexao.ControleFabricaDeConexao;
 import controle.modelos.ControleTratamentoMesAno;
 
 public class UsuarioDAO {
@@ -22,7 +20,7 @@ public class UsuarioDAO {
 		this.conn = conn;
 	}
 
-	public Sessao BuscarUsuarioLogin(String login, String senha) throws SQLException {
+	public Sessao BuscaUsuarioLogin(String login, String senha) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Sessao usuario = null;

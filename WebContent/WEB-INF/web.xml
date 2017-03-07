@@ -18,7 +18,7 @@
 	
 	<servlet> 
 		<servlet-name>ServletUsuario</servlet-name> 
-		<servlet-class>controle.servlet.ServletUsuario</servlet-class> 
+		<servlet-class>controle.servlet.usuario.ServletUsuario</servlet-class> 
 	</servlet>
 	<servlet-mapping> 
 		<servlet-name>ServletUsuario</servlet-name> 

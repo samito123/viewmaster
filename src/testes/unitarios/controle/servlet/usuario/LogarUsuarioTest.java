@@ -367,5 +367,55 @@ public class LogarUsuarioTest {
 		Sessao usuario = null;
 		return usuario;
 	}
+	
+	@Test
+	public void TrataSessaoDeUsuario_QuantidadeDeSessoesMaiorQueZero() throws SQLException {
+		boolean sucesso = false;
+		Sessao usuario = mock(Sessao.class);
+		when(usuario.getQuantidade_de_sessoes()).thenReturn(5);
+		
+		int qtdErros = 0;
+		if(usuario.getQuantidade_de_sessoes() > 0){
+			sucesso = true;
+			//qtdErros = AtualizaSessaoUsuario(usuario);
+		}else{
+			//qtdErros = InsereSessaoUsuario(usuario);
+		}
+		//ValidaSessaoUsuario(qtdErros);
+		assertTrue(sucesso);
+	}
+	
+	@Test
+	public void TrataSessaoDeUsuario_QuantidadeDeSessoesZero() throws SQLException {
+		boolean sucesso = false;
+		Sessao usuario = mock(Sessao.class);
+		when(usuario.getQuantidade_de_sessoes()).thenReturn(0);
+		
+		int qtdErros = 0;
+		if(usuario.getQuantidade_de_sessoes() > 0){
+			//qtdErros = AtualizaSessaoUsuario(usuario);
+		}else{
+			sucesso = true;
+			//qtdErros = InsereSessaoUsuario(usuario);
+		}
+		//ValidaSessaoUsuario(qtdErros);
+		assertTrue(sucesso);
+	}
+	
+	@Test
+	public void TrataSessaoDeUsuario_QuantidadeDeSessoesNull() throws SQLException {
+		boolean sucesso = false;
+		Sessao usuario = mock(Sessao.class);
+		
+		int qtdErros = 0;
+		if(usuario.getQuantidade_de_sessoes() > 0){
+			//qtdErros = AtualizaSessaoUsuario(usuario);
+		}else{
+			sucesso = true;
+			//qtdErros = InsereSessaoUsuario(usuario);
+		}
+		//ValidaSessaoUsuario(qtdErros);
+		assertTrue(sucesso);
+	}
 
 }
