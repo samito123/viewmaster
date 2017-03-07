@@ -1,4 +1,4 @@
-package controle.conexao;
+package controle.servlet;
 
 import java.io.UnsupportedEncodingException;
 
@@ -7,7 +7,7 @@ import modelos.Assinatura;
 import modelos.TipoDeProduto;
 import modelos.Usuario;
 
-public class ControleCodificaUTF8 {
+public class CodificaUTF8 {
 
 	public Usuario CodificaUsuarioUTF8(Usuario usuario) throws UnsupportedEncodingException{
 		if(usuario.getNome_usuario() != null)

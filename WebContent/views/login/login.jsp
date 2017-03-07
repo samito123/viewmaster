@@ -105,16 +105,16 @@ pageEncoding="UTF-8"%>
 			
 			acess.LogarUsuario = function(){
 				$("#loading").show();
-				var variaveis = "?metodo=VerificaLoginDoUsuario&login="+acess.login+"&senha="+acess.pass;
-				$http.post('LogarUsuario'+variaveis)
+				var variaveis = "?metodo=LogarUsuario&login="+acess.login+"&senha="+acess.pass;
+				$http.post('ServletUsuario'+variaveis)
 	            .success(function (data, status, headers, config) {				  
-	            	if(data == "erro"){
-	            		MensagemDeErroModal("Usuário ou senha está incorreto!");
-	            	}else{							
+	            	if(data == "sucesso"){
 	            		GuardarSessaoUsuario(data);
+	            	}else{							
+	            		MensagemDeErroModal(data);
 	            	}	    	
             	}).error(function (data, status, header, config) {		            	
-            		MensagemDeErroModal("Ocorreu um erro no servidor, tente novamente mais tarde!");
+            		MensagemDeErroModal("Ocorreu um erro no servidor, erro: "+status);
             	});
 			};
 			

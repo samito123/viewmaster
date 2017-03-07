@@ -17,12 +17,12 @@
     </servlet-mapping>
 	
 	<servlet> 
-		<servlet-name>LoginDeUsuario</servlet-name> 
-		<servlet-class>servlet.LoginUsuario</servlet-class> 
+		<servlet-name>ServletUsuario</servlet-name> 
+		<servlet-class>controle.servlet.ServletUsuario</servlet-class> 
 	</servlet>
 	<servlet-mapping> 
-		<servlet-name>LoginDeUsuario</servlet-name> 
-		<url-pattern>/LogarUsuario</url-pattern> 
+		<servlet-name>ServletUsuario</servlet-name> 
+		<url-pattern>/ServletUsuario</url-pattern> 
 	</servlet-mapping>
 	
 	<servlet>

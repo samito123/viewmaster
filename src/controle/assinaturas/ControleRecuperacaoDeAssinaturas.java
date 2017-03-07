@@ -12,8 +12,8 @@ import modelos.Assinatura;
 
 import com.google.gson.Gson;
 
-import controle.conexao.ControleCodificaUTF8;
-import controle.conexao.ControleDeRetornoServidor;
+import controle.servlet.CodificaUTF8;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.AssinaturasDAO;
 
 public class ControleRecuperacaoDeAssinaturas {
@@ -37,7 +37,7 @@ public class ControleRecuperacaoDeAssinaturas {
 			assinaturas = dao.RetornaListaDeAssinaturas(assinaturas);
 			RetornaListaDeAssinaturas(assinaturas);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -46,7 +46,7 @@ public class ControleRecuperacaoDeAssinaturas {
 		PrintWriter out = response.getWriter();
 		for(int contador = 0; contador < assinaturas.size(); contador++){
 			assinaturas.set(contador, 
-				new ControleCodificaUTF8().CodificaAssinaturaUTF8(assinaturas.get(contador)));
+				new CodificaUTF8().CodificaAssinaturaUTF8(assinaturas.get(contador)));
 		}
 		out.write(gson.toJson(assinaturas));
 	}

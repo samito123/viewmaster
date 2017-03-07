@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import testes.unitarios.controle.conexao.ControleDeRetornoServidorTest;
-import testes.unitarios.servlet.ServletUsuarioTest;
+import testes.unitarios.controle.servlet.usuario.ServletUsuarioTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({

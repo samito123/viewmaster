@@ -13,8 +13,8 @@ import modelos.TipoDeProduto;
 
 import com.google.gson.Gson;
 
-import controle.conexao.ControleCodificaUTF8;
-import controle.conexao.ControleDeRetornoServidor;
+import controle.servlet.CodificaUTF8;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.GraficosDAO;
 
 public class ControleGraficoTiposDeProdutosMaisVendidos {
@@ -42,7 +42,7 @@ public class ControleGraficoTiposDeProdutosMaisVendidos {
 			tiposDeProdutos = dao.ConstroiDadosParaGraficoDeTiposDeProdutosMaisVendidos(tiposDeProdutos);
 			RetornaDadosParaGraficoDeTiposDeProdutosMaisVendidos(tiposDeProdutos);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class ControleGraficoTiposDeProdutosMaisVendidos {
 		PrintWriter out = response.getWriter();
 		for(int contador = 0; contador < tiposDeProdutos.size(); contador++){
 			tiposDeProdutos.set(contador, 
-					new ControleCodificaUTF8().CodificaTipoProdutoUTF8(tiposDeProdutos.get(contador)));
+					new CodificaUTF8().CodificaTipoProdutoUTF8(tiposDeProdutos.get(contador)));
 		}
 		out.write(gson.toJson(tiposDeProdutos));
 	}

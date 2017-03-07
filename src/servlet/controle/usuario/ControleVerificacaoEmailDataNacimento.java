@@ -12,8 +12,8 @@ import modelos.Usuario;
 
 import com.google.gson.Gson;
 
-import controle.conexao.ControleCodificaUTF8;
-import controle.conexao.ControleDeRetornoServidor;
+import controle.servlet.CodificaUTF8;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.UsuarioDAO;
 
 public class ControleVerificacaoEmailDataNacimento {
@@ -36,7 +36,7 @@ public class ControleVerificacaoEmailDataNacimento {
 
 	private void VerificaRetornoDeUsuarioParaRecuperacaoDeSenha(Usuario usuario) throws IOException{
 		if(usuario.getNome_usuario() == null){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}else{
 			RetornaUsuarioJsonRecuperadoViaEmailDataDeNascimento(usuario);
 		}
@@ -45,6 +45,6 @@ public class ControleVerificacaoEmailDataNacimento {
 	private void RetornaUsuarioJsonRecuperadoViaEmailDataDeNascimento(Usuario usuario) throws IOException{
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
-		out.write(gson.toJson(new ControleCodificaUTF8().CodificaUsuarioUTF8(usuario)));
+		out.write(gson.toJson(new CodificaUTF8().CodificaUsuarioUTF8(usuario)));
 	}
 }

@@ -1,4 +1,4 @@
-package controle.conexao;
+package controle.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,12 +6,12 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ControleDeRetornoServidor {
+public class ControleDeRetornoServlet {
 	
 	static private HttpServletRequest request;
 	static private HttpServletResponse response; 
 	
-	public ControleDeRetornoServidor(HttpServletRequest request, HttpServletResponse response){
+	public ControleDeRetornoServlet(HttpServletRequest request, HttpServletResponse response){
 		this.request = request;
 		this.response = response;
 	}
@@ -26,10 +26,10 @@ public class ControleDeRetornoServidor {
 		} 
 	}
 	
-	public void RetornaErro(){
+	public void RetornaErro(String erro){
 		try{
 			PrintWriter out = response.getWriter();
-			out.write("erro");	
+			out.write(new CodificaUTF8().CodificaStringUTF8(erro));	
 			out.close();
 		}catch(Exception e){
 			System.out.println("Erro: Controle de retorno de erro do servidor, "+e);

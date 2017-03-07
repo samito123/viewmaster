@@ -1,35 +1,52 @@
-package controle.servlet;
+package controle.servlet.usuario;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelos.Usuario;
-
-import com.google.gson.Gson;
-
-import controle.conexao.ControleDeRetornoServidor;
-import dao.SessoesDeUsuarioDAO;
-import dao.UltimaSessaoUsuarioDAO;
+import modelos.Sessao;
+import controle.conexao.ControleFabricaDeConexao;
 import dao.UsuarioDAO;
 
-public class ServletControleLoginDeUsuario {
+
+public class LogarUsuario {
 
 	static private HttpServletRequest request;
 	static private HttpServletResponse response; 
 	
-	public ServletControleLoginDeUsuario(HttpServletRequest request, HttpServletResponse response) 
+	public LogarUsuario(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception{
 		this.request = request;
 		this.response = response;
-		VerificaLoginDiferenteDeNullOuVazio();
+		//VerificaLoginDiferenteDeNullOuVazio();
+		LoginDeUsuario();
 	}
 	
-	private void VerificaLoginDiferenteDeNullOuVazio() throws Exception{
+	public void LoginDeUsuario() throws Exception{
+
+		Connection conn = new ControleFabricaDeConexao().getConnection();
+		conn.setAutoCommit(false);
+		try {
+			String login = request.getParameter("login");
+			String senha = request.getParameter("senha");
+			Sessao usuario = new UsuarioDAO(conn).BuscarUsuarioLogin(login, senha);
+			if(usuario != null){
+				//TrataSessaoDeUsuario(usuario);
+			}else{
+				//RetornaErroParaUsuario("Usuario ou senha está incorreto!");
+			}
+		} catch (Exception e) {
+			System.out.println("Erro: LoginDeUsuario, "+e);
+		}finally{
+			conn.rollback();
+			conn.close();
+		}
+	}
+	
+	
+	/*private void VerificaLoginDiferenteDeNullOuVazio() throws Exception{
 		if(request.getParameter("login") != null && request.getParameter("login") != ""){
 			VerificaSenhaDiferenteDeNull();
 		}else{
@@ -99,7 +116,7 @@ public class ServletControleLoginDeUsuario {
 			dao.SalvarSessaoUsuario(usuario);
 			RetornaUsuarioJsonRecuperadoViaLogin(usuario);
 		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			//new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
@@ -118,7 +135,7 @@ public class ServletControleLoginDeUsuario {
 			dao.UpdateUltimaSessaoUsuario(usuario);
 			RetornaUsuarioJsonRecuperadoViaLogin(usuario);
 		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			//new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
@@ -128,7 +145,7 @@ public class ServletControleLoginDeUsuario {
 			dao.SalvarUltimaSessaoUsuario(usuario);
 			RetornaUsuarioJsonRecuperadoViaLogin(usuario);
 		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			//new ControleDeRetornoServidor(request, response).RetornaErro();
 		}
 	}
 	
@@ -136,5 +153,5 @@ public class ServletControleLoginDeUsuario {
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		out.write(gson.toJson(usuario)); 
-	}
+	}*/
 }

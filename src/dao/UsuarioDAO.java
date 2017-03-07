@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
+
+import modelos.Sessao;
 import modelos.Usuario;
 import controle.conexao.ControleFabricaDeConexao;
-
+import controle.modelos.ControleTratamentoMesAno;
 
 public class UsuarioDAO {
 	
@@ -15,7 +18,67 @@ public class UsuarioDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
-	public Usuario VerificaLoginDeAcessoRetornaUsuario(Usuario usuario) throws Exception{
+	public UsuarioDAO(Connection conn){
+		this.conn = conn;
+	}
+
+	public Sessao BuscarUsuarioLogin(String login, String senha) throws SQLException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Sessao usuario = null;
+		try{
+			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
+			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
+				
+			String sql = "select id_usuario, nome_usuario, login_usuario, "
+					+ "(select s.quantidade_sessoes "
+					+ "from tb_usuarios as u "
+					+ "left join tb_sessoes_usuario as s "
+					+ "on u.id_usuario = s.id_usuario "
+					+ "where login_usuario = ? "
+					+ "and senha_usuario = ? "
+					+ "and mes_sessao = ? "
+					+ "and ano_sessao = ?) "
+					+ "as quantidade_sessoes, "
+					+ "(select us.data_hora_sessao "
+					+ "from tb_usuarios as u "
+					+ "left join tb_ultima_sessao_usuario as us "
+					+ "on u.id_usuario = us.id_usuario "
+					+ "where login_usuario = ?"
+					+ "and senha_usuario = ?) "
+					+ "as data_hora_sessao "				
+					+ "from tb_usuarios "
+					+ "where login_usuario = ? "
+					+ "and senha_usuario = ? ";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, login); 
+			ps.setString(2, senha); 
+			ps.setString(3, mesAtual); 
+			ps.setString(4, anoAtual); 
+			ps.setString(5, login); 
+			ps.setString(6, senha); 
+			ps.setString(7, login); 
+			ps.setString(8, senha);
+			rs = ps.executeQuery(); 
+
+			while (rs.next()) {
+				usuario = new Sessao();
+				usuario.setId_usuario(rs.getLong("id_usuario"));
+				usuario.setNome_usuario(rs.getString("nome_usuario"));
+				usuario.setLogin_usuario(rs.getString("login_usuario"));
+				usuario.setQuantidade_de_sessoes(rs.getInt(("quantidade_sessoes")));
+			}
+		}catch(Exception e){
+			System.out.println("Erro: BuscaUsuarioLogin, "+e);
+		}finally{
+			rs.close();
+			ps.close();
+		}
+		return usuario;
+	} 
+	
+	/*public Usuario VerificaLoginDeAcessoRetornaUsuario(Usuario usuario) throws Exception{
 		try {	
 			conn = new ControleFabricaDeConexao().getConnection();
 			String sql = "select * from tb_usuarios where login_usuario = ? "
@@ -91,7 +154,7 @@ public class UsuarioDAO {
 			conn.close();
 		}
 		return executouSQL;
-	}
+	}*/
 	
 	/*public ArrayList<Usuario> RetornaTudo(Usuario usuario) throws ServletException, SQLException{
 		ArrayList<Usuario> usuarios = new ArrayList<>();

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import modelos.Ano;
-import controle.conexao.ControleCodificaUTF8;
-import controle.conexao.ControleDeRetornoServidor;
+import controle.servlet.CodificaUTF8;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.GraficosDAO;
 
 public class ControleGraficoClientes {
@@ -37,7 +37,7 @@ public class ControleGraficoClientes {
 			anos.get(0).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeClientesAno(anos.get(0)));
 			SomaTotalDeClientesAnoCorrente(anos);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class ControleGraficoClientes {
 			anos.get(0).setValor(totalDeClientes);
 			ConstroiDadosParaGraficoDeClientesPorcentagem(anos);
 		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}	
 	}
 	
@@ -64,7 +64,7 @@ public class ControleGraficoClientes {
 			anos.get(1).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeClientesPorcentagem(anos.get(1)));	
 			SomaTotalDeClientesPorcentagem(anos);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -77,15 +77,15 @@ public class ControleGraficoClientes {
 			anos.get(1).setValor(totalDeSessoesAno);
 			RetornaDadosParaGraficoDeClientes(anos);
 		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}	
 	}
 	
 	private void RetornaDadosParaGraficoDeClientes(ArrayList<Ano> anos) throws IOException{
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
-		anos.set(0, new ControleCodificaUTF8().CodificaAnoUTF8(anos.get(0)));
-		anos.set(1, new ControleCodificaUTF8().CodificaAnoUTF8(anos.get(1)));
+		anos.set(0, new CodificaUTF8().CodificaAnoUTF8(anos.get(0)));
+		anos.set(1, new CodificaUTF8().CodificaAnoUTF8(anos.get(1)));
 		out.write(gson.toJson(anos));
 	}
 }

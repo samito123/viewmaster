@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelos.Email;
 import modelos.Usuario;
-import controle.conexao.ControleCodificaUTF8;
-import controle.conexao.ControleDeRetornoServidor;
+import controle.servlet.CodificaUTF8;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.UsuarioDAO;
 
 public class ControleEnvioDeSenha {
@@ -59,7 +59,7 @@ public class ControleEnvioDeSenha {
 			AlterarSenhaUsuarioEmail(usuario);
 		} catch (Exception e) {
 			e.printStackTrace();
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -69,15 +69,15 @@ public class ControleEnvioDeSenha {
 			boolean executouSQL = dao.AlteraSenhaUsuario(usuario);
 			TrataErroAlterarSenhaEmailBancoDeDados(executouSQL);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
 	private void TrataErroAlterarSenhaEmailBancoDeDados(boolean executouSQL) throws IOException{
 		if(executouSQL == true){
-			new ControleDeRetornoServidor(request, response).RetornaSucesso();
+			new ControleDeRetornoServlet(request, response).RetornaSucesso();
 		}else{
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -85,7 +85,7 @@ public class ControleEnvioDeSenha {
 		try {
 			AlterarSenhaUsuarioPerguntaSecreta(usuario);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -95,7 +95,7 @@ public class ControleEnvioDeSenha {
 			boolean executouSQL = dao.AlteraSenhaUsuario(usuario);
 			TrataErroAlterarSenhaPerguntaSecretaBancoDeDados(executouSQL, usuario.getSenha_usuario());
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -103,12 +103,12 @@ public class ControleEnvioDeSenha {
 		if(executouSQL == true){
 			RetornaNovaSenhaUsuario(novaSenha);
 		}else{
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
 	private void RetornaNovaSenhaUsuario(String novaSenha) throws IOException{
 		PrintWriter out = response.getWriter();
-		out.write(new ControleCodificaUTF8().CodificaStringUTF8(novaSenha));
+		out.write(new CodificaUTF8().CodificaStringUTF8(novaSenha));
 	}
 }

@@ -12,7 +12,7 @@ import modelos.Modulo;
 
 import com.google.gson.Gson;
 
-import controle.conexao.ControleDeRetornoServidor;
+import controle.servlet.ControleDeRetornoServlet;
 import dao.GraficosDAO;
 
 public class ControleGraficoModulos {
@@ -36,7 +36,7 @@ public class ControleGraficoModulos {
 			modulos = dao.ConstroiDadosParaGraficoDeModulosGeralAno();
 			SomaTotalDeVezesModuloUtilizado(modulos);
 		} catch (Exception e) {
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class ControleGraficoModulos {
 			}
 			RetornaDadosParaGraficoDeModulosGeral(modulos);
 		}catch(Exception e){
-			new ControleDeRetornoServidor(request, response).RetornaErro();
+			new ControleDeRetornoServlet(request, response).RetornaErro();
 		}	
 	}
 	
