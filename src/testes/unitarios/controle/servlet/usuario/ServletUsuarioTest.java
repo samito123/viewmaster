@@ -31,7 +31,6 @@ public class ServletUsuarioTest{
 			}
 		}catch(Exception e){
 			sucesso = false;
-			System.out.println("Erro: ServletUsuarioTest doPost, "+e);
 		}
 		assertTrue(sucesso);
 	}
@@ -55,7 +54,6 @@ public class ServletUsuarioTest{
 			}
 		}catch(Exception e){
 			sucesso = false;
-			System.out.println("Erro: ServletUsuarioTest doPost, "+e);
 		}
 		assertTrue(sucesso);
 	}
@@ -78,7 +76,6 @@ public class ServletUsuarioTest{
 			}
 		}catch(Exception e){
 			sucesso = true;
-			System.out.println("Erro: ServletUsuarioTest doPost, "+e);
 		}
 		assertTrue(sucesso);
 	}
@@ -102,7 +99,6 @@ public class ServletUsuarioTest{
 			}
 		}catch(Exception e){
 			sucesso = true;
-			System.out.println("Erro: ServletUsuarioTest doPost, "+e);
 		}
 		assertTrue(sucesso);
 	}

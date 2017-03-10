@@ -66,6 +66,7 @@ public class UsuarioDAO {
 				usuario.setNome_usuario(rs.getString("nome_usuario"));
 				usuario.setLogin_usuario(rs.getString("login_usuario"));
 				usuario.setQuantidade_de_sessoes(rs.getInt(("quantidade_sessoes")));
+				usuario.setData_hora_sessao(rs.getString(("data_hora_sessao")));
 			}
 		}catch(Exception e){
 			System.out.println("Erro: BuscaUsuarioLogin, "+e);

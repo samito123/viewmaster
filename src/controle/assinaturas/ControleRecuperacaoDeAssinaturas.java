@@ -37,7 +37,7 @@ public class ControleRecuperacaoDeAssinaturas {
 			assinaturas = dao.RetornaListaDeAssinaturas(assinaturas);
 			RetornaListaDeAssinaturas(assinaturas);
 		} catch (Exception e) {
-			new ControleDeRetornoServlet(request, response).RetornaErro();
+			//new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	

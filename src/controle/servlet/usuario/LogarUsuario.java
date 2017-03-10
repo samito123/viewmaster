@@ -3,67 +3,114 @@ package controle.servlet.usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import testes.unitarios.controle.servlet.ControleDeRetornoServletTest;
 import modelos.Sessao;
 import controle.conexao.ControleFabricaDeConexao;
 import controle.servlet.ControleDeRetornoServlet;
+import controle.servlet.exception.ServletException;
+import dao.SessoesDeUsuarioDAO;
 import dao.UsuarioDAO;
 
 
 public class LogarUsuario {
 
 	static private HttpServletRequest request;
-	static private HttpServletResponse response; 
+	static private HttpServletResponse response;
+	Connection conn;
 	
 	public LogarUsuario(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception{
 		this.request = request;
 		this.response = response;
-		//VerificaLoginDiferenteDeNullOuVazio();
-		LoginDeUsuario();
+		ProcuraUsuarioPorParametrosDeLoginSenha();
 	}
 	
-	public void LoginDeUsuario() throws Exception{
-		System.out.println("entrou");
-		Connection conn = new ControleFabricaDeConexao().getConnection();
+	private void ProcuraUsuarioPorParametrosDeLoginSenha() throws Exception{
+		conn = new ControleFabricaDeConexao().getConnection();
 		conn.setAutoCommit(false);
+		Sessao usuario;
 		try {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
-			Sessao usuario = new UsuarioDAO(conn).BuscaUsuarioLogin(login, senha);
-			if(usuario != null){
-				TrataSessaoDeUsuario(usuario);
-			}else{
-				RetornaErroServlet("Os parametros informados estão incorretos!");
-			}
+			usuario = new UsuarioDAO(conn).BuscaUsuarioLogin(login, senha);
 		} catch (Exception e) {
-			System.out.println("Erro: LoginDeUsuario, "+e);
-			RetornaErroServlet("Erro: LoginDeUsuario, "+e);
-		}finally{
 			conn.rollback();
 			conn.close();
+			throw new ServletException("ProcuraUsuarioPorParametrosDeLoginSenha: "+e, "Ocorreu um erro no ServletUsuario!", response);
+		}
+		ValidaProcuraUsuarioPorParametrosDeLoginSenha(usuario);
+	}
+	
+	private void ValidaProcuraUsuarioPorParametrosDeLoginSenha(Sessao usuario) throws Exception{
+		if(usuario != null){
+			TrataSessaoDeUsuario(usuario);
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServlet(response)
+			.RetornaErro("Os parametros informados estão incorretos!");
 		}
 	}
 	
-	
-	private void RetornaErroServlet(String erro){
-		new ControleDeRetornoServlet(request, response)
-		.RetornaErro(erro);
-	}
-	
-	public void TrataSessaoDeUsuario(Sessao usuario) throws SQLException {
+	private void TrataSessaoDeUsuario(Sessao usuario) throws Exception {
 		int qtdErros = 0;
 		if(usuario.getQuantidade_de_sessoes() > 0){
-			//qtdErros = AtualizaSessaoUsuario(usuario);
-			RetornaErroServlet("Deu certo");
+			qtdErros = RetornaStatusDeTransacao(new SessoesDeUsuarioDAO(conn)
+				.AtualizaSessaoUsuario(usuario));
 		}else{
-			//qtdErros = InsereSessaoUsuario(usuario);
-			RetornaErroServlet("Nps");
+			qtdErros = RetornaStatusDeTransacao(new SessoesDeUsuarioDAO(conn)
+				.InsereSessaoUsuario(usuario));
 		}
-		//ValidaSessaoUsuario(qtdErros);
+		ValidaSessaoDeUsuario(usuario, qtdErros);
+	}
+	
+	private int RetornaStatusDeTransacao(int transacaoRealizada){
+		if(transacaoRealizada == 0){
+			return +1;
+		}
+		else{
+			return +0;
+		}
+	}
+	
+	private void ValidaSessaoDeUsuario(Sessao usuario, int qtdErros) throws Exception {
+		if(qtdErros == 0){
+			TrataUltimaSessaoUsuario(usuario, qtdErros);
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServlet(response)
+			.RetornaErro("ValidaSessaoDeUsuario, ocorreu um erro no servidor!");
+		}
+	}
+	
+	
+	private void TrataUltimaSessaoUsuario(Sessao usuario, int qtdErros) throws Exception {
+		if(usuario.getData_hora_sessao().isEmpty()){
+			
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+		}
+	}
+
+	private void ValidaLoginUsuario(int qtdErros) throws SQLException {
+		if(qtdErros > 0){
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServlet(response)
+			.RetornaErro("ValidaLoginUsuario, ocorreu um erro no servidor!"+qtdErros);
+		}else{
+			conn.commit();
+			conn.close();
+			new ControleDeRetornoServlet(response)
+			.RetornaErro("lalala sucesso");
+		}
 	}
 	
 	/*private void VerificaLoginDiferenteDeNullOuVazio() throws Exception{

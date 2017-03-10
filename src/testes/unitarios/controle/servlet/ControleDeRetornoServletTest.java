@@ -1,4 +1,4 @@
-package testes.unitarios.controle.conexao;
+package testes.unitarios.controle.servlet;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 
-public class ControleDeRetornoServidorTest{
+import controle.servlet.CodificaUTF8;
+
+public class ControleDeRetornoServletTest{
 	
 	@Test
 	public void RetornaSucesso_CasoDeSucesso() throws IOException{
@@ -89,4 +91,13 @@ public class ControleDeRetornoServidorTest{
 		} 
 		assertEquals(sucesso, true);
 	}
+	
+	public ControleDeRetornoServletTest(){
+		
+	}
+	
+	public void RetornaErro(String erro){	
+		System.out.println("Test-Erro: "+erro);	 
+	}
+	
 }

@@ -18,8 +18,7 @@ public class ServletUsuario extends HttpServlet{
 	static private HttpServletResponse response;
 		
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 		
 		this.request = req;
 		this.response = resp;
@@ -32,14 +31,12 @@ public class ServletUsuario extends HttpServlet{
 				break;
 				
 			default:
-				new ControleDeRetornoServlet(request, response)
+				new ControleDeRetornoServlet(response)
 					.RetornaErro("Método não encontrado!");
 				break;
 			}
 		}catch(Exception e){
-			new ControleDeRetornoServlet(request, response)
-				.RetornaErro("Erro: ServletUsuarioTest doPost, "+e);
-			System.out.println("Erro: ServletUsuarioTest doPost, "+e);
+			
 		}
 	}
 }

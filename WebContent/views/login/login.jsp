@@ -108,10 +108,11 @@ pageEncoding="UTF-8"%>
 				var variaveis = "?metodo=LogarUsuario&login="+acess.login+"&senha="+acess.pass;
 				$http.post('ServletUsuario'+variaveis)
 	            .success(function (data, status, headers, config) {				  
-	            	if(data == "sucesso"){
-	            		GuardarSessaoUsuario(data);
-	            	}else{							
-	            		MensagemDeErroModal(data);
+	            	if(data.substring(0, 4) == "Erro"){
+	            		MensagemDeErroModal(data.substring(6));
+	            	}else{
+	            		//GuardarSessaoUsuario(data);
+	            		//MensagemDeErroModal(data);
 	            	}	    	
             	}).error(function (data, status, header, config) {		            	
             		MensagemDeErroModal("Ocorreu um erro no servidor, erro: "+status);

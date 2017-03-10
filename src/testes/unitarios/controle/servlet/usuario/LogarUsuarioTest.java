@@ -1,22 +1,33 @@
 package testes.unitarios.controle.servlet.usuario;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 
+import testes.unitarios.controle.servlet.ControleDeRetornoServletTest;
+import testes.unitarios.controle.servlet.exception.ServletExceptionTest;
+import controle.auxiliares.DataControle;
 import controle.conexao.ControleFabricaDeConexao;
+import controle.servlet.ControleDeRetornoServlet;
 import modelos.Sessao;
 import modelos.Usuario;
 import dao.SessoesDeUsuarioDAO;
 import dao.UsuarioDAO;
 
 public class LogarUsuarioTest {
+	
+	static private HttpServletRequest request;
+	static private HttpServletResponse response;
+	private Connection conn;
 
 	/*@Test
 	public void VerificaLoginDiferenteDeNullOuVazio_ParametroString() throws Exception{
@@ -269,153 +280,303 @@ public class LogarUsuarioTest {
 		assertTrue(sucesso);
 	}*/
 	
-	@Test
-	public void LoginDeUsuario_UsuarioExistente() throws Exception{
-		boolean sucesso = false;
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		when(request.getParameter("login")).thenReturn("testeLogin");
-		when(request.getParameter("senha")).thenReturn("testeSenha");
-		
-		Connection conn = new ControleFabricaDeConexao().getConnection();
+	private void ConstroiCenarioConnection() throws Exception{
+		conn = new ControleFabricaDeConexao().getConnection();
 		conn.setAutoCommit(false);
-		try {
-			String login = request.getParameter("login");
-			String senha = request.getParameter("senha");
-			Sessao usuario = BuscaUsuarioLogin_UsuarioExistente(login, senha);
-			if(usuario != null){
-				sucesso = true;
-				//TrataSessaoDeUsuario(usuario);
-			}else{
-				//RetornaErroParaUsuario("Usuario ou senha está incorreto!");
-			}
-		} catch (Exception e) {
-			System.out.println("Erro: LoginDeUsuario, "+e);
-		}finally{
-			conn.rollback();
-			conn.close();
-		}
-		assertTrue(sucesso);
 	}
 	
-	private Sessao BuscaUsuarioLogin_UsuarioExistente(String login, String senha){
+	private Sessao ConstroiCenarioUsuario(String login, String senha) {
 		Sessao usuario = mock(Sessao.class);
 		when(usuario.getId_usuario()).thenReturn((long) -1);
 		when(usuario.getNome_usuario()).thenReturn("testeNome");
-		when(usuario.getLogin_usuario()).thenReturn(login);
+		when(usuario.getLogin_usuario()).thenReturn("testeLogin");
 		when(usuario.getQuantidade_de_sessoes()).thenReturn(5);
 		return usuario;
 	}
 	
-	@Test
-	public void LoginDeUsuario_UsuarioNull() throws Exception{
-		boolean sucesso = false;
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		when(request.getParameter("login")).thenReturn("testeLogin");
-		when(request.getParameter("senha")).thenReturn("testeSenha");
-		
-		Connection conn = new ControleFabricaDeConexao().getConnection();
-		conn.setAutoCommit(false);
-		try {
-			String login = request.getParameter("login");
-			String senha = request.getParameter("senha");
-			Sessao usuario = BuscaUsuarioLogin_UsuarioNullLancandoExcecao(login, senha);
-			if(usuario != null){
-				//TrataSessaoDeUsuario(usuario);
-			}else{
-				sucesso = true;
-				//RetornaErroParaUsuario("Usuario ou senha está incorreto!");
-			}
-		} catch (Exception e) {
-			System.out.println("Erro: LoginDeUsuario, "+e);
-		}finally{
-			conn.rollback();
-			conn.close();
-		}
-		assertTrue(sucesso);
-	}
-	
-	@Test
-	public void LoginDeUsuario_LancandoExcecao() throws Exception{
-		boolean sucesso = false;
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		when(request.getParameter("login")).thenReturn("testeLogin");
-		when(request.getParameter("senha")).thenReturn("testeSenha");
-		
-		Connection conn = new ControleFabricaDeConexao().getConnection();
-		conn.setAutoCommit(false);
-		try {
-			String login = request.getParameter("login");
-			String senha = request.getParameter("senha");
-			Sessao usuario = BuscaUsuarioLogin_UsuarioNullLancandoExcecao(login, senha);
-			if(usuario != null){
-				//TrataSessaoDeUsuario(usuario);
-			}else{
-				usuario.getAno_sessao();
-				//RetornaErroParaUsuario("Usuario ou senha está incorreto!");
-			}
-		} catch (Exception e) {
-			sucesso = true;
-			System.out.println("Erro: LoginDeUsuario, "+e);
-		}finally{
-			conn.rollback();
-			conn.close();
-		}
-		assertTrue(sucesso);
-	}
-	
-	private Sessao BuscaUsuarioLogin_UsuarioNullLancandoExcecao(String login, String senha){
-		Sessao usuario = null;
+	private Sessao ConstroiCenarioUsuario() {
+		Sessao usuario = mock(Sessao.class);
+		when(usuario.getId_usuario()).thenReturn((long) -1);
+		when(usuario.getNome_usuario()).thenReturn("testeNome");
+		when(usuario.getLogin_usuario()).thenReturn("testeLogin");
+		when(usuario.getQuantidade_de_sessoes()).thenReturn(5);
+		when(usuario.getData_hora_sessao()).thenReturn("xx/xx/xxxx : xx:xx:xx");
 		return usuario;
 	}
 	
 	@Test
+	public void ProcuraUsuarioPorParametrosDeLoginSenha_UsuarioExistente() throws Exception{
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getParameter("login")).thenReturn("xxxx");
+		when(request.getParameter("senha")).thenReturn("xxxx");
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		
+		ConstroiCenarioConnection();
+		try {
+			String login = request.getParameter("login");
+			String senha = request.getParameter("senha");
+			Sessao usuario = ConstroiCenarioUsuario(login, senha);
+		} catch (Exception e) {
+			assertTrue(false);
+			conn.rollback();
+			conn.close();
+			throw new ServletExceptionTest("ProcuraUsuarioPorParametrosDeLoginSenha: "
+					+e, "Ocorreu um erro no ServletUsuario!", response);
+		}
+	}
+	
+	@Test
+	public void ProcuraUsuarioPorParametrosDeLoginSenha_UsuarioNull() throws Exception{
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		when(request.getParameter("login")).thenReturn("xxxx");
+		when(request.getParameter("senha")).thenReturn("xxxx");
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		
+		ConstroiCenarioConnection();
+		try {
+			String login = request.getParameter("login");
+			String senha = request.getParameter("senha");
+			Sessao usuario = null;
+		} catch (Exception e) {
+			assertTrue(false);
+			conn.rollback();
+			conn.close();
+			throw new ServletExceptionTest("ProcuraUsuarioPorParametrosDeLoginSenha: "
+					+e, "Ocorreu um erro no ServletUsuario!", response);
+		}
+	}
+	
+	@Test(expected=Exception.class)
+	public void ProcuraUsuarioPorParametrosDeLoginSenha_LancandoExcecao() throws Exception{
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		
+		ConstroiCenarioConnection();
+		try {
+			String login = request.getParameter("login");
+			String senha = request.getParameter("senha");
+			Sessao usuario = null;
+			assertTrue(false);
+		} catch (Exception e) {
+			conn.rollback();
+			conn.close();
+			throw new ServletExceptionTest("ProcuraUsuarioPorParametrosDeLoginSenha: "
+					+e, "Ocorreu um erro no ServletUsuario!", response);
+		}
+	}
+	
+	@Test 
+	public void ValidaProcuraUsuarioPorParametrosDeLoginSenha_UsuarioDiferenteDeNull() throws Exception{
+		Sessao usuario = mock(Sessao.class);
+		
+		if(usuario != null){
+		
+		}else{
+			assertTrue(false);
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("Os parametros informados estão incorretos!");
+		}
+	}
+	
+	@Test 
+	public void ValidaProcuraUsuarioPorParametrosDeLoginSenha_UsuarioNull() throws Exception{
+		Sessao usuario = null;
+		ConstroiCenarioConnection();
+		
+		if(usuario != null){
+			assertTrue(false);
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("Os parametros informados estão incorretos!");
+		}
+	}
+	
+	@Test
 	public void TrataSessaoDeUsuario_QuantidadeDeSessoesMaiorQueZero() throws SQLException {
-		boolean sucesso = false;
 		Sessao usuario = mock(Sessao.class);
 		when(usuario.getQuantidade_de_sessoes()).thenReturn(5);
 		
 		int qtdErros = 0;
 		if(usuario.getQuantidade_de_sessoes() > 0){
-			sucesso = true;
-			//qtdErros = AtualizaSessaoUsuario(usuario);
+			qtdErros += 1;
 		}else{
-			//qtdErros = InsereSessaoUsuario(usuario);
+			assertTrue(false);
+			qtdErros += 1;
 		}
-		//ValidaSessaoUsuario(qtdErros);
-		assertTrue(sucesso);
 	}
 	
 	@Test
 	public void TrataSessaoDeUsuario_QuantidadeDeSessoesZero() throws SQLException {
-		boolean sucesso = false;
 		Sessao usuario = mock(Sessao.class);
 		when(usuario.getQuantidade_de_sessoes()).thenReturn(0);
 		
 		int qtdErros = 0;
 		if(usuario.getQuantidade_de_sessoes() > 0){
-			//qtdErros = AtualizaSessaoUsuario(usuario);
+			assertTrue(false);
+			qtdErros += 1;
 		}else{
-			sucesso = true;
-			//qtdErros = InsereSessaoUsuario(usuario);
+			qtdErros += 1;
 		}
-		//ValidaSessaoUsuario(qtdErros);
-		assertTrue(sucesso);
 	}
 	
 	@Test
 	public void TrataSessaoDeUsuario_QuantidadeDeSessoesNull() throws SQLException {
-		boolean sucesso = false;
 		Sessao usuario = mock(Sessao.class);
 		
 		int qtdErros = 0;
 		if(usuario.getQuantidade_de_sessoes() > 0){
-			//qtdErros = AtualizaSessaoUsuario(usuario);
+			assertTrue(false);
+			qtdErros += 1;
 		}else{
-			sucesso = true;
-			//qtdErros = InsereSessaoUsuario(usuario);
+			qtdErros += 1;
 		}
-		//ValidaSessaoUsuario(qtdErros);
-		assertTrue(sucesso);
 	}
 
+	@Test
+	public void RetornaStatusDeTransacao_TransacaoRetornaValorUm(){
+		int transacaoRealizada = 1;
+		
+		if(transacaoRealizada == 0){
+			assertTrue(false);
+		}else{
+			
+		}
+	}
+	
+	@Test
+	public void RetornaStatusDeTransacao_TransacaoRetornaValorZero(){
+		int transacaoRealizada = 0;
+		
+		if(transacaoRealizada == 0){
+			
+		}else{
+			assertTrue(false);
+		}
+	}
+	
+	/*Sessao usuario = mock(Sessao.class);
+	when(usuario.getId_usuario()).thenReturn((long) -1);
+	when(usuario.getData_hora_sessao()).thenReturn(new DataControle().RetornaDataHoraAtualRepresentacaoNumerica());*/
+	
+	@Test
+	public void ValidaSessaoDeUsuario_QuantidadeDeErrosMaiorQueZero() throws Exception {
+		ConstroiCenarioConnection();
+		int qtdErros = 1;
+		
+		if(qtdErros == 0){
+			assertTrue(false);
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("ValidaSessaoDeUsuario, ocorreu um erro no servidor!");
+		}
+	}
+	
+	@Test
+	public void ValidaSessaoDeUsuario_QuantidadeDeErrosZero() throws Exception{
+		ConstroiCenarioConnection();
+		int qtdErros = 0;
+		
+		if(qtdErros == 0){
+			
+		}else{
+			assertTrue(false);
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("ValidaSessaoDeUsuario, ocorreu um erro no servidor!");
+		}
+	}
+	
+	@Test
+	public void TrataUltimaSessaoUsuario_DataHoraSessaoDiferenteDeNullOuVazio() throws Exception{
+		ConstroiCenarioConnection();
+		Sessao usuario = ConstroiCenarioUsuario();
+		
+		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
+			
+		}else{
+			assertTrue(false);
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+		}
+	}
+	
+	@Test
+	public void TrataUltimaSessaoUsuario_DataHoraSessaoNull() throws Exception{
+		ConstroiCenarioConnection();
+		Sessao usuario = ConstroiCenarioUsuario();
+		when(usuario.getData_hora_sessao()).thenReturn(null);
+
+		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
+			assertTrue(false);
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+		}
+	}
+	
+	@Test
+	public void TrataUltimaSessaoUsuario_DataHoraSessaoVazio() throws Exception{
+		ConstroiCenarioConnection();
+		Sessao usuario = ConstroiCenarioUsuario();
+		when(usuario.getData_hora_sessao()).thenReturn("");
+		
+		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
+			assertTrue(false);
+		}else{
+			conn.rollback();
+			conn.close();
+			new ControleDeRetornoServletTest()
+				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+		}
+	}
+	
+	@Test
+	public void ValidaLoginUsuario_QuantidadeDeErrosZero() throws SQLException {
+		boolean sucesso = false;
+		int qtdErros = 0;
+		
+		if(qtdErros > 0){
+			//conn.rollback();
+			//conn.close();
+			//RetornaErroServlet();
+		}else{
+			sucesso = true;
+			//conn.commit();
+			//conn.close();
+			//RetornaUsuarioServlet();
+		}
+		assertTrue(sucesso);
+	}
+	
+	@Test
+	public void ValidaLoginUsuario_QuantidadeDeErrosMaiorQueZero() throws SQLException {
+		boolean sucesso = false;
+		int qtdErros = 1;
+		
+		if(qtdErros > 0){
+			sucesso = true;
+			//conn.rollback();
+			//conn.close();
+		}else{
+			//conn.commit();
+			//conn.close();
+		}
+		assertTrue(sucesso);
+	}
+	
+	/*private void RetornaUsuarioJsonRecuperadoViaLogin(Usuario usuario) throws IOException{
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		out.write(gson.toJson(usuario)); 
+	}*/
 }
