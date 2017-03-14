@@ -2,9 +2,7 @@ package testes.integracao.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import modelos.Sessao;
 import modelos.Usuario;
@@ -42,17 +40,18 @@ public class SessoesDeUsuarioDAOTest {
 		int transacaoSucesso = 0;
 		try{
 			String sql = "insert into tb_sessoes_usuario "
-					+ "(id_usuario, dia_sessao, mes_sessao,"
+					+ "(id_usuario, mes_sessao,"
 					+ "ano_sessao, quantidade_sessoes) values"
-					+ "(?,?,?,?,?)";
+					+ "(?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, usuario.getId_usuario()); 
-			ps.setString(2, new DataControle().RetornaDiaAtualRepresentacaoNumerica()); 
-			ps.setString(3, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
-			ps.setString(4, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
-			ps.setInt(5, 5); 
+			ps.setString(2, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
+			ps.setString(3, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
+			ps.setInt(4, 5); 
 			transacaoSucesso = ps.executeUpdate(); 
 		}catch(Exception e){
+			conn.rollback();
+			conn.close();
 			System.out.println("Erro: CenarioDeSessao, "+e);
 		}finally{
 			ps.close();
@@ -78,9 +77,7 @@ public class SessoesDeUsuarioDAOTest {
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{	
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
-				
+			
 			String sql = "update tb_sessoes_usuario set " 
 					+ "quantidade_sessoes=? "
 					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?";
@@ -93,7 +90,9 @@ public class SessoesDeUsuarioDAOTest {
 			transacaoRealizada = ps.executeUpdate();
 			
 		}catch(Exception e){
-			System.out.println("Erro: UpdateSessaoUsuario, "+e);
+			//conn.rollback();
+			//conn.close();
+			System.out.println("Erro: AtualizaSessaoUsuario, "+e);
 		}finally{
 			ps.close();	
 		}
@@ -112,9 +111,7 @@ public class SessoesDeUsuarioDAOTest {
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{	
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
-				
+			
 			String sql = "update tb_sessoes_usuario set " 
 					+ "quantidade_sessoes=? "
 					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?";
@@ -127,7 +124,9 @@ public class SessoesDeUsuarioDAOTest {
 			transacaoRealizada = ps.executeUpdate();
 			
 		}catch(Exception e){
-			System.out.println("Erro: UpdateSessaoUsuario, "+e);
+			//conn.rollback();
+			//conn.close();
+			System.out.println("Erro: AtualizaSessaoUsuario, "+e);
 		}finally{
 			ps.close();	
 		}
@@ -146,8 +145,6 @@ public class SessoesDeUsuarioDAOTest {
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{	
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
 				
 			String sql = "update tb_sessoes_usuario set " 
 					+ "quantidade_sessoes=? "
@@ -161,7 +158,9 @@ public class SessoesDeUsuarioDAOTest {
 			transacaoRealizada = ps.executeUpdate();
 			
 		}catch(Exception e){
-			System.out.println("Erro: UpdateSessaoUsuario, "+e);
+			//conn.rollback();
+			//conn.close();
+			System.out.println("Erro: AtualizaSessaoUsuario, "+e);
 		}finally{
 			ps.close();	
 		}
@@ -170,15 +169,12 @@ public class SessoesDeUsuarioDAOTest {
 	}
 	
 	@Test
-	public void AtualizaSessaoUsuario_UsuarioNull() throws SQLException {
+	public void AtualizaSessaoUsuario_UsuarioNull() throws Exception {
 		Sessao usuario = null;
 		
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{	
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
-				
 			String sql = "update tb_sessoes_usuario set " 
 					+ "quantidade_sessoes=? "
 					+ "where id_usuario=? and mes_sessao=? and ano_sessao=?";
@@ -191,7 +187,9 @@ public class SessoesDeUsuarioDAOTest {
 			transacaoRealizada = ps.executeUpdate();
 			
 		}catch(Exception e){
-			System.out.println("Erro: UpdateSessaoUsuario, "+e);
+			//conn.rollback();
+			//conn.close();
+			System.out.println("Erro: AtualizaSessaoUsuario_UsuarioNull, "+e);
 		}finally{
 			ps.close();	
 		}
@@ -207,22 +205,20 @@ public class SessoesDeUsuarioDAOTest {
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{
-			
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
 				
 			String sql = "insert into tb_sessoes_usuario " 
-					+ "(id_usuario, dia_sessao, mes_sessao, ano_sessao, quantidade_sessoes) "
-					+ "values (?,?,?,?,?)"; 
+					+ "(id_usuario, mes_sessao, ano_sessao, quantidade_sessoes) "
+					+ "values (?,?,?,?)"; 
 			
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, usuario.getId_usuario()); 
-			ps.setString(2, new DataControle().RetornaDiaAtualRepresentacaoNumerica()); 
-			ps.setString(3, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
-			ps.setString(4, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
-			ps.setLong(5, 1);  
+			ps.setString(2, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
+			ps.setString(3, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
+			ps.setInt(4, 5);  
 			transacaoRealizada = ps.executeUpdate();
 		}catch(Exception e){
+			//conn.rollback();
+			//conn.close();
 			System.out.println("Erro: InsereSessaoUsuario, "+e);
 		}finally{
 			ps.close();	
@@ -233,33 +229,31 @@ public class SessoesDeUsuarioDAOTest {
 	
 	@Test
 	public void InsereSessaoUsuario_PassandoUsuarioSemId() throws SQLException {
-		Sessao usuario = mock(Sessao.class);
+		Sessao usuario = null;
 		
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{
-			
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
 				
 			String sql = "insert into tb_sessoes_usuario " 
-					+ "(id_usuario, dia_sessao, mes_sessao, ano_sessao, quantidade_sessoes) "
-					+ "values (?,?,?,?,?)"; 
+					+ "(id_usuario, mes_sessao, ano_sessao, quantidade_sessoes) "
+					+ "values (?,?,?,?,)"; 
 			
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, usuario.getId_usuario()); 
-			ps.setString(2, new DataControle().RetornaDiaAtualRepresentacaoNumerica()); 
-			ps.setString(3, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
-			ps.setString(4, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
-			ps.setLong(5, 1); 
+			ps.setString(2, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
+			ps.setString(3, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
+			ps.setInt(4, 5); 
 			transacaoRealizada = ps.executeUpdate();
 		}catch(Exception e){
+			//conn.rollback();
+			//conn.close();
 			System.out.println("Erro: InsereSessaoUsuario, "+e);
 		}finally{
 			ps.close();	
 		}
 		//transacaoRealizada;
-		assertEquals(transacaoRealizada, 1);
+		assertEquals(transacaoRealizada, 0);
 	}
 	
 	@Test
@@ -269,22 +263,20 @@ public class SessoesDeUsuarioDAOTest {
 		PreparedStatement ps = null;
 		int transacaoRealizada = 0;
 		try{
-			
-			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));
-			String anoAtual = ""+Calendar.getInstance().get(Calendar.YEAR); 
 				
 			String sql = "insert into tb_sessoes_usuario " 
-					+ "(id_usuario, dia_sessao, mes_sessao, ano_sessao, quantidade_sessoes) "
-					+ "values (?,?,?,?,?)"; 
+					+ "(id_usuario, mes_sessao, ano_sessao, quantidade_sessoes) "
+					+ "values (?,?,?,?,)"; 
 			
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, usuario.getId_usuario()); 
-			ps.setString(2, new DataControle().RetornaDiaAtualRepresentacaoNumerica()); 
-			ps.setString(3, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
-			ps.setString(4, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
-			ps.setLong(5, 1); 
+			ps.setString(2, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
+			ps.setString(3, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
+			ps.setInt(4, 5); 
 			transacaoRealizada = ps.executeUpdate();
 		}catch(Exception e){
+			//conn.rollback();
+			//conn.close();
 			System.out.println("Erro: InsereSessaoUsuario, "+e);
 		}finally{
 			ps.close();	

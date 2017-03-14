@@ -92,10 +92,6 @@ public class ControleDeRetornoServletTest{
 		assertEquals(sucesso, true);
 	}
 	
-	public ControleDeRetornoServletTest(){
-		
-	}
-	
 	public void RetornaErro(String erro){	
 		System.out.println("Test-Erro: "+erro);	 
 	}

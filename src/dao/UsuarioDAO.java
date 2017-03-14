@@ -21,8 +21,6 @@ public class UsuarioDAO {
 	}
 
 	public Sessao BuscaUsuarioLogin(String login, String senha) throws SQLException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		Sessao usuario = null;
 		try{
 			String mesAtual = new ControleTratamentoMesAno().TrataMesCalendario(Calendar.getInstance().get(Calendar.MONTH));

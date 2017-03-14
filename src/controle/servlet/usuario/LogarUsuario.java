@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import testes.unitarios.controle.servlet.ControleDeRetornoServletTest;
 import modelos.Sessao;
 import controle.conexao.ControleFabricaDeConexao;
 import controle.servlet.ControleDeRetornoServlet;
 import controle.servlet.exception.ServletException;
 import dao.SessoesDeUsuarioDAO;
+import dao.UltimaSessaoUsuarioDAO;
 import dao.UsuarioDAO;
 
 
@@ -89,27 +89,27 @@ public class LogarUsuario {
 	
 	
 	private void TrataUltimaSessaoUsuario(Sessao usuario, int qtdErros) throws Exception {
-		if(usuario.getData_hora_sessao().isEmpty()){
-			
+		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
+			qtdErros = RetornaStatusDeTransacao(new UltimaSessaoUsuarioDAO(conn).
+					   AtualizaUltimaSessaoUsuario(usuario));
 		}else{
-			conn.rollback();
-			conn.close();
-			new ControleDeRetornoServletTest()
-				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+			qtdErros = RetornaStatusDeTransacao(new UltimaSessaoUsuarioDAO(conn).
+					   InsereUltimaSessaoUsuario(usuario));
 		}
+		ValidaLoginUsuario(usuario, qtdErros);
 	}
 
-	private void ValidaLoginUsuario(int qtdErros) throws SQLException {
-		if(qtdErros > 0){
+	private void ValidaLoginUsuario(Sessao usuario, int qtdErros) throws Exception {
+		if(qtdErros == 0){
+			conn.commit();
+			conn.close();
+			new ControleDeRetornoServlet(response)
+			.RetornaErro("lalala sucesso");	
+		}else{
 			conn.rollback();
 			conn.close();
 			new ControleDeRetornoServlet(response)
 			.RetornaErro("ValidaLoginUsuario, ocorreu um erro no servidor!"+qtdErros);
-		}else{
-			conn.commit();
-			conn.close();
-			new ControleDeRetornoServlet(response)
-			.RetornaErro("lalala sucesso");
 		}
 	}
 	

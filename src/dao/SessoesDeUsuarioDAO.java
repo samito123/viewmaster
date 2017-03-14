@@ -37,6 +37,8 @@ public class SessoesDeUsuarioDAO {
 			ps.setString(4, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
 			transacaoRealizada = ps.executeUpdate();
 		}catch(Exception e){
+			conn.rollback();
+			conn.close();
 			System.out.println("Erro: AtualizaSessaoUsuario, "+e);
 		}finally{
 			ps.close();	
@@ -50,17 +52,18 @@ public class SessoesDeUsuarioDAO {
 		try{
 				
 			String sql = "insert into tb_sessoes_usuario " 
-					+ "(id_usuario, dia_sessao, mes_sessao, ano_sessao, quantidade_sessoes) "
-					+ "values (?,?,?,?,?)"; 
+					+ "(id_usuario, mes_sessao, ano_sessao, quantidade_sessoes) "
+					+ "values (?,?,?,?)"; 
 			
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, usuario.getId_usuario()); 
-			ps.setString(2, new DataControle().RetornaDiaAtualRepresentacaoNumerica()); 
-			ps.setString(3, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
-			ps.setString(4, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
-			ps.setLong(5, 1); 
+			ps.setString(2, new DataControle().RetornaMesAtualRepresentacaoNumerica()); 
+			ps.setString(3, new DataControle().RetornaAnoAtualRepresentacaoNumerica()); 
+			ps.setInt(4, 1); 
 			transacaoRealizada = ps.executeUpdate();
 		}catch(Exception e){
+			conn.rollback();
+			conn.close();
 			System.out.println("Erro: InsereSessaoUsuario, "+e);
 		}finally{
 			ps.close();	

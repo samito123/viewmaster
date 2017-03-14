@@ -498,13 +498,10 @@ public class LogarUsuarioTest {
 		Sessao usuario = ConstroiCenarioUsuario();
 		
 		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
-			
+			//UpdateUltimaSessaoUsuario();
 		}else{
 			assertTrue(false);
-			conn.rollback();
-			conn.close();
-			new ControleDeRetornoServletTest()
-				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+			//InsertUltimaSessaoUsuario();
 		}
 	}
 	
@@ -516,11 +513,9 @@ public class LogarUsuarioTest {
 
 		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
 			assertTrue(false);
+			//UpdateUltimaSessaoUsuario();
 		}else{
-			conn.rollback();
-			conn.close();
-			new ControleDeRetornoServletTest()
-				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+			//InsertUltimaSessaoUsuario();
 		}
 	}
 	
@@ -532,11 +527,9 @@ public class LogarUsuarioTest {
 		
 		if(usuario.getData_hora_sessao() != null && usuario.getData_hora_sessao() != ""){
 			assertTrue(false);
+			//UpdateUltimaSessaoUsuario();
 		}else{
-			conn.rollback();
-			conn.close();
-			new ControleDeRetornoServletTest()
-				.RetornaErro("TrataUltimaSessaoUsuario, ocorreu um erro no servidor!");
+			//InsertUltimaSessaoUsuario();UltimaSessaoUsuario, ocorreu um erro no servidor!");
 		}
 	}
 	
