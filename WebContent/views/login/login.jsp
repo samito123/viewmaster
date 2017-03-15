@@ -36,14 +36,16 @@ pageEncoding="UTF-8"%>
 				</div>
 				
 				<form ng-submit="vm.LogarUsuario()" name="form">		
-					<input type="text" style="margin: 15px 20% 15px 20%; width: 60%;" 
+					<input type="text" id="text" ng-model="vm.text" hidden="true">		
+				
+					<input type="text" id="login" style="margin: 15px 20% 15px 20%; width: 60%;" 
 					placeholder="Digite seu login..." class="form-control" ng-model="vm.login" required maxlength="50">		
 					
-					<input  type="password" style="margin: 15px 20% 15px 20%; width: 60%;" 
+					<input  type="password" id="pass" style="margin: 15px 20% 15px 20%; width: 60%;" 
 					placeholder="Digite sua senha..." class="form-control" ng-model="vm.pass" required maxlength="50">
 					
 					<div>
-						<button type="submit" style="width: 30%; margin: 0 0 15px 0;" 
+						<button type="submit" id="entrar" style="width: 30%; margin: 0 0 15px 0;" 
 						class="btn btn-primary">Entrar</button>
 					</div>
 					
@@ -102,12 +104,12 @@ pageEncoding="UTF-8"%>
 		app.controller('ViewMaster', ['$http',function($http){
 			
 			var acess = this;
-			
+
 			acess.LogarUsuario = function(){
 				$("#loading").show();
 				var variaveis = "?metodo=LogarUsuario&login="+acess.login+"&senha="+acess.pass;
 				$http.post('ServletUsuario'+variaveis)
-	            .success(function (data, status, headers, config) {				  
+	            .success(function (data, status, headers, config) {
 	            	if(data.substring(0, 4) == "Erro"){
 	            		MensagemDeErroModal(data.substring(6));
 	            	}else{

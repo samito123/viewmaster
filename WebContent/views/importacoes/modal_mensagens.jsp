@@ -4,7 +4,7 @@
 		<div class="modal-dialog" role="document">
 		   <div class="modal-content">
 			 <div class="modal-header">
-			 	<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+			 	<button id="botaoCloseModal" type='button' class='close' data-dismiss='modal' aria-label='Close'>
 			 		<span aria-hidden='true'>&times;</span>
 		 		</button>
 				<h4 class='modal-title' id='myModalLabel'>
@@ -19,7 +19,7 @@
 				</div>
 			 </div>
 			 <div class="modal-footer">
-			 	<button type='button' class='btn {{vm.btnModal}}' ng-click="vm.fechar()" data-dismiss='modal'>
+			 	<button id="botaoFecharModal" type='button' class='btn {{vm.btnModal}}' ng-click="vm.fechar()" data-dismiss='modal'>
 			 		{{vm.modalFooter}}
 			 	</button>
 			 </div>
