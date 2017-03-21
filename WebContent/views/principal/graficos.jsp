@@ -577,6 +577,7 @@ pageEncoding="UTF-8"%>
 		        		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 	    				"não foi possível carregar gráfico de sessões!");
 		        	}else{
+		        		console.log(status);
 		        		ConstroiGraficoDeSessoesUsuario(data);
 		        		SetLegendasParaGraficoDeSessoesDoUsuario(data);
 		        	}	

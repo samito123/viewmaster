@@ -38,7 +38,7 @@ public class ControleGraficoDeSessao {
 			anos.get(0).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeSessaoDoUsuarioAno(anos.get(0)));
 			SomaTotalDeSessoesUsuarioAnoCorrente(anos);
 		} catch (Exception e) {
-			new ControleDeRetornoServlet(request, response).RetornaErro();
+			//new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class ControleGraficoDeSessao {
 			anos.get(0).setValor(totalDeSessoesAno);
 			ConstroiDadosParaGraficoDeSessaoUsuarioPorcentagem(anos);
 		}catch(Exception e){
-			new ControleDeRetornoServlet(request, response).RetornaErro();
+			//new ControleDeRetornoServlet(request, response).RetornaErro();
 		}	
 	}
 	
@@ -65,7 +65,7 @@ public class ControleGraficoDeSessao {
 			anos.get(1).setMeses_do_ano(dao.ConstroiDadosParaGraficoDeSessaoDoUsuarioPorcentagem(anos.get(1)));	
 			SomaTotalDeSessoesUsuarioPorcentagem(anos);
 		} catch (Exception e) {
-			new ControleDeRetornoServlet(request, response).RetornaErro();
+			//new ControleDeRetornoServlet(request, response).RetornaErro();
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class ControleGraficoDeSessao {
 			anos.get(1).setValor(totalDeSessoesAno);
 			RetornaDadosParaGraficoDeSessaoUsuario(anos);
 		}catch(Exception e){
-			new ControleDeRetornoServlet(request, response).RetornaErro();
+			//new ControleDeRetornoServlet(request, response).RetornaErro();
 		}	
 	}
 	

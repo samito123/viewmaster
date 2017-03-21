@@ -104,7 +104,7 @@ public class LogarUsuario {
 			conn.commit();
 			conn.close();
 			new ControleDeRetornoServlet(response)
-			.RetornaErro("lalala sucesso");	
+			.RetornaErro("sucesso");	
 		}else{
 			conn.rollback();
 			conn.close();

@@ -32,6 +32,7 @@ public class Graficos extends HttpServlet{
 		switch (metodo) {
 			case "RecuperaDadosParaGraficoDeSessaoUsuario":	
 				try {
+					System.out.println("aaaaaaaaaaaa");
 					new ControleGraficoDeSessao(req, resp).ConstroiArrayDeAnosParaGraficoDeSessaoUsuario(CriaObjetoAnoRequest());
 				} catch (Exception e) {
 					e.printStackTrace();

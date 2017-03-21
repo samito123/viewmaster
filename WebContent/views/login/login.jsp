@@ -113,9 +113,10 @@ pageEncoding="UTF-8"%>
 	            	if(data.substring(0, 4) == "Erro"){
 	            		MensagemDeErroModal(data.substring(6));
 	            	}else{
-	            		//GuardarSessaoUsuario(data);
+	            		GuardarSessaoUsuario(data);
 	            		//MensagemDeErroModal(data);
 	            	}	    	
+	            	GuardarSessaoUsuario(data);
             	}).error(function (data, status, header, config) {		            	
             		MensagemDeErroModal("Ocorreu um erro no servidor, erro: "+status);
             	});
