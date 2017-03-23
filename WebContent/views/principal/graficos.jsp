@@ -565,7 +565,7 @@ pageEncoding="UTF-8"%>
 			GraficoDeClientes();
 			GraficoDeReceitas();
 			GraficoDeTiposDeProdutosMaisVendidos();
-			PlanoDeAssinatura();
+			//PlanoDeAssinatura();
 	    	
 	    	function GraficoDeSessaoUsuario() {
 		    	var variaveis = "?metodo=RecuperaDadosParaGraficoDeSessaoUsuario&id_de_busca="+
@@ -596,7 +596,7 @@ pageEncoding="UTF-8"%>
 	    	}
 	    	
 	    	function GraficoDeModulos() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeModulos&id_de_busca="+
+	    		/*var variaveis = "?metodo=RecuperaDadosParaGraficoDeModulos&id_de_busca="+
     			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
     	
 		    	$http.post('Graficos'+variaveis)
@@ -611,7 +611,8 @@ pageEncoding="UTF-8"%>
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 		    				"verifique sua conexão com a internet e tente novamente!");
-		    	});
+		    	});*/
+	    		ConstroiGraficoDeModulos("");
 	    	};
 	    	
 	    	function SetLegendasParaGraficoDeModulos(modulos){
@@ -625,7 +626,7 @@ pageEncoding="UTF-8"%>
 	    	}
 	    	
 	    	function GraficoDeClientes() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeClientes&id_de_busca="+	    		
+	    		/*var variaveis = "?metodo=RecuperaDadosParaGraficoDeClientes&id_de_busca="+	    		
     			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
     	
 		    	$http.post('Graficos'+variaveis)
@@ -640,7 +641,8 @@ pageEncoding="UTF-8"%>
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 		    				"verifique sua conexão com a internet e tente novamente!");
-		    	});
+		    	});*/
+	    		ConstroiGraficoDeClientes("");
 	    	};
 	    	
 	    	function SetLegendasParaGraficoDeClientes(ano){
@@ -652,7 +654,7 @@ pageEncoding="UTF-8"%>
 	    	}
 	    	
 	    	function GraficoDeReceitas() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeReceitas&id_de_busca="+	    		
+	    		/*var variaveis = "?metodo=RecuperaDadosParaGraficoDeReceitas&id_de_busca="+	    		
     			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
     	
 		    	$http.post('Graficos'+variaveis)
@@ -667,7 +669,8 @@ pageEncoding="UTF-8"%>
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 		    				"verifique sua conexão com a internet e tente novamente!");
-		    	});
+		    	});*/
+	    		ConstroiGraficoDeReceitas("");
 	    	};
 	    	
 	    	function SetLegendasParaGraficoDeReceitas(ano){
@@ -679,7 +682,7 @@ pageEncoding="UTF-8"%>
 	    	}
 	    	
 	    	function GraficoDeTiposDeProdutosMaisVendidos() {
-	    		var variaveis = "?metodo=RecuperaDadosParaGraficoDeTiposDeProdutosMaisVendidos&id_de_busca="+	    		
+	    		/*var variaveis = "?metodo=RecuperaDadosParaGraficoDeTiposDeProdutosMaisVendidos&id_de_busca="+	    		
     			sessionStorage.getItem("id_usuario_logado")+"&ano="+anoDoSistema.getFullYear();
     	
 		    	$http.post('Graficos'+variaveis)
@@ -694,7 +697,8 @@ pageEncoding="UTF-8"%>
 		    	}).error(function (data, status, header, config) {		            	
 		    		MensagemDeErroModal("Ocorreu um erro no servidor, "+
 		    				"verifique sua conexão com a internet e tente novamente!");
-		    	});
+		    	});*/
+	    		ConstroiGraficoDeTiposDeProdutosMaisVendidos("");
 	    	};
 	    	
 	    	function SetLegendasParaGraficoDeDeTiposDeProdutosMaisVendidos(tipoDeProduto){
