@@ -10,7 +10,7 @@
 	<servlet>
         <servlet-name>TelaDeLogin</servlet-name>
         <jsp-file>/views/login/login.jsp</jsp-file>
-        </servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TelaDeLogin</servlet-name>
         <url-pattern>/Login</url-pattern>
